@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>时钟 北京时间 Clock UTF-8</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            transition: background-color 1.5s ease, color 1.5s ease;
+        }
+
+        .time-container {
+            text-align: center;
+        }
+
+        .time {
+            font-size: 22vw;
+            font-weight: bold;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            transition: color 1.5s ease;
+            font-family: 'Source Code Pro', monospace;
+        }
+
+        @media (max-width: 768px) {
+            .time {
+                font-size: 20vw;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="time-container">
+        <div class="time" id="time"></div>
+    </div>
+
+    <!-- 添加帮助页面 -->
+    <div id="help-page"
+        style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.8); padding: 20px; border-radius: 10px; color: #fff; text-align: center;">
+        <h2>帮助</h2>
+        <p>点击屏幕以切换全屏模式。</p>
+        <p>按下 'h' 键以显示或隐藏此帮助页面。</p>
+    </div>
+
+    <script>
+        let mouseTimeout;
+        let hue = 0; // 初始色相值
+        let colorDirection = 1; // 颜色变化方向
+
+        function hideMouse() {
+            document.body.style.cursor = 'none';
+        }
+
+        function showMouse() {
+            document.body.style.cursor = 'auto';
+            clearTimeout(mouseTimeout);
+            mouseTimeout = setTimeout(hideMouse, 2000); // 2秒后隐藏鼠标
+        }
+
+        document.addEventListener('mousemove', showMouse);
+
+        function updateTime() {
+            const now = new Date();
+
+            // 更新时间
+            const timeElement = document.getElementById('time');
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            let seconds = now.getSeconds();
+            let t = "";
+            if (hours > 12) {
+                t = "p.m.";
+            }
+            else {
+                t = "a.m.";
+            }
+            // 添加前导零
+            hours = hours > 12 ? hours - 12 : hours;
+            hours = hours < 10 ? '0' + hours : hours;
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+
+            timeElement.textContent = `${hours}:${minutes}:${seconds} ${t}`;
+        }
+
+        // 颜色渐变函数
+        function updateColors() {
+            // 缓慢改变色相值
+            hue += 0.1 * colorDirection;
+            
+            // 确保色相值在0-360范围内
+            if (hue >= 360) {
+                hue = 360;
+                colorDirection = -1; // 反向变化
+            } else if (hue <= 0) {
+                hue = 0;
+                colorDirection = 1; // 反向变化
+            }
+            
+            // 应用新颜色
+            document.body.style.backgroundColor = `hsl(${hue}, 70%, 10%)`;
+            document.getElementById('time').style.color = `hsl(${hue}, 100%, 70%)`;
+            
+            // 继续动画
+            requestAnimationFrame(updateColors);
+        }
+
+        // 初始调用
+        updateTime();
+        updateColors(); // 开始颜色渐变
+
+        // 每秒更新一次时间
+        setInterval(updateTime, 1000);
+
+        // 点击全屏或退出全屏
+        document.addEventListener('click', () => {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.error(`全屏错误: ${err.message}`);
+                });
+                hideMouse(); // 全屏时立即隐藏鼠标
+            } else {
+                document.exitFullscreen();
+                showMouse(); // 退出全屏时显示鼠标
+            }
+        });
+
+        // 监听全屏变化
+        document.addEventListener('fullscreenchange', () => {
+            if (document.fullscreenElement) {
+                hideMouse(); // 进入全屏时隐藏鼠标
+            } else {
+                showMouse(); // 退出全屏时显示鼠标
+            }
+        });
+
+        // 添加键盘事件监听器
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'h') {
+                const helpPage = document.getElementById('help-page');
+                if (helpPage.style.display === 'none') {
+                    helpPage.style.display = 'block';
+                } else {
+                    helpPage.style.display = 'none';
+                }
+            }
+        });
+
+    </script>
+</body>
+
+</html>
