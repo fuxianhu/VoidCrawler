@@ -1,0 +1,77 @@
+{
+    "no_admin": true,
+    "admin_warning": true,
+    "file_encoding": "utf-8",
+    "version": "v.0.0.1",
+    "restart_self_program": "powershell.exe -WindowStyle Hidden -Command \"python.exe e:\\YFY\\VoidCrawler\\main.py\"",
+    "Shortcutkey": {
+        "display_window": [
+            "f4"
+        ]
+    },
+    "json": {
+        "json_ensure_ascii": false,
+        "json_indent": 4,
+        "config_filename": "VoidCrawlerConfig.json"
+    },
+    "logging": {
+        "json": {
+            "version": 1,
+            "formatters": {
+                "default": {
+                    "format": "%(asctime)s.%(msecs)03d - %(name)s - %(levelname)s - [%(filename)s:%(lineno)d] - %(funcName)s - %(message)s"
+                }
+            },
+            "handlers": {
+                "file": {
+                    "class": "logging.handlers.TimedRotatingFileHandler",
+                    "filename": "VoidCrawlerClient.log",
+                    "when": "midnight",
+                    "interval": 1,
+                    "backupCount": 10,
+                    "encoding": "utf-8",
+                    "formatter": "default"
+                }
+            },
+            "root": {
+                "level": 10,
+                "handlers": [
+                    "file"
+                ]
+            }
+        }
+    },
+    "FodhelperUACBypass": {
+        "program": "cmd.exe"
+    },
+    "SelfFodhelperUACBypass": {
+        "self_program": "powershell.exe -WindowStyle Hidden -Command \"python.exe e:\\YFY\\VoidCrawler\\main.py -privilege_escalation\""
+    },
+    "TrustedInstallerRun": {
+        "program": "cmd.exe"
+    },
+    "auto_click": {
+        "key": "mouse_left",
+        "cps": 5,
+        "auto_stop_second": 0,
+        "hotkeys": [
+            "f8"
+        ]
+    },
+    "auto_shutdown": {
+        "time": [
+            1,
+            1,
+            0,
+            0,
+            0
+        ],
+        "force": false
+    },
+    "clear_log": {
+        "permanent": false
+    },
+    "toggle_window_invisibility": {
+        "dwAffinity": false
+    }
+}

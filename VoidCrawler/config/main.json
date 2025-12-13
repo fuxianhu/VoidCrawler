@@ -1,0 +1,20 @@
+{
+    "agreeTerms": true,
+    "clientLock": {
+        "disableClient": false,
+        "maximumAttempts": 3,
+        "password": "",
+        "salted": ""
+    },
+    "configVersion": "v.0.0.0.1",
+    "enableMultipleApplications": false,
+    "language": "zh-cn",
+    "log": {
+        "level": "debug",
+        "logFolder": "log",
+        "logName": "VoidCrawler",
+        "maxFileSize": 1048576,
+        "maxFiles": 10
+    },
+    "userName": "Hacker"
+}

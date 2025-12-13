@@ -1,0 +1,50 @@
+[
+    {
+        "id": "VoidCrawler", 
+        "hide": false, 
+        "items": [
+            {
+                "id": "cmd", 
+                "icons": null, 
+                "type": 0, 
+                "description": "Run cmd.exe. ", 
+                "help": "Conveniently run cmd.exe program. "
+            }, 
+            {
+                "id": "pwsh", 
+                "icons": null, 
+                "type": 0, 
+                "description": "Run pwsh.exe. ", 
+                "help": "Conveniently run pwsh.exe (New version) program. "
+            }, 
+            {
+                "id": "PowerShell", 
+                "icons": null, 
+                "type": 0, 
+                "description": "Run powershell.exe. ", 
+                "help": "Conveniently run powershell.exe (Old version) program. "
+            }, 
+            {
+                "id": "chcp", 
+                "icons": null, 
+                "type": 0, 
+                "description": "Change character set.", 
+                "help": "Run chcp <a number>, change character set."
+            }, 
+            {
+                "id": "exit", 
+                "icons": null, 
+                "type": 0, 
+                "description": "Exit Client. ", 
+                "help": "Exit VoidCrawler Client. "
+            }, 
+            {
+                "id": "test1", 
+                "icons": null, 
+                "type": 0, 
+                "description": "Not allowed for everyone to click!", 
+                "help": "Not allowed for everyone to click! Only for testing purposes! "
+            }
+        ]
+    }
+]

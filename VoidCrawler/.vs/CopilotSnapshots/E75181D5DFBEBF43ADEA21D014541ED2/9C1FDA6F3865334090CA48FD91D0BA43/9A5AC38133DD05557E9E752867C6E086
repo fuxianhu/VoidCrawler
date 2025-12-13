@@ -1,0 +1,98 @@
+﻿#include "Core.h"
+#include <spdlog/spdlog.h>
+#include <spdlog/sinks/rotating_file_sink.h>
+#include <algorithm>
+#include <filesystem>
+#include <iostream>
+
+#include <unordered_map>
+#include <windows.h>
+#include <cstdlib>
+#include <format>
+
+#include <QDir>
+#include <QMessageBox>
+#include <QtWidgets/QApplication>
+#include <QDebug>
+#include <QTranslator>
+#include <QObject>
+
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonValue>
+#include <QJsonParseError>
+#include <QFile>
+#include <QTextStream>
+
+
+
+
+// 读取 JSON 文件，成功则返回 true，并更改 doc 的值
+bool readJSON(QJsonDocument& doc, 
+    const QString& path, 
+    const QStringConverter::Encoding& encoding = QStringConverter::Utf8, 
+    const bool& useConfigFolder = true)
+{
+    // 自动生成 JSON 文件路径
+    QString filePath = useConfigFolder ? (VoidCrawlerCore::getPath("coonfig") + "/" + path) : path;
+    QFile jsonFile(filePath);
+    if (jsonFile.exists())
+    {
+        // 如果文件存在，读取配置
+        if (!jsonFile.open(QFile::ReadOnly | QFile::Text)) {
+            std::cerr << "can't open error!";
+            QMessageBox::critical(nullptr,
+                "VoidCrawler",
+                "Unable to open configuration file!");
+            return false;
+        }
+        // 读取文件全部内容
+        QTextStream stream(&jsonFile);
+        stream.setEncoding(encoding); // 设置读取编码
+        QString str = stream.readAll();
+        jsonFile.close();
+
+        // 解析 JSON 对象
+        QJsonParseError jsonError;
+        QJsonDocument jsonDoc = QJsonDocument::fromJson(str.toUtf8(), &jsonError);
+        if (jsonError.error != QJsonParseError::NoError && !jsonDoc.isNull()) {
+            std::cerr << "can't open error!";
+            QMessageBox::critical(nullptr,
+                "VoidCrawler",
+                "JSON format error!");
+            return false;
+        }
+        doc = jsonDoc;
+        return true;
+    }
+    else
+    {
+        // 文件不存在
+        return false;
+    }
+}
+
+// 写入 JSON 文件，成功则返回 true
+bool writeJSON(const QJsonDocument& doc,
+    const QString& path,
+    const QStringConverter::Encoding& encoding = QStringConverter::Utf8,
+    const bool& useConfigFolder = true)
+{
+    // 自动生成 JSON 文件路径
+    QString filePath = useConfigFolder ? (VoidCrawlerCore::getPath("coonfig") + "/" + path) : path;
+    QFile jsonFile(filePath);
+    if (!jsonFile.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
+        std::cerr << "can't open error!";
+        QMessageBox::critical(nullptr,
+            "VoidCrawler",
+            "Unable to open configuration file!");
+        return false;
+    }
+    QTextStream stream(&jsonFile);
+    stream.setEncoding(encoding); // 设置写入编码
+    // 写入文件
+    stream << doc.toJson();
+    jsonFile.close();
+    return true;
+}

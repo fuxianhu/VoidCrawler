@@ -1,0 +1,146 @@
+﻿#pragma once
+
+#include <QString>
+#include <QDir>
+#include <QDateTime>
+#include <QCoreApplication>
+#include <string>
+#include <type_traits>
+#include <format>
+#include "LoggerManager.h"
+
+
+#include <unordered_map>
+#include <windows.h>
+#include <cstdlib>
+#include <iostream>
+#include <format>
+#include <QMessageBox>
+#include <QtWidgets/QApplication>
+#include <QDebug>
+#include <QTranslator>
+#include <QObject>
+
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonValue>
+#include <QJsonParseError>
+
+namespace VoidCrawlerCore {
+
+    template<typename StringType>
+    inline QString getPath(const StringType& path) {
+        QString qstr;
+        if constexpr (std::is_same_v<StringType, std::string>) {
+            qstr = QString::fromStdString(path);
+        } else if constexpr (std::is_same_v<StringType, QString>) {
+            qstr = path;
+        } else {
+            qstr = QString::fromUtf8(reinterpret_cast<const char*>(path));
+        }
+
+    #ifdef QT_DEBUG
+        return QDir::currentPath() + "/" + qstr;
+    #else
+        return QCoreApplication::applicationDirPath() + "/" + qstr;
+    #endif
+    }
+
+    class Version {
+    public:
+        const quint16 MAJOR, MINOR, PATCH, BUILD;
+        const QString description_;
+        const QDateTime buildTime_;
+
+        Version(const quint16& major = 0,
+                const quint16& minor = 0,
+                const quint16& patch = 0,
+                const quint16& build = 0,
+                const QString& description = "",
+                const QDateTime& buildTime = QDateTime::currentDateTimeUtc()) :
+            MAJOR(major), MINOR(minor), PATCH(patch), BUILD(build), description_(description), buildTime_(buildTime)
+        { }
+
+        auto operator<=>(const Version& other) const {
+            if (auto cmp = MAJOR <=> other.MAJOR; cmp != 0) return cmp;
+            if (auto cmp = MINOR <=> other.MINOR; cmp != 0) return cmp;
+            if (auto cmp = PATCH <=> other.PATCH; cmp != 0) return cmp;
+            return BUILD <=> other.BUILD;
+        }
+
+        auto operator==(const Version& other) const {
+            return MAJOR == other.MAJOR &&
+                   MINOR == other.MINOR &&
+                   PATCH == other.PATCH &&
+                   BUILD == other.BUILD;
+        }
+
+        std::string toStdString() const {
+            return std::format("v.{}.{}.{}.{}", MAJOR, MINOR, PATCH, BUILD);
+        }
+
+        QString toQString() const {
+            return QString::fromStdString(toStdString());
+        }
+    };
+
+    inline Version VoidCrawlerVersion = Version(0, 0, 0, 1, "First Version");
+
+    // 创建或获取文件夹：目录不存在时创建，存在时直接访问，QDir 函数
+    static QDir createAndGetFolder(QDir directory, const QString& folderName)
+    {
+        if (!directory.cd(folderName))
+        {
+            std::cout << std::format("{} folder does not exist. Creating...", folderName.toStdString()) << std::endl;
+            if (!directory.mkdir(folderName))
+            {
+                std::cerr << std::format("Failed to create {} directory!", folderName.toStdString()) << std::endl;
+                QMessageBox::critical(nullptr,
+                    "VoidCrawler",
+                    QString("Failed to create %1 directory!").arg(folderName));
+                std::exit(EXIT_FAILURE);
+            }
+            if (!directory.cd(folderName))
+            {
+                std::cerr << "Failed to access log directory after creation!" << std::endl;
+                QMessageBox::critical(nullptr,
+                    "VoidCrawler",
+                    "Failed to access log directory after creation!");
+                std::exit(EXIT_FAILURE);
+            }
+        }
+        return directory;
+    }
+
+    static std::shared_ptr<spdlog::logger> initLogger()
+    {
+        QDir logFolder = VoidCrawlerCore::getPath("");
+        logFolder = createAndGetFolder(logFolder, "log");
+
+        // 以下配置后日志文件最多占用 11 MiB 的硬盘空间，因为其中 10 个是备份文件。
+
+        std::unordered_map<std::string, std::string> config_map = {
+            {"logFolder", logFolder.path().toStdString()}, // 不可以由用户更改
+            {"logName", "VoidCrawler"},
+            {"maxFileSize", "1048576"},  // 1 MiB
+            {"maxFiles", "10"},
+            {"level", "debug"}
+        };
+
+        // 加载配置并初始化日志系统
+        LoggerConfig config;
+        config.LoadFromMap(config_map);
+
+        if (!LoggerManager::init(config)) {
+            std::cerr << "Failed to initialize logger!" << std::endl;
+            QMessageBox::critical(nullptr, "VoidCrawler", QString("Failed to initialize logger!"));
+            std::exit(EXIT_FAILURE);
+        }
+
+        return LoggerManager::getLogger();
+    }
+
+
+    inline auto logger = initLogger();
+}

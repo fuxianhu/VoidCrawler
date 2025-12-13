@@ -1,0 +1,100 @@
+﻿/*
+项目核心
+*/
+
+#include <unordered_map>
+#include <windows.h>
+#include <cstdlib>
+#include <iostream>
+#include <format>
+
+#include <QDir>
+#include <QMessageBox>
+#include <QtWidgets/QApplication>
+#include <QDebug>
+#include <QTranslator>
+#include <QObject>
+
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonValue>
+#include <QJsonParseError>
+#include <string>
+#include <compare>
+
+
+
+namespace VoidCrawlerCore
+{
+    template<typename StringType>
+    static QString getPath(const StringType& path) {
+        // 在函数内部统一转换为 QString
+        QString qstr;
+
+        if constexpr (std::is_same_v<StringType, std::string>) {
+            qstr = QString::fromStdString(path);
+        }
+        else if constexpr (std::is_same_v<StringType, QString>) {
+            qstr = path;
+        }
+        else if constexpr (std::is_same_v<StringType, const char*>) {
+            qstr = QString(path);
+        }
+        // 返回结果
+#ifdef QT_DEBUG
+        return QDir::currentPath() + "/" + qstr;
+#else
+        return QCoreApplication::applicationDirPath() + "/" + qstr;
+#endif
+    }
+
+    class Version
+    {
+    public:
+        // unsigned short : 16 bit, 0 to 65535
+        const quint16 MAJOR, MINOR, PATCH, BUILD;
+        const QString description_;
+        const QDateTime buildTime_; // 注意！使用 UTC 时间，而不是本地时间，这样可以确保一致性。
+
+        // 构造函数
+        Version(const quint16& major = 0,
+            const quint16& minor = 0,
+            const quint16& patch = 0,
+            const quint16& build = 0,
+            const QString& description = "",
+            const QDateTime& buildTime = QDateTime::currentDateTimeUtc()) :
+            MAJOR(major), MINOR(minor), PATCH(patch), BUILD(build), description_(description), buildTime_(buildTime)
+        { }
+
+        // C++23 新特性！"<=>" 三路比较运算符！
+        // 默认 "<=>" 运算符以生成所有关系比较
+        auto operator<=>(const Version& other) const
+        {
+            if (auto cmp = MAJOR <=> other.MAJOR; cmp != 0) return cmp;
+            if (auto cmp = MINOR <=> other.MINOR; cmp != 0) return cmp;
+            if (auto cmp = PATCH <=> other.PATCH; cmp != 0) return cmp;
+            return BUILD <=> other.BUILD;
+        }
+        // 显示默认 "==" 运算符
+        auto operator==(const Version& other) const
+        {
+            return MAJOR == other.MAJOR &&
+                MINOR == other.MINOR &&
+                PATCH == other.PATCH &&
+                BUILD == other.BUILD;
+        }
+
+        std::string toStdString()
+        {
+            return std::format("v.{}.{}.{}.{}", MAJOR, MINOR, PATCH, BUILD);
+        }
+
+        QString toQString()
+        {
+            return QString::fromStdString(toStdString());
+        }
+    };
+
+    Version VoidCrawlerVersion = Version(0, 0, 0, 1, "First Version");
+}

@@ -1,0 +1,88 @@
+﻿/*
+项目核心
+*/
+
+#include "Core.h"
+
+#include <unordered_map>
+#include <windows.h>
+#include <cstdlib>
+#include <iostream>
+#include <format>
+
+#include <QDir>
+#include <QMessageBox>
+#include <QtWidgets/QApplication>
+#include <QDebug>
+#include <QTranslator>
+#include <QObject>
+
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonValue>
+#include <QJsonParseError>
+#include <string>
+#include <compare>
+
+
+namespace VoidCrawlerCore
+{
+    template<typename StringType>
+    static QString getPath(const StringType& path) {
+        // 在函数内部统一转换为 QString
+        QString qstr;
+
+        if constexpr (std::is_same_v<StringType, std::string>) {
+            qstr = QString::fromStdString(path);
+        }
+        else if constexpr (std::is_same_v<StringType, QString>) {
+            qstr = path;
+        }
+        else if constexpr (std::is_same_v<StringType, const char*>) {
+            qstr = QString(path);
+        }
+        // 返回结果
+#ifdef QT_DEBUG
+        return QDir::currentPath() + "/" + qstr;
+#else
+        return QCoreApplication::applicationDirPath() + "/" + qstr;
+#endif
+    }
+    Version::Version(const quint16& major,
+        const quint16& minor,
+        const quint16& patch,
+        const quint16& build,
+        const QString& description,
+        const QDateTime& buildTime) :
+        MAJOR(major), MINOR(minor), PATCH(patch), BUILD(build), description_(description), buildTime_(buildTime)
+    { }
+
+    auto Version::operator<=>(const Version& other) const
+    {
+        if (auto cmp = MAJOR <=> other.MAJOR; cmp != 0) return cmp;
+        if (auto cmp = MINOR <=> other.MINOR; cmp != 0) return cmp;
+        if (auto cmp = PATCH <=> other.PATCH; cmp != 0) return cmp;
+        return BUILD <=> other.BUILD;
+    }
+
+    auto Version::operator==(const Version& other) const
+    {
+        return MAJOR == other.MAJOR &&
+            MINOR == other.MINOR &&
+            PATCH == other.PATCH &&
+            BUILD == other.BUILD;
+    }
+
+    std::string Version::toStdString()
+    {
+        return std::format("v.{}.{}.{}.{}", MAJOR, MINOR, PATCH, BUILD);
+    }
+
+    QString Version::toQString()
+    {
+        return QString::fromStdString(toStdString());
+    }
+
+    Version VoidCrawlerVersion = Version(0, 0, 0, 1, "First Version");
+}

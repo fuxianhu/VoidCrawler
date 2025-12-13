@@ -1,0 +1,2 @@
+temp 文件夹不参与项目构建，作为开发软件时的草稿，除本文件外可以随意编辑。
+The temp folder does not participate in project construction and serves as a draft during software development. All files except this one can be freely edited.

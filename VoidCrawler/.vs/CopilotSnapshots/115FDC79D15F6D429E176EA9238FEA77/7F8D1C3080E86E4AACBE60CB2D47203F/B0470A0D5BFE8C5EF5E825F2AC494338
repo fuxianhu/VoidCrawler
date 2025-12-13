@@ -1,0 +1,91 @@
+﻿/*
+
+项目主文件
+
+Minecraft PVP 技巧：
+https://www.bilibili.com/video/BV1GygYzZEHA/
+https://www.bilibili.com/video/BV1xRtbzjEme/
+
+E:\Qt\6.5.3\msvc2019_64\bin\lupdate .\VoidCrawler.vcxproj -ts .\translations\zh-CN.ts
+E:\Qt\6.5.3\msvc2019_64\bin\lrelease .\translations\en-US.ts -qm .\translations\en-US.qm
+
+*/
+
+#include "VoidCrawler.h"
+#include "LoggerManager.h"
+#include "configOperate.cpp"
+#include "Core.cpp"
+
+#include <unordered_map>
+#include <windows.h>
+#include <cstdlib>
+#include <iostream>
+#include <format>
+
+#include <QDir>
+#include <QMessageBox>
+#include <QtWidgets/QApplication>
+#include <QDebug>
+#include <QTranslator>
+#include <QObject>
+
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonValue>
+#include <QJsonParseError>
+
+
+
+QJsonDocument mainConfig, categoryConfig;
+
+
+
+
+static std::shared_ptr<spdlog::logger> initLogger()
+{   
+    QDir logFolder = QDir(QCoreApplication::applicationDirPath());
+	logFolder = createAndGetFolder(logFolder, "log");
+   
+    // 以下配置后日志文件最多占用 11 MiB 的硬盘空间，因为其中 10 个是备份文件。
+
+    std::unordered_map<std::string, std::string> config_map = {
+        {"logFolder", logFolder.path().toStdString()}, // 不可以由用户更改
+        {"logName", "VoidCrawler"},
+        {"maxFileSize", "1048576"},  // 1 MiB
+        {"maxFiles", "10"},
+        {"level", "debug"}
+    };
+
+    // 加载配置并初始化日志系统
+    LoggerConfig config;
+    config.LoadFromMap(config_map);
+
+    if (!LoggerManager::init(config)) {
+        std::cerr << "Failed to initialize logger!" << std::endl;
+        QMessageBox::critical(nullptr, "VoidCrawler", QString("Failed to initialize logger!"));
+        std::exit(EXIT_FAILURE);
+    }
+
+    return LoggerManager::getLogger();
+}
+
+int main(int argc, char *argv[])
+{
+    QApplication app(argc, argv);
+
+    //QLocale::setDefault(QLocale(QLocale::Chinese, QLocale::China));
+    // 使用系统默认语言
+    QLocale::setDefault(QLocale::system());
+
+    readJSON(mainConfig, "main.json");
+    auto logger = initLogger();
+	logger->info(std::format("Application started. Version: {}", VoidCrawlerCore::VoidCrawlerVersion.toStdString()));
+	std::cout << QCoreApplication::applicationDirPath().toStdString() << std::endl;
+    VoidCrawler window;
+    //window.changeLanguage("en-US");
+    //window.changeLanguage("zh-CN");
+    window.initUI();
+    window.show();
+    return app.exec();
+}
