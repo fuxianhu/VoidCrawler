@@ -1,5 +1,4 @@
 ﻿#include "Core.h"
-#include <QObject>
 
 
 void VCCore::hideAllTopLevelWindows()

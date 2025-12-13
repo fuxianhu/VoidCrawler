@@ -212,7 +212,7 @@ namespace VCCore
     };
 
     // 当前客户端版本
-    inline Version VoidCrawlerVersion = Version(0, 0, 0, 1, "First Version");
+    inline Version VoidCrawlerVersion = Version(0, 0, 1, 1, "Alpha Version", QDateTime(QDate(2025, 12, 13), QTime(16, 44)));
 
     // 隐藏所有顶级窗口（包括主窗口、独立对话框等）
     void hideAllTopLevelWindows();
