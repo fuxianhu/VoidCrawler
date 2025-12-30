@@ -1,5 +1,7 @@
 # VoidCrawler Client 虚空潜行者 客户端
 
+**v.0.0.1.2 的船新版本正在开发！完成后将正式提供可执行文件！**
+
 - This is a desktop hacking client running on the Microsoft Windows operating system.
 
     这是一个 Microsoft Windows 操作系统下运行的桌面黑客客户端。
