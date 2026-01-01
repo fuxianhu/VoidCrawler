@@ -7,23 +7,28 @@
       "RelativeMoniker": "D:0:0:{37487662-6E98-48B5-B45F-1D5DA31C369D}|VoidCrawler.vcxproj|solutionrelative:Core.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{37487662-6E98-48B5-B45F-1D5DA31C369D}|VoidCrawler.vcxproj|E:\\YFY\\VoidCrawler\\VoidCrawler\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{37487662-6E98-48B5-B45F-1D5DA31C369D}|VoidCrawler.vcxproj|solutionrelative:main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{37487662-6E98-48B5-B45F-1D5DA31C369D}|VoidCrawler.vcxproj|E:\\YFY\\VoidCrawler\\VoidCrawler\\VoidCrawler.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{37487662-6E98-48B5-B45F-1D5DA31C369D}|VoidCrawler.vcxproj|solutionrelative:VoidCrawler.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{37487662-6E98-48B5-B45F-1D5DA31C369D}|VoidCrawler.vcxproj|E:\\YFY\\VoidCrawler\\VoidCrawler\\VoidCrawler.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{37487662-6E98-48B5-B45F-1D5DA31C369D}|VoidCrawler.vcxproj|solutionrelative:VoidCrawler.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{37487662-6E98-48B5-B45F-1D5DA31C369D}|VoidCrawler.vcxproj|E:\\YFY\\VoidCrawler\\VoidCrawler\\Core.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{37487662-6E98-48B5-B45F-1D5DA31C369D}|VoidCrawler.vcxproj|solutionrelative:Core.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{37487662-6E98-48B5-B45F-1D5DA31C369D}|VoidCrawler.vcxproj|E:\\YFY\\VoidCrawler\\VoidCrawler\\VoidCrawler.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{37487662-6E98-48B5-B45F-1D5DA31C369D}|VoidCrawler.vcxproj|solutionrelative:VoidCrawler.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{37487662-6E98-48B5-B45F-1D5DA31C369D}|VoidCrawler.vcxproj|E:\\YFY\\VoidCrawler\\VoidCrawler\\MediaPlayer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{37487662-6E98-48B5-B45F-1D5DA31C369D}|VoidCrawler.vcxproj|solutionrelative:MediaPlayer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{37487662-6E98-48B5-B45F-1D5DA31C369D}|VoidCrawler.vcxproj|E:\\QT\\6.5.3\\MSVC2019_64\\INCLUDE\\QTCORE\\QRUNNABLE.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{37487662-6E98-48B5-B45F-1D5DA31C369D}|VoidCrawler.vcxproj|E:\\YFY\\VoidCrawler\\VoidCrawler\\configOperate.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{37487662-6E98-48B5-B45F-1D5DA31C369D}|VoidCrawler.vcxproj|solutionrelative:configOperate.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{37487662-6E98-48B5-B45F-1D5DA31C369D}|VoidCrawler.vcxproj|E:\\YFY\\VoidCrawler\\VoidCrawler\\VoidCrawler.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{37487662-6E98-48B5-B45F-1D5DA31C369D}|VoidCrawler.vcxproj|solutionrelative:VoidCrawler.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{37487662-6E98-48B5-B45F-1D5DA31C369D}|VoidCrawler.vcxproj|E:\\YFY\\VoidCrawler\\VoidCrawler\\configOperate.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{37487662-6E98-48B5-B45F-1D5DA31C369D}|VoidCrawler.vcxproj|solutionrelative:configOperate.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{37487662-6E98-48B5-B45F-1D5DA31C369D}|VoidCrawler.vcxproj|E:\\YFY\\VoidCrawler\\VoidCrawler\\FunctionSet.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -34,8 +39,24 @@
       "RelativeMoniker": "D:0:0:{37487662-6E98-48B5-B45F-1D5DA31C369D}|VoidCrawler.vcxproj|solutionrelative:FunctionSet.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{37487662-6E98-48B5-B45F-1D5DA31C369D}|VoidCrawler.vcxproj|E:\\YFY\\VoidCrawler\\VoidCrawler\\LoggerManger.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{37487662-6E98-48B5-B45F-1D5DA31C369D}|VoidCrawler.vcxproj|solutionrelative:LoggerManger.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{37487662-6E98-48B5-B45F-1D5DA31C369D}|VoidCrawler.vcxproj|E:\\YFY\\VoidCrawler\\VoidCrawler\\MediaPlayer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{37487662-6E98-48B5-B45F-1D5DA31C369D}|VoidCrawler.vcxproj|solutionrelative:MediaPlayer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{37487662-6E98-48B5-B45F-1D5DA31C369D}|VoidCrawler.vcxproj|E:\\YFY\\VoidCrawler\\VoidCrawler\\SmoothSwitch.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{37487662-6E98-48B5-B45F-1D5DA31C369D}|VoidCrawler.vcxproj|solutionrelative:SmoothSwitch.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{37487662-6E98-48B5-B45F-1D5DA31C369D}|VoidCrawler.vcxproj|E:\\YFY\\VoidCrawler\\VoidCrawler\\SmoothSwitch.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{37487662-6E98-48B5-B45F-1D5DA31C369D}|VoidCrawler.vcxproj|solutionrelative:SmoothSwitch.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{37487662-6E98-48B5-B45F-1D5DA31C369D}|VoidCrawler.vcxproj|E:\\YFY\\VoidCrawler\\VoidCrawler\\CustomQtLogger.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{37487662-6E98-48B5-B45F-1D5DA31C369D}|VoidCrawler.vcxproj|solutionrelative:CustomQtLogger.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{37487662-6E98-48B5-B45F-1D5DA31C369D}|VoidCrawler.vcxproj|E:\\YFY\\VoidCrawler\\VoidCrawler\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{37487662-6E98-48B5-B45F-1D5DA31C369D}|VoidCrawler.vcxproj|solutionrelative:main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{37487662-6E98-48B5-B45F-1D5DA31C369D}|VoidCrawler.vcxproj|E:\\YFY\\VoidCrawler\\VoidCrawler\\keyhookthread.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -44,18 +65,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{37487662-6E98-48B5-B45F-1D5DA31C369D}|VoidCrawler.vcxproj|E:\\YFY\\VoidCrawler\\VoidCrawler\\keyhookthread.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{37487662-6E98-48B5-B45F-1D5DA31C369D}|VoidCrawler.vcxproj|solutionrelative:keyhookthread.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{37487662-6E98-48B5-B45F-1D5DA31C369D}|VoidCrawler.vcxproj|E:\\YFY\\VoidCrawler\\VoidCrawler\\configOperate.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{37487662-6E98-48B5-B45F-1D5DA31C369D}|VoidCrawler.vcxproj|solutionrelative:configOperate.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{37487662-6E98-48B5-B45F-1D5DA31C369D}|VoidCrawler.vcxproj|E:\\YFY\\VoidCrawler\\VoidCrawler\\configOperate.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{37487662-6E98-48B5-B45F-1D5DA31C369D}|VoidCrawler.vcxproj|solutionrelative:configOperate.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{37487662-6E98-48B5-B45F-1D5DA31C369D}|VoidCrawler.vcxproj|E:\\YFY\\VoidCrawler\\VoidCrawler\\LoggerManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{37487662-6E98-48B5-B45F-1D5DA31C369D}|VoidCrawler.vcxproj|solutionrelative:LoggerManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -69,13 +78,13 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 13,
               "Title": "main.cpp",
               "DocumentMoniker": "E:\\YFY\\VoidCrawler\\VoidCrawler\\main.cpp",
               "RelativeDocumentMoniker": "main.cpp",
               "ToolTip": "E:\\YFY\\VoidCrawler\\VoidCrawler\\main.cpp",
               "RelativeToolTip": "main.cpp",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAAAcAAAARAAAAAAAAAA==",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAtwA4AAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-11-22T05:06:35.956Z",
               "IsPinned": true
@@ -88,7 +97,7 @@
               "RelativeDocumentMoniker": "Core.h",
               "ToolTip": "E:\\YFY\\VoidCrawler\\VoidCrawler\\Core.h",
               "RelativeToolTip": "Core.h",
-              "ViewState": "AgIAAMkAAAAAAAAAAAAAANcAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAM8AAAAAAAAAAAAvwNcAAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-11-29T06:53:10.107Z",
               "IsPinned": true,
@@ -96,134 +105,158 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Core.cpp",
               "DocumentMoniker": "E:\\YFY\\VoidCrawler\\VoidCrawler\\Core.cpp",
               "RelativeDocumentMoniker": "Core.cpp",
               "ToolTip": "E:\\YFY\\VoidCrawler\\VoidCrawler\\Core.cpp",
               "RelativeToolTip": "Core.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAARAAAAAAAAAA==",
+              "ViewState": "AgIAACEAAAAAAAAAAAAcwCYAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-12-06T10:35:07.912Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 2,
               "Title": "VoidCrawler.h",
               "DocumentMoniker": "E:\\YFY\\VoidCrawler\\VoidCrawler\\VoidCrawler.h",
               "RelativeDocumentMoniker": "VoidCrawler.h",
               "ToolTip": "E:\\YFY\\VoidCrawler\\VoidCrawler\\VoidCrawler.h",
               "RelativeToolTip": "VoidCrawler.h",
-              "ViewState": "AgIAAC0AAAAAAAAAAIAwwDwAAAAGAAAAAAAAAA==",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAABgAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-12-02T09:56:12.233Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "VoidCrawler.cpp",
               "DocumentMoniker": "E:\\YFY\\VoidCrawler\\VoidCrawler\\VoidCrawler.cpp",
               "RelativeDocumentMoniker": "VoidCrawler.cpp",
               "ToolTip": "E:\\YFY\\VoidCrawler\\VoidCrawler\\VoidCrawler.cpp",
               "RelativeToolTip": "VoidCrawler.cpp",
-              "ViewState": "AgIAAJ8AAAAAAAAAAIAwwK4AAAAjAAAAAAAAAA==",
+              "ViewState": "AgIAAFAAAAAAAAAAAADgv14AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-11-22T05:05:26.283Z",
-              "IsPinned": true
+              "WhenOpened": "2025-12-27T04:36:28.637Z",
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "CustomQtLogger.h",
+              "DocumentMoniker": "E:\\YFY\\VoidCrawler\\VoidCrawler\\CustomQtLogger.h",
+              "RelativeDocumentMoniker": "CustomQtLogger.h",
+              "ToolTip": "E:\\YFY\\VoidCrawler\\VoidCrawler\\CustomQtLogger.h",
+              "RelativeToolTip": "CustomQtLogger.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-01-01T05:38:30.689Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "SmoothSwitch.h",
+              "DocumentMoniker": "E:\\YFY\\VoidCrawler\\VoidCrawler\\SmoothSwitch.h",
+              "RelativeDocumentMoniker": "SmoothSwitch.h",
+              "ToolTip": "E:\\YFY\\VoidCrawler\\VoidCrawler\\SmoothSwitch.h",
+              "RelativeToolTip": "SmoothSwitch.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-01-01T04:48:48.198Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "SmoothSwitch.cpp",
+              "DocumentMoniker": "E:\\YFY\\VoidCrawler\\VoidCrawler\\SmoothSwitch.cpp",
+              "RelativeDocumentMoniker": "SmoothSwitch.cpp",
+              "ToolTip": "E:\\YFY\\VoidCrawler\\VoidCrawler\\SmoothSwitch.cpp",
+              "RelativeToolTip": "SmoothSwitch.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-01-01T04:49:28.574Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "MediaPlayer.h",
+              "DocumentMoniker": "E:\\YFY\\VoidCrawler\\VoidCrawler\\MediaPlayer.h",
+              "RelativeDocumentMoniker": "MediaPlayer.h",
+              "ToolTip": "E:\\YFY\\VoidCrawler\\VoidCrawler\\MediaPlayer.h",
+              "RelativeToolTip": "MediaPlayer.h",
+              "ViewState": "AgIAADMAAAAAAAAAAAAAAD4AAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-12-31T11:00:49.73Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "qrunnable.h",
-              "DocumentMoniker": "E:\\Qt\\6.5.3\\msvc2019_64\\include\\QtCore\\qrunnable.h",
-              "RelativeDocumentMoniker": "..\\..\\..\\Qt\\6.5.3\\msvc2019_64\\include\\QtCore\\qrunnable.h",
-              "ToolTip": "E:\\Qt\\6.5.3\\msvc2019_64\\include\\QtCore\\qrunnable.h",
-              "RelativeToolTip": "..\\..\\..\\Qt\\6.5.3\\msvc2019_64\\include\\QtCore\\qrunnable.h",
-              "ViewState": "AgIAAAQAAAAAAAAAAIAwwBMAAAAOAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-12-13T04:39:38.542Z"
+              "Title": "MediaPlayer.cpp",
+              "DocumentMoniker": "E:\\YFY\\VoidCrawler\\VoidCrawler\\MediaPlayer.cpp",
+              "RelativeDocumentMoniker": "MediaPlayer.cpp",
+              "ToolTip": "E:\\YFY\\VoidCrawler\\VoidCrawler\\MediaPlayer.cpp",
+              "RelativeToolTip": "MediaPlayer.cpp",
+              "ViewState": "AgIAAL8AAAAAAAAAAAAswMsAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-12-31T11:00:54.369Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "FunctionSet.h",
               "DocumentMoniker": "E:\\YFY\\VoidCrawler\\VoidCrawler\\FunctionSet.h",
               "RelativeDocumentMoniker": "FunctionSet.h",
               "ToolTip": "E:\\YFY\\VoidCrawler\\VoidCrawler\\FunctionSet.h",
               "RelativeToolTip": "FunctionSet.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-12-13T03:51:58.197Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "FunctionSet.cpp",
               "DocumentMoniker": "E:\\YFY\\VoidCrawler\\VoidCrawler\\FunctionSet.cpp",
               "RelativeDocumentMoniker": "FunctionSet.cpp",
               "ToolTip": "E:\\YFY\\VoidCrawler\\VoidCrawler\\FunctionSet.cpp",
               "RelativeToolTip": "FunctionSet.cpp",
-              "ViewState": "AgIAACoAAAAAAAAAAAAAACoAAAArAAAAAAAAAA==",
+              "ViewState": "AgIAAC4AAAAAAAAAAAAgwDwAAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-12-13T03:50:15.057Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 6,
               "Title": "configOperate.h",
               "DocumentMoniker": "E:\\YFY\\VoidCrawler\\VoidCrawler\\configOperate.h",
               "RelativeDocumentMoniker": "configOperate.h",
               "ToolTip": "E:\\YFY\\VoidCrawler\\VoidCrawler\\configOperate.h",
               "RelativeToolTip": "configOperate.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-11-29T06:15:13.994Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 5,
               "Title": "configOperate.cpp",
               "DocumentMoniker": "E:\\YFY\\VoidCrawler\\VoidCrawler\\configOperate.cpp",
               "RelativeDocumentMoniker": "configOperate.cpp",
               "ToolTip": "E:\\YFY\\VoidCrawler\\VoidCrawler\\configOperate.cpp",
               "RelativeToolTip": "configOperate.cpp",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAEwBoAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAADgAAAAAAAAAAIAwwE0AAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-11-29T13:27:59.913Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "LoggerManager.h",
-              "DocumentMoniker": "E:\\YFY\\VoidCrawler\\VoidCrawler\\LoggerManager.h",
-              "RelativeDocumentMoniker": "LoggerManager.h",
-              "ToolTip": "E:\\YFY\\VoidCrawler\\VoidCrawler\\LoggerManager.h",
-              "RelativeToolTip": "LoggerManager.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-11-28T11:41:51.319Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "LoggerManger.cpp",
-              "DocumentMoniker": "E:\\YFY\\VoidCrawler\\VoidCrawler\\LoggerManger.cpp",
-              "RelativeDocumentMoniker": "LoggerManger.cpp",
-              "ToolTip": "E:\\YFY\\VoidCrawler\\VoidCrawler\\LoggerManger.cpp",
-              "RelativeToolTip": "LoggerManger.cpp",
-              "ViewState": "AgIAAFAAAAAAAAAAAAAwwGwAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-11-22T06:04:11.115Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 15,
               "Title": "keyhookthread.h",
               "DocumentMoniker": "E:\\YFY\\VoidCrawler\\VoidCrawler\\keyhookthread.h",
               "RelativeDocumentMoniker": "keyhookthread.h",
@@ -235,7 +268,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 14,
               "Title": "keyhookthread.cpp",
               "DocumentMoniker": "E:\\YFY\\VoidCrawler\\VoidCrawler\\keyhookthread.cpp",
               "RelativeDocumentMoniker": "keyhookthread.cpp",

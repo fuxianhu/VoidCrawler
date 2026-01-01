@@ -6,6 +6,8 @@ E:\Qt\6.5.3\msvc2019_64\bin\lupdate .\VoidCrawler.vcxproj -ts .\translations\zh-
 E:\Qt\6.5.3\msvc2019_64\bin\lrelease .\translations\en-US.ts -qm .\translations\en-US.qm
 
 链接器/系统/子系统 控制台或窗口
+
+高考不方zhuangs
 */
 
 #include "VoidCrawler.h"
@@ -37,7 +39,8 @@ E:\Qt\6.5.3\msvc2019_64\bin\lrelease .\translations\en-US.ts -qm .\translations\
 #include <QJsonParseError>
 
 
-void parseArguments(const int &argc, char* argv[])
+// 解析命令行参数
+static void parseArguments(const int &argc, char* argv[])
 {
     // 遍历所有命令行参数
     for (int i = 1; i < argc; i++)
@@ -71,9 +74,8 @@ int main(int argc, char* argv[])
     QPixmap pixmap(VCCore::getPath("icon/startup.png"));
     QSplashScreen* splash = new QSplashScreen(pixmap);
     splash->show();
-    QApplication::processEvents(); // 确保启动画面立即显示
+    QApplication::processEvents();
 
-    // 执行初始化工作
     VCCore::logger->info(std::format("Application started. Version: {}", VCCore::VoidCrawlerVersion.toStdString()));
     VCCore::logger->debug(VCCore::mainConfig.object().value("language").toString().toStdString());
 
@@ -82,10 +84,7 @@ int main(int argc, char* argv[])
     VCCore::logger->debug("init UI window...");
     window.initUI();
 
-    // 计算已经过去的时间
-    qint64 elapsed = timer.elapsed(); // 毫秒
-
-    // 如果不到，等待剩余时间
+    qint64 elapsed = timer.elapsed();
     if (elapsed < STARTUP_SPLASH_DISPLAY_TIME)
     {
         QThread::msleep(STARTUP_SPLASH_DISPLAY_TIME - elapsed);

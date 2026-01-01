@@ -26,7 +26,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
@@ -37,12 +37,12 @@
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
     <QtInstall>6.5.3_msvc2019_64</QtInstall>
-    <QtModules>core;gui;widgets</QtModules>
+    <QtModules>core;gui;widgets;multimedia;multimediawidgets</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
     <QtInstall>6.5.3_msvc2019_64</QtInstall>
-    <QtModules>core;gui;widgets</QtModules>
+    <QtModules>core;gui;widgets;multimedia;multimediawidgets</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
   </PropertyGroup>
   <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
@@ -72,6 +72,13 @@
     <Link>
       <AdditionalDependencies>Advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <LanguageStandard>stdcpp23</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <AdditionalIncludeDirectories>.</AdditionalIncludeDirectories>
+    </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
     <ClCompile>
@@ -103,6 +110,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <QtRcc Include="VoidCrawler.qrc" />
+    <QtUic Include="AudioPlayer.ui" />
     <QtUic Include="VoidCrawler.ui" />
     <ClCompile Include="configOperate.cpp" />
     <ClCompile Include="Core.cpp" />
@@ -116,7 +124,9 @@
       <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).moc</QtMocFileName>
     </ClCompile>
     <ClCompile Include="LoggerManger.cpp" />
+    <ClCompile Include="MediaPlayer.cpp" />
     <ClCompile Include="PrivilegeLevel.cpp" />
+    <ClCompile Include="SmoothSwitch.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="VoidCrawler.cpp">
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
@@ -129,13 +139,42 @@
   <ItemGroup>
     <ClInclude Include="configOperate.h" />
     <ClInclude Include="Core.h" />
+    <ClInclude Include="CustomQtLogger.h" />
     <ClInclude Include="Encryption.h" />
+    <ClInclude Include="resource.h" />
+    <QtMoc Include="SmoothSwitch.h" />
     <QtMoc Include="LicenseAgreementDialog.h" />
     <QtMoc Include="keyhookthread.h" />
     <ClInclude Include="FunctionSet.h" />
     <ClInclude Include="LoggerManager.h" />
+    <QtMoc Include="MediaPlayer.h" />
     <ClInclude Include="PrivilegeLevel.h" />
     <QtMoc Include="VoidCrawler.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon\Administrator.png" />
+    <Image Include="icon\favicon.ico" />
+    <Image Include="icon\icon.png" />
+    <Image Include="icon\startup.png" />
+    <Image Include="icon\System.png" />
+    <Image Include="icon\TrunstedInstaller.png" />
+    <Image Include="icon\User.png" />
+    <Image Include="icon\VoidCrawlerIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="release.ps1" />
+    <None Include="translations\en-US.qm" />
+    <None Include="translations\zh-CN.qm" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtTranslation Include="translations\en-US.ts" />
+    <QtTranslation Include="translations\zh-CN.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="log\VoidCrawler.log" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="VoidCrawler.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

@@ -1,0 +1,26 @@
+﻿#include "MediaPlayer.h"
+
+AudioPlayer::AudioPlayer(QWidget* parent)
+	: QMainWindow(parent)
+{
+	setAttribute(Qt::WA_DeleteOnClose); // 关闭时自动释放内存
+
+	//         不在任务栏显示图标    无边框窗口，以便自定义标题栏样式    置顶窗口
+	this->setWindowFlags(Qt::Tool | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
+
+	resize(400, 200);
+	QWidget* w = new QWidget(this);
+	w->setObjectName("centralWidget");
+	w->setStyleSheet("background: transparent;");
+	setCentralWidget(w);
+
+    player = new QMediaPlayer(this);
+    titleLabel = new QLabel(this);
+	QFont titleFont = QFont("Arial", 30, QFont::Bold);
+	titleLabel->setFont(titleFont);
+    titleLabel->setText("Once upon a time");
+}
+AudioPlayer::~AudioPlayer()
+{
+	delete player;
+}

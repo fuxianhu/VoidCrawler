@@ -1,49 +1,73 @@
 [
     {
-        "id": "VoidCrawler", 
-        "hide": false, 
+        "hide": false,
+        "id": "VoidCrawler",
         "items": [
             {
-                "id": "cmd", 
-                "icons": null, 
-                "type": 0, 
-                "description": "Run cmd.exe. ", 
-                "help": "Conveniently run cmd.exe program. "
-            }, 
+                "description": "Run cmd.exe. ",
+                "help": "Conveniently run cmd.exe program. ",
+                "icons": null,
+                "id": "cmd",
+                "type": 0
+            },
             {
-                "id": "pwsh", 
-                "icons": null, 
-                "type": 0, 
-                "description": "Run pwsh.exe. ", 
-                "help": "Conveniently run pwsh.exe (New version) program. "
-            }, 
+                "description": "Run pwsh.exe. ",
+                "help": "Conveniently run pwsh.exe (New version) program. ",
+                "icons": null,
+                "id": "pwsh",
+                "type": 0
+            },
             {
-                "id": "PowerShell", 
-                "icons": null, 
-                "type": 0, 
-                "description": "Run powershell.exe. ", 
-                "help": "Conveniently run powershell.exe (Old version) program. "
-            }, 
+                "description": "Run powershell.exe. ",
+                "help": "Conveniently run powershell.exe (Old version) program. ",
+                "icons": null,
+                "id": "PowerShell",
+                "type": 0
+            },
             {
-                "id": "chcp", 
-                "icons": null, 
-                "type": 0, 
-                "description": "Change character set.", 
-                "help": "Run chcp <a number>, change character set."
-            }, 
+                "description": "Change character set.",
+                "help": "Run chcp <a number>, change character set.",
+                "icons": null,
+                "id": "chcp",
+                "type": 0
+            },
             {
-                "id": "exit", 
-                "icons": null, 
-                "type": 0, 
-                "description": "Exit Client. ", 
-                "help": "Exit VoidCrawler Client. "
-            }, 
+                "description": "Switch",
+                "help": "Switch",
+                "icons": null,
+                "id": "SwitchIMECtrlSpace",
+                "switch": true,
+                "type": 1
+            },
             {
-                "id": "test1", 
-                "icons": null, 
-                "type": 0, 
-                "description": "Not allowed for everyone to click!", 
-                "help": "Not allowed for everyone to click! Only for testing purposes! "
+                "description": "Switch",
+                "help": "Switch",
+                "icons": null,
+                "id": "SwitchIMEShift",
+                "switch": false,
+                "type": 1
+            },
+            {
+                "description": "Switch",
+                "help": "Switch",
+                "icons": null,
+                "id": "SwitchIMECtrl",
+                "switch": false,
+                "type": 1
+            },
+            {
+                "description": "Audio Player",
+                "help": "A Audio Player",
+                "icons": null,
+                "id": "AudioPlayer",
+                "type": 0
+            },
+            {
+                "description": "Exit Client. ",
+                "help": "Exit VoidCrawler Client. ",
+                "icons": null,
+                "id": "exit",
+                "type": 0
             }
         ]
     }

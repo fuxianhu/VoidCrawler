@@ -67,7 +67,9 @@ QJsonDocument readJSON(const QString& path,
     else
     {
         // 文件不存在
-        OutputDebugString(TEXT("JSON 配置文件读取失败！原因：!rj\n"));
+        OutputDebugString(TEXT("JSON 配置文件读取失败！原因：文件不存在！\n"));
+		OutputDebugString(filePath.toStdWString().c_str());
+		OutputDebugString(TEXT("\n"));
         return QJsonDocument();
     }
 }

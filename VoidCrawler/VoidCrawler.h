@@ -11,6 +11,9 @@
 #include <QEvent>
 #include <QSplashScreen>
 #include "ui_VoidCrawler.h"
+#include <QGraphicsDropShadowEffect>
+#include <QVariantAnimation>
+#include <QColor>
 
 
 class VoidCrawler : public QMainWindow
@@ -58,7 +61,7 @@ private:
     void ProgramAfterStartup();
 
 	// 按钮点击处理槽函数
-	void on_button_clicked(QString id);
+	void on_button_clicked(QString id, QPushButton* qpb, QString styles);
 
     // 全局热键槽函数
     void onHotkeyDetected(const QString& message);
@@ -89,4 +92,9 @@ private:
     int m_collapsedHeight = 100;
     int m_contentExpandedHeight = 0;
     int m_contentCollapsedHeight = 0;
+
+    QVariantAnimation* m_titleShadowAnim = nullptr;
+    QGraphicsDropShadowEffect* m_titleShadow = nullptr;
+    QList<QVariantAnimation*> m_buttonShadowAnims;
+    QList<QGraphicsDropShadowEffect*> m_buttonShadows;
 };

@@ -2,6 +2,7 @@
 
 #include "LoggerManager.h"
 #include "configOperate.h"
+#include "CustomQtLogger.h"
 
 #include <string>
 #include <type_traits>
@@ -65,11 +66,11 @@ namespace VCCore
             qstr = QString::fromUtf8(reinterpret_cast<const char*>(path));
         }
 
-#ifdef QT_DEBUG
+//#ifdef QT_DEBUG
         return QDir::currentPath() + "/" + qstr;
-#else
-        return QCoreApplication::applicationDirPath() + "/" + qstr;
-#endif
+//#else
+//        return QCoreApplication::applicationDirPath() + "/" + qstr;
+//#endif
     }
 
     // 版本描述类，格式为 x.x.x.x，且支持记录描述信息和构建时间、比较大小等
@@ -264,4 +265,57 @@ namespace VCCore
 
     // 使用 ShellExecute 启动外部程序，非阻塞
     void startShellDetached(const QString& program);
+
+    template <typename StringType>
+    inline QJsonValue cfgValue(const StringType& path, const QJsonDocument& cfg)
+    {
+        // 1. 转换为 QString
+        QString qstr;
+        if constexpr (std::is_same_v<StringType, std::string>)
+        {
+            qstr = QString::fromStdString(path);
+        }
+        else if constexpr (std::is_same_v<StringType, QString>)
+        {
+            qstr = path;
+        }
+        else
+        {
+            qstr = QString::fromUtf8(reinterpret_cast<const char*>(path));
+        }
+
+        if (qstr.isEmpty())
+        {
+            return QJsonValue();
+        }
+
+        // 2. 分割路径（处理边界情况）
+        const QStringList parts = qstr.split('/', Qt::SkipEmptyParts);
+        if (parts.isEmpty())
+        {
+            return QJsonValue();
+        }
+
+        // 3. 遍历路径，每一步都检查有效性
+        QJsonValue current = cfg.object().value(parts[0]);
+
+        for (int i = 1; i < parts.size() && current.isObject(); ++i)
+        {
+            current = current.toObject().value(parts[i]);
+        }
+
+        return current;
+    }
+
+    template <typename StringType>
+    inline QJsonValue mainCfgValue(const StringType& path)
+    {
+        return cfgValue(path, VCCore::mainConfig);
+    }
+
+    template <typename StringType>
+    inline QJsonValue itemsCfgValue(const StringType& path)
+    {
+        return cfgValue(path, VCCore::itemsConfig);
+    }
 }

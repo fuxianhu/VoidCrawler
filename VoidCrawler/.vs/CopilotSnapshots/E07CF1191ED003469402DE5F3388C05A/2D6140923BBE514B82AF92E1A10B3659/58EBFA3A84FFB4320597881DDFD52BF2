@@ -1,0 +1,17 @@
+﻿#pragma once
+#include <QApplication>
+#include <QtMultimedia>
+#include <QtMultimediaWidgets>
+
+
+
+class AudioPlayer : public QWidget
+{
+	Q_OBJECT
+private:
+	QMediaPlayer* player; // 播放器
+public:
+	AudioPlayer(QWidget* parent = nullptr);
+	~AudioPlayer();
+	//void playAudio(const QString& audioFilePath);
+}

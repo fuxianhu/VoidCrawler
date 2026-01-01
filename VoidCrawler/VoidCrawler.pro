@@ -17,3 +17,6 @@ FORMS += VoidCrawler.ui
 
 # 翻译文件
 TRANSLATIONS += translations/zh-CN.ts
+
+QT += multimedia
+QT += multimediawidgets

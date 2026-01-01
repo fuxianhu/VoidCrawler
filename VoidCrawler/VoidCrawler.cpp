@@ -5,7 +5,9 @@
 #include "configOperate.h"
 #include "LicenseAgreementDialog.h"
 #include "PrivilegeLevel.h"
+#include "FunctionSet.h"
 #include "keyhookthread.h"
+#include "MediaPlayer.h"
 
 #include <format>
 #include <string>
@@ -326,16 +328,54 @@ void VoidCrawler::ProgramAfterStartup()
     }
 }
 
-void VoidCrawler::on_button_clicked(QString id)
+void VoidCrawler::on_button_clicked(QString id, QPushButton* qpb, QString styles)
 {
+	// 由于 styles 参数是值传递，因此在函数内修改 styles 不会影响外部变量，不会出现超长字符串累积的问题
     // 用 startShellDetached 的原因：
     // 不阻塞主线程，能够执行其他 UI 操作，阻塞时间从3秒降至0.02秒左右
-	VCCore::logger->debug("on_button_clicked called.");
     VCCore::logger->debug(std::format("Button clicked, ID: {}", id.toStdString()));
+
+    // 对于 开关类型，反转 switch （开关状态）
+    QJsonArray items = VCCore::itemsConfig.array()[0].toObject().value("items").toArray();
+    std::bitset<3> IMESwitchState;
+    for (int i = 0; i < items.size(); i++)
+    {
+        QJsonObject obj = items[i].toObject();
+        if (obj.contains("id") && obj["id"].toString() == id)
+        {
+            if (obj.contains("type") && obj["type"].toInt() == 1)
+            {
+                bool newValue = !obj["switch"].toBool(); // 反转布尔值
+                obj["switch"] = newValue;
+                items[i] = obj; // 更新回数组
+                if (id == "SwitchIMECtrlSpace") { IMESwitchState[2] = newValue; }
+                if (id == "SwitchIMEShift") { IMESwitchState[1] = newValue; }
+                if (id == "SwitchIMECtrl") { IMESwitchState[0] = newValue; }
+                styles = "background: rgba(0, 0, 0, 0.3); border-radius: 8px; ";
+                if (newValue)
+                {
+                    styles = styles.append("color: green; ");
+                }
+                else
+                {
+                    styles = styles.append("color: red; ");
+                }
+                qpb->setStyleSheet(styles);
+
+                QJsonArray arr = VCCore::itemsConfig.array();
+                QJsonObject a = arr[0].toObject();
+                a["items"] = items;
+                arr[0] = a;
+                VCCore::itemsConfig.setArray(arr);
+                writeJSON(VCCore::itemsConfig, ITEMS_JSON_FILE);
+                break;
+            }
+        }
+    }
+
     if (id == "cmd")
     {
         VCCore::startShellDetached("cmd.exe");
-        VCCore::logger->debug("startShellDetached called.");
     }
     else if (id == "pwsh")
     {
@@ -354,8 +394,35 @@ void VoidCrawler::on_button_clicked(QString id)
         QApplication::quit();
         std::exit(0);
     }
-    else if (id == "test1")
+    else if (id == "SwitchIMECtrlSpace")
     {
+        std::bitset<3> switchKey = FunctionSet::getMicrosoftPinyinSwitchKey();
+        switchKey[2] = IMESwitchState[2];
+        FunctionSet::modifyMicrosoftPinyinSwitchKey(switchKey);
+    }
+    else if (id == "SwitchIMEShift")
+    {
+        std::bitset<3> switchKey = FunctionSet::getMicrosoftPinyinSwitchKey();
+        switchKey[1] = IMESwitchState[1];
+        FunctionSet::modifyMicrosoftPinyinSwitchKey(switchKey);
+    }
+    else if (id == "SwitchIMECtrl")
+    {
+        std::bitset<3> switchKey = FunctionSet::getMicrosoftPinyinSwitchKey();
+        switchKey[0] = IMESwitchState[0];
+        FunctionSet::modifyMicrosoftPinyinSwitchKey(switchKey);
+    }
+    else if (id == "AudioPlayer")
+    {
+        /*
+        创建一个子窗口，同样没有标题栏，圆角
+        （或许，可以给所有窗口加一个亚克力半透明效果？
+        长度大，宽度小，细长（根据实际歌曲调整长宽，切歌时也动态调整，且有动画）
+        第一行写名称，大标题，左对齐
+        之后照着书上 543 页做一下
+        */
+		AudioPlayer* player = new AudioPlayer(nullptr);
+        player->show();
     }
     else
     {
@@ -366,8 +433,6 @@ void VoidCrawler::on_button_clicked(QString id)
 void VoidCrawler::initUI()
 {
     ProgramAfterStartup();
-
-    // 允许在以后启用拖放功能：this->acceptDrops();
     VCCore::logger->debug("initUI called.");
     // 创建中央部件并设置为主窗口的 central widget
     QWidget* w = new QWidget(this);
@@ -375,7 +440,7 @@ void VoidCrawler::initUI()
     w->setStyleSheet("background: transparent;");
     this->setCentralWidget(w);
 
-    // 设置无边框窗口，以便自定义标题栏样式，Qt::Tool用于不在任务栏显示图标
+    //         不在任务栏显示图标    无边框窗口，以便自定义标题栏样式    置顶窗口
     this->setWindowFlags(Qt::Tool | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
     this->resize(300, m_expandedHeight);
     this->setWindowTitle("VoidCrawler Client");
@@ -385,9 +450,9 @@ void VoidCrawler::initUI()
     // 创建自定义标题栏（位于顶部）
     m_titleBar = new QWidget(w);
     m_titleBar->setObjectName("titleBar");
-    int titleBarHeight = 48; // 标题栏高度固定为 48
+    int titleBarHeight = 48; // 标题栏高度
     m_titleBar->setGeometry(0, 0, this->width(), titleBarHeight);
-    // 标题栏使用线性渐变背景并带有圆角样式，使其与窗口圆角一致
+    // 标题栏使用线性渐变背景并带有圆角样式
     m_titleBar->setStyleSheet(
         "QWidget#titleBar {"
         "background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #111111, stop:1 #0b0b0b);"
@@ -399,7 +464,40 @@ void VoidCrawler::initUI()
     m_titleLabel->setText("VoidCrawler Client");
     m_titleLabel->setGeometry(0, 0, this->width(), titleBarHeight);
     m_titleLabel->setAlignment(Qt::AlignCenter);
-    m_titleLabel->setStyleSheet("color: white; background: transparent; font-size: 16px; font-weight: bold;");
+    m_titleLabel->setFont(QFont(
+        VCCore::mainCfgValue("font/title/family").toString(),
+        VCCore::mainCfgValue("font/title/pointSize").toInt(),
+        VCCore::mainCfgValue("font/title/weight").toInt())
+    );
+    // 半透明背景，阴影更明显
+    m_titleLabel->setStyleSheet("color: white; background: rgba(0,0,0,0.3); border-radius: 8px;");
+
+    m_titleShadow = new QGraphicsDropShadowEffect(m_titleLabel);
+    m_titleShadow->setBlurRadius(40);
+    m_titleShadow->setOffset(0, 0);
+    m_titleShadow->setColor(QColor(255, 0, 0, 200)); // 红色阴影
+    m_titleLabel->setGraphicsEffect(m_titleShadow);
+
+    // ====== 彩色动态阴影效果：标题 ======
+    m_titleShadow = new QGraphicsDropShadowEffect(m_titleLabel);
+    m_titleShadow->setBlurRadius(32);
+    m_titleShadow->setOffset(0, 0);
+    m_titleLabel->setGraphicsEffect(m_titleShadow);
+    m_titleShadowAnim = new QVariantAnimation(this);
+    m_titleShadowAnim->setStartValue(0.0);
+    m_titleShadowAnim->setEndValue(360.0);
+    m_titleShadowAnim->setDuration(3000);
+    m_titleShadowAnim->setLoopCount(-1);
+    
+    connect(m_titleShadowAnim, &QVariantAnimation::valueChanged, this, [this](const QVariant& value) {
+        // 彩虹色 HSL 动态
+        QColor color;
+        color.setHslF(static_cast<float>(fmod(value.toDouble() / 360.0, 1.0)), 0.8f, 0.5f);
+        m_titleShadow->setColor(color);
+    });
+    m_titleShadowAnim->start();
+    // ====== 彩色动态阴影效果 END ======
+
     VCCore::logger->debug("Create Toggle Button...");
     // 创建折叠/展开按钮（位于标题栏右侧），使用自定义可旋转按钮类
     m_toggleButton = new RotatableIconButton(w);
@@ -434,18 +532,90 @@ void VoidCrawler::initUI()
     QJsonArray items = classification.value("items").toArray();
     if (!items.isEmpty())
     {
+        int btnIdx = 0;
         for (const QJsonValue& itemVal : items)
         {
             QJsonObject itemObj = itemVal.toObject();
-            QString itemName = itemObj.value("id").toString();
-            QPushButton* qpb = new QPushButton(itemName, m_contentWidget);
-            qpb->setStyleSheet("color: white; background: transparent;");
-            qpb->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
             QString itemID = itemObj.value("id").toString();
+            QString itemName = itemID;
+            int valueType = itemObj.value("type").toInt();
+            QPushButton* qpb = new QPushButton(itemName, m_contentWidget);
+            QString styles = "background: rgba(0, 0, 0, 0.3); border-radius: 8px; ";
+
+            std::bitset<3> switchKey = FunctionSet::getMicrosoftPinyinSwitchKey();
+            if (
+                (itemID == "SwitchIMECtrlSpace" && switchKey[2] != itemObj.value("switch").toBool()) ||
+                (itemID == "SwitchIMEShift" && switchKey[1] != itemObj.value("switch").toBool()) ||
+                (itemID == "SwitchIMECtrl" && switchKey[0] != itemObj.value("switch").toBool())
+                )
+            {
+                itemObj["switch"] = !itemObj["switch"].toBool();
+                items[btnIdx] = itemObj;
+                QJsonArray arr = VCCore::itemsConfig.array();
+                QJsonObject a = arr[0].toObject();
+                a["items"] = items;
+                arr[0] = a;
+                VCCore::itemsConfig.setArray(arr);
+                writeJSON(VCCore::itemsConfig, ITEMS_JSON_FILE);
+            }
+            
+            if (valueType == 1) // 开关类型
+            {
+                if (itemObj.value("switch").toBool())
+                {
+                    // 开
+                    styles = styles.append("color: green; ");
+                }
+                else
+                {
+                    // 关
+                    styles = styles.append("color: red; ");
+                }
+            }
+            else if (valueType == 0) // 按钮类型
+            {
+                styles = styles.append("color: white; ");
+            }
+            qpb->setStyleSheet(styles);
+
+            qpb->setFont(
+                QFont(
+                    VCCore::mainCfgValue("font/item/family").toString(),
+                    VCCore::mainCfgValue("font/item/pointSize").toInt(),
+                    VCCore::mainCfgValue("font/item/weight").toInt())
+            );
+            QGraphicsDropShadowEffect* btnShadow = new QGraphicsDropShadowEffect(qpb);
+            btnShadow->setBlurRadius(32);
+            btnShadow->setOffset(0, 0);
+            btnShadow->setColor(QColor(0, 120, 255, 200)); // 蓝色阴影
+            qpb->setGraphicsEffect(btnShadow);
+            qpb->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+
             // 使用C++14的广义lambda捕获
-            connect(qpb, &QPushButton::clicked, this, [this, itemID = itemID]()
-                { VoidCrawler::on_button_clicked(itemID); });
+            connect(qpb, &QPushButton::clicked, this, [this, itemID = itemID, qpb = qpb, styles = styles]()
+                { VoidCrawler::on_button_clicked(itemID, qpb, styles); });
             contentLayout->addWidget(qpb);
+
+            // ====== 彩色动态阴影效果：按钮 ======
+            QGraphicsDropShadowEffect* btnShadowEffect = new QGraphicsDropShadowEffect(qpb);
+            btnShadowEffect->setBlurRadius(24);
+            btnShadowEffect->setOffset(0, 0);
+            qpb->setGraphicsEffect(btnShadowEffect);
+            m_buttonShadows.append(btnShadowEffect);
+            QVariantAnimation* btnAnim = new QVariantAnimation(this);
+            btnAnim->setStartValue(0.0);
+            btnAnim->setEndValue(360.0);
+            btnAnim->setDuration(2500 + btnIdx * 200); // 每个按钮动画略有错位
+            btnAnim->setLoopCount(-1);
+            connect(btnAnim, &QVariantAnimation::valueChanged, this, [btnShadowEffect, btnIdx](const QVariant& value) {
+                QColor color;
+                color.setHslF(static_cast<float>(fmod((value.toDouble() + btnIdx * 40) / 360.0, 1.0)), 0.7f, 0.55f);
+                btnShadowEffect->setColor(color);
+            });
+            btnAnim->start();
+            m_buttonShadowAnims.append(btnAnim);
+            btnIdx++;
+            // ====== 彩色动态阴影效果 END ======
         }
     }
 
