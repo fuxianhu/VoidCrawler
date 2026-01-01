@@ -40,4 +40,11 @@
 - 尝试生成解决方案
 
 > [!NOTE]
-> 大部分文件为 UTF-8 with BOM 编码
+> 除特殊情况，所有文件都要用 UTF-8 with BOM 编码！优先用 CRLF，减少因编码导致的乱码问题和因换行方式导致的换行问题。
+
+## 发布软件
+
+1. 安装 Powershell，作者使用 7.5.4 版本
+2. 清理解决方案，并使用 `Releses x64` 生成解决方案
+3. 在 `VoidCrawler` 目录下，运行 `pwsh release.ps1`
+4. 在 `VoidCrawler\x64\Releses\` 中，便是我们的软件了，其中有一个压缩包，你可以把它传给任何人。
