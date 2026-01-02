@@ -29,3 +29,5 @@
 > When running for the first time, you may need to wait for a while before you can see the document.
 > 
 > 首次运行时，您可能需要等待一会儿才能看到文档。
+
+最近有个神奇的想法，在 Github 上写日记？

@@ -16,9 +16,10 @@
 > [!ATTENTION]
 > 软件中的发布时间和实际发布时间完全不符，因为忘记在 Github 上发布了。
 
-## v.0.0.1.3
+## v.0.0.1.3 2026/1/2
 
 - 解决版本显示（`--version`选项）无法输出的问题，且将描述的`UTC`字符删除，因为为了方便，一般用 `UTC-8`
 - AudioPlayer亚克力背景，但失去了圆角（技术问题，暂无法解决）
 - 增加有关 Minecraft、布吉岛的 $3$ 个选项（无广告）：`OpenMinecraftChinaEdition`, `OpenBjd`, `OpenBjdOfficialWebsite`
+- 文档的一些修改
 - Beta版本
