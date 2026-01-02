@@ -57,9 +57,30 @@
             },
             {
                 "description": "Audio Player",
-                "help": "A Audio Player",
+                "help": "A Audio Player.",
                 "icons": null,
                 "id": "AudioPlayer",
+                "type": 0
+            },
+            {
+                "description": "Open Minecraft China Edition",
+                "help": "Open Minecraft China Edition (fevergames://mygame/?gameId=1).",
+                "icons": null,
+                "id": "OpenMinecraftChinaEdition",
+                "type": 0
+            },
+            {
+                "description": "Open Bjd in Minecraft",
+                "help": "Open Bjd in Minecraft China Edition.",
+                "icons": null,
+                "id": "OpenBjd",
+                "type": 0
+            },
+            {
+                "description": "Open Bjd Official Website",
+                "help": "Open Bjd official website in your browser.",
+                "icons": null,
+                "id": "OpenBjdOfficialWebsite",
                 "type": 0
             },
             {

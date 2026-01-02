@@ -1,1 +1,13 @@
-﻿
+﻿   Qt/MSBuild: 3.4.1.0
+   Qt: 6.5.3
+  Core.cpp
+  Encryption.cpp
+  FunctionSet.cpp
+  LoggerManger.cpp
+  MediaPlayer.cpp
+  VoidCrawler.cpp
+  configOperate.cpp
+  main.cpp
+  moc_MediaPlayer.cpp
+  LINK : 没有找到 E:\YFY\VoidCrawler\VoidCrawler\x64\Debug\VoidCrawler.exe 或上一个增量链接没有生成它；正在执行完全链接
+  VoidCrawler.vcxproj -> E:\YFY\VoidCrawler\VoidCrawler\x64\Debug\VoidCrawler.exe

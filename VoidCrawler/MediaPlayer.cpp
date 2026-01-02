@@ -19,6 +19,7 @@
 #include <QVBoxLayout>
 #include <QMimeData>
 #include <QSlider>
+#include <QWidget>
 #include <QSpinBox>
 
 #include <windows.h>
@@ -40,7 +41,9 @@ AudioPlayer::AudioPlayer(QWidget* parent)
 //#ifdef Q_OS_WIN
     // Windows 特有性能优化
     //setAttribute(Qt::WA_MSWindowsUseDirect3D, true);
-    setAttribute(Qt::WA_PaintUnclipped, true);
+    // 
+    //setAttribute(Qt::WA_PaintUnclipped, true);
+    //setAttribute(Qt::WA_TranslucentBackground); // 设置窗口背景透明
 //#endif
 
     // 无边框窗口
@@ -63,7 +66,7 @@ AudioPlayer::AudioPlayer(QWidget* parent)
 
     // 使用 QPalette 设置背景色（比样式表更快）
     QPalette pal = palette();
-    pal.setColor(QPalette::Window, QColor(0, 0, 0));
+    pal.setColor(QPalette::Window, Qt::transparent);
     setPalette(pal);
 
     central->setAutoFillBackground(true);
@@ -185,14 +188,21 @@ void AudioPlayer::initUI()
     QAudioOutput* audioOutput = new QAudioOutput(this);
     player->setAudioOutput(audioOutput);
 
-    QPainterPath PainterPath; // 绘制一个QPainter路径对象
-    PainterPath.addRoundedRect(rect(), 10, 10); // 对它设置路径为四周圆角。10即圆角的深度
-    QRegion mask = QRegion(PainterPath.toFillPolygon().toPolygon()); // 创建遮罩对象，内容即该QPainter路径
-    setMask(mask); // 为QWidget覆盖上这个遮罩
+    //QPainterPath PainterPath; // 绘制一个QPainter路径对象
+    //PainterPath.addRoundedRect(rect(), 10, 10); // 对它设置路径为四周圆角。10即圆角的深度
+    //QRegion mask = QRegion(PainterPath.toFillPolygon().toPolygon()); // 创建遮罩对象，内容即该QPainter路径
+    //setMask(mask); // 为QWidget覆盖上这个遮罩
 
     setAcceptDrops(true);
 
     QWidget* w = centralWidget();
+    w->setAttribute(Qt::WA_TranslucentBackground);
+
+    // 设置所有子部件的透明背景
+    auto setWidgetTransparent = [](QWidget* widget) {
+        widget->setAttribute(Qt::WA_TranslucentBackground);
+        widget->setAutoFillBackground(false);
+        };
 
     // 关闭按钮
     closeBtn = new QPushButton("✗", w);
@@ -526,6 +536,42 @@ void AudioPlayer::initUI()
     pSpinBoxMinute->setValue(0);
     pSpinBoxSecond->setValue(0);
     positionSlider->setValue(0);
+
+
+    acryBackground = QColor(240, 240, 240, 150);
+    acryOpacity = 50;
+    hwnd = HWND(winId());
+    huser = GetModuleHandle(L"user32.dll");
+
+    //以下这段代码可以启动Aero效果
+    //if (huser) {
+    //    setWindowCompositionAttribute = (pfnSetWindowCompositionAttribute)GetProcAddress(huser, "SetWindowCompositionAttribute");
+    //    if (setWindowCompositionAttribute) {
+    //        //DWORD gradientColor = DWORD(0x50FFFFFF);
+    //        ACCENT_POLICY accent = { ACCENT_ENABLE_BLURBEHIND, 0, 0, 0 };
+    //        WINDOWCOMPOSITIONATTRIBDATA data;
+    //        data.Attrib = WCA_ACCENT_POLICY;
+    //        data.pvData = &accent;
+    //        data.cbData = sizeof(accent);
+    //        setWindowCompositionAttribute(hwnd, &data);
+    //    }
+    //}
+
+    //以下这段代码可以启动亚克力效果，但据说效率上有很大缺陷，不建议使用
+    //Warning: Due to the API proplem, this effect is laggy when dragging | resizing
+
+    if(huser){
+        setWindowCompositionAttribute = (pfnSetWindowCompositionAttribute)GetProcAddress(huser, "SetWindowCompositionAttribute");
+        if(setWindowCompositionAttribute){
+            DWORD gradientColor = DWORD(0x50F5F5F5);
+            ACCENT_POLICY accent = { ACCENT_ENABLE_ACRYLICBLURBEHIND, 0, gradientColor, 0 };
+            WINDOWCOMPOSITIONATTRIBDATA data;
+            data.Attrib = WCA_ACCENT_POLICY;
+            data.pvData = &accent;
+            data.cbData = sizeof(accent);
+            setWindowCompositionAttribute(hwnd, &data);
+        }
+    }
 }
 
 void AudioPlayer::onLoopPlaySwitchToggled(bool checked)
@@ -698,27 +744,62 @@ void AudioPlayer::onSmoothMoveTimeout()
     }
 }
 
+//void AudioPlayer::paintEvent(QPaintEvent* event)
+//{
+//    QPainter painter(this);
+//    painter.setRenderHint(QPainter::Antialiasing);
+//
+//    // 创建透明背景路径（圆角效果）
+//    QPainterPath path;
+//    path.addRoundedRect(rect(), 10, 10);
+//    painter.setClipPath(path);
+//
+//    // 清除背景（完全透明）
+//    painter.setCompositionMode(QPainter::CompositionMode_Clear);
+//    painter.fillRect(rect(), Qt::transparent);
+//    painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
+//}
+//void AudioPlayer::paintEvent(QPaintEvent* event)
+//{
+//    QPainter painter(this);
+//    painter.setRenderHint(QPainter::Antialiasing);
+//    painter.setRenderHint(QPainter::SmoothPixmapTransform);
+//    
+//    painter.setCompositionMode(QPainter::CompositionMode_Clear);
+//    painter.fillRect(rect(), Qt::transparent);
+//    painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
+//
+//    // 然后绘制带圆角的背景
+//    QPainterPath path;
+//    path.addRoundedRect(rect(), 10, 10);
+//    painter.fillPath(path, QColor(0, 0, 0, 50)); // 浅色：0, 0, 0, 50 深色：30, 30, 30, 180
+//}
 void AudioPlayer::paintEvent(QPaintEvent* event)
 {
-    // 高性能圆角绘制
     QPainter painter(this);
-    painter.setRenderHint(QPainter::Antialiasing, !highPerformanceMode);  // 拖拽时关闭抗锯齿
-    painter.setRenderHint(QPainter::SmoothPixmapTransform, !highPerformanceMode);
+    painter.setRenderHint(QPainter::Antialiasing);
 
-    // 绘制圆角背景
+    // 完全透明背景
+    painter.setCompositionMode(QPainter::CompositionMode_Clear);
+    painter.fillRect(rect(), Qt::transparent);
+    painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
+
+    //QPainterPath p;
+    //p.addRoundedRect(rect(), 0, 0);
+
+    //// 使用半透明颜色
+    //painter.fillPath(p, QColor(0, 0, 0, 0));
+
+    // 绘制带圆角的半透明背景
     QPainterPath path;
-    path.addRoundedRect(rect(), 10, 10);
-    painter.setClipPath(path);
+    path.addRoundedRect(rect(), 0, 0);
 
-    // 填充背景
-    painter.fillRect(rect(), QColor(0, 0, 0));
+    // 使用半透明颜色
+    painter.fillPath(path, QColor(30, 30, 30, 100));
 
-    // 绘制边框
-    if (!highPerformanceMode)
-    {
-        painter.setPen(QPen(QColor(100, 100, 100, 50), 1));
-        painter.drawPath(path);
-    }
+    // 可选：添加边框
+    //painter.setPen(QPen(QColor(255, 255, 255, 30), 1));
+    //painter.drawPath(path);
 }
 
 void AudioPlayer::showEvent(QShowEvent* event)
@@ -751,21 +832,3 @@ AudioPlayer::~AudioPlayer()
     delete smoothMoveTimer;
     delete player;
 }
-
-// 可选：添加键盘快捷键支持
-//bool AudioPlayer::event(QEvent* event)
-//{
-//    // 在拖拽时禁用某些事件以提高性能
-//    if (m_isDragging) {
-//        switch (event->type()) {
-//        case QEvent::UpdateRequest:
-//        case QEvent::UpdateLater:
-//            // 在拖拽时跳过某些更新请求
-//            return QMainWindow::event(event);
-//        default:
-//            break;
-//        }
-//    }
-//
-//    return QMainWindow::event(event);
-//}

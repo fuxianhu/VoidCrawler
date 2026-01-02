@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include "SmoothSwitch.h"
+#include "WindowCompositionAttribute.h"
 
 #include <QMainWindow>
 #include <QMediaPlayer>
@@ -83,4 +84,13 @@ private:
     void initSmoothMove();
     void applyHighPerformanceSettings();
     void updatePositionSmoothly(const QPoint& targetPos);
+
+    //Inside class
+private:
+    HWND hwnd;
+    HMODULE huser;
+    pfnSetWindowCompositionAttribute setWindowCompositionAttribute;
+
+    QColor acryBackground;	//用来控制背景颜色
+    int acryOpacity;	//用来控制透明度
 };

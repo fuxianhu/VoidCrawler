@@ -8,6 +8,7 @@
 #include "FunctionSet.h"
 #include "keyhookthread.h"
 #include "MediaPlayer.h"
+//#include "GlassEffectWindow.h"
 
 #include <format>
 #include <string>
@@ -424,6 +425,42 @@ void VoidCrawler::on_button_clicked(QString id, QPushButton* qpb, QString styles
 		AudioPlayer* player = new AudioPlayer(nullptr);
         player->show();
     }
+    else if (id == "OpenMinecraftChinaEdition")
+    {
+        VCCore::startShellDetached("fevergames://mygame/?gameId=1");
+    }
+    else if (id == "OpenBjd")
+    {
+        VCCore::startShellDetached("minecraft://netease?params=6974656D5F343636313333343436373336363137383838345F315F325F38");
+    }
+    else if (id == "OpenBjdOfficialWebsite")
+    {
+        VCCore::startShellDetached("https://mcbjd.net/");
+    }
+    //else if (id == "test")
+    //{
+    //    GlassEffectWindow glassWindow;
+
+    //    if (!glassWindow.Create()) {
+    //        std::cerr << "Failed to create glass effect window!" << std::endl;
+    //        //return 1;
+    //    }
+
+    //    std::cout << "Glass effect window created successfully!" << std::endl;
+    //    std::cout << "Press ESC to exit." << std::endl;
+
+    //    glassWindow.Show();
+    //    glassWindow.RunMessageLoop();
+    //}
+    /*
+                {
+                "description": "test",
+                "help": "test",
+                "icons": null,
+                "id": "test",
+                "type": 0
+            },
+    */
     else
     {
         VCCore::logger->warn("In VoidCrawler::on_button_clicked function, id error!");

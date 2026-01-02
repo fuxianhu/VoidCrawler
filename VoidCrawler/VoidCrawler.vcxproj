@@ -142,6 +142,7 @@
     <ClInclude Include="CustomQtLogger.h" />
     <ClInclude Include="Encryption.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="WindowCompositionAttribute.h" />
     <QtMoc Include="SmoothSwitch.h" />
     <QtMoc Include="LicenseAgreementDialog.h" />
     <QtMoc Include="keyhookthread.h" />

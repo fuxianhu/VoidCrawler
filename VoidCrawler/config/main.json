@@ -6,7 +6,7 @@
         "password": "",
         "salted": ""
     },
-    "configVersion": "v.0.0.1.1",
+    "configVersion": "v.0.0.1.3",
     "enableMultipleApplications": false,
     "language": "zh-cn",
     "log": {

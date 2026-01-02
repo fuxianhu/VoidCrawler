@@ -1,4 +1,0 @@
-﻿#include "Core.h"
-
-// Core.cpp left intentionally empty because 
-// Version and getPath are defined inline in Core.h

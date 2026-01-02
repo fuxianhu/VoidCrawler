@@ -6,8 +6,6 @@ E:\Qt\6.5.3\msvc2019_64\bin\lupdate .\VoidCrawler.vcxproj -ts .\translations\zh-
 E:\Qt\6.5.3\msvc2019_64\bin\lrelease .\translations\en-US.ts -qm .\translations\en-US.qm
 
 链接器/系统/子系统 控制台或窗口
-
-高考不方zhuangs
 */
 
 #include "VoidCrawler.h"
@@ -40,7 +38,7 @@ E:\Qt\6.5.3\msvc2019_64\bin\lrelease .\translations\en-US.ts -qm .\translations\
 
 
 // 解析命令行参数
-static void parseArguments(const int &argc, char* argv[])
+static void parseArguments(const int& argc, char* argv[])
 {
     // 遍历所有命令行参数
     for (int i = 1; i < argc; i++)
@@ -48,11 +46,20 @@ static void parseArguments(const int &argc, char* argv[])
         std::string arg = argv[i];
         if (arg == "-version" || arg == "--version")
         {
+            // 确保控制台输出可用
+            if (!GetConsoleWindow()) {
+                AttachConsole(ATTACH_PARENT_PROCESS) || AllocConsole();
+                FILE* fp;
+                freopen_s(&fp, "CONOUT$", "w", stdout);
+                freopen_s(&fp, "CONOUT$", "w", stderr);
+                std::ios::sync_with_stdio();
+            }
+            std::cout << std::endl << std::endl;
             std::cout << "------------------------------" << std::endl;
             std::cout << " VoidCrawler Client" << std::endl;
             std::cout << " Version Number: " << VCCore::VoidCrawlerVersion.toStdString() << std::endl;
-			std::cout << " Description: " << VCCore::VoidCrawlerVersion.DESCRIPTION.toStdString() << std::endl;
-			std::cout << " Release Date: " << VCCore::VoidCrawlerVersion.BUILD_TIME.toString("yyyy/MM/dd").toStdString() << " UTC" << std::endl;
+            std::cout << " Description: " << VCCore::VoidCrawlerVersion.DESCRIPTION.toStdString() << std::endl;
+            std::cout << " Release Date: " << VCCore::VoidCrawlerVersion.BUILD_TIME.toString("yyyy/MM/dd").toStdString() << std::endl;
             std::cout << "------------------------------" << std::endl;
             std::exit(0); // 输出版本后直接退出
         }
