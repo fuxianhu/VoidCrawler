@@ -23,3 +23,9 @@
 - 增加有关 Minecraft、布吉岛的 $3$ 个选项（无广告）：`OpenMinecraftChinaEdition`, `OpenBjd`, `OpenBjdOfficialWebsite`
 - 文档的一些修改
 - Beta版本
+
+## v.0.0.1.4 预告
+
+- 再次尝试解决AudioPlayer圆角问题
+- 尝试增加 Auto Click 功能
+- 尝试优化内存、窗口拖动时的卡顿问题
