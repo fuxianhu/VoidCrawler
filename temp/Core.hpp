@@ -47,33 +47,34 @@ inline void memoryLeak(size_t bytes = 1, bool fill = true)
     // 没有 delete 导致内存泄漏
 }
 
-inline void GetPrefixSum()
-{
-    int n, m, q, x1, y1, x2, y2;
-    int a[MAXN][MAXN], p[MAXN][MAXN];
-    void main()
-    {
-        std::cin >> n >> m >> q;
-        for (int i = 0; i <= n; i++)
-        {
-            p[0][i] = 0;
-            p[i][0] = 0;
-        }
-        for (int i = 1; i <= n; i++)
-        {
-            for (int j = 1; j <= m; j++)
-            {
-                std::cin >> a[i][j];
-                p[i][j] = p[i][j - 1] + p[i - 1][j] + a[i][j] - p[i - 1][j - 1];
-            }
-        }
+// inline void GetPrefixSum()
+// {
+//     const int MAXN = 1001;
+//     int n, m, q, x1, y1, x2, y2;
+//     int a[MAXN][MAXN], p[MAXN][MAXN];
+//     void main()
+//     {
+//         std::cin >> n >> m >> q;
+//         for (int i = 0; i <= n; i++)
+//         {
+//             p[0][i] = 0;
+//             p[i][0] = 0;
+//         }
+//         for (int i = 1; i <= n; i++)
+//         {
+//             for (int j = 1; j <= m; j++)
+//             {
+//                 std::cin >> a[i][j];
+//                 p[i][j] = p[i][j - 1] + p[i - 1][j] + a[i][j] - p[i - 1][j - 1];
+//             }
+//         }
 
-        for (int i = 1; i <= q; i++)
-        {
-            std::cin >> x1 >> y1 >> x2 >> y2;
-            x1--;
-            y1--;
-            std::cout << p[x2][y2] - p[x2][y1] - p[x1][y2] + p[x1][y1] << std::endl;
-        }
-    }
-}
+//         for (int i = 1; i <= q; i++)
+//         {
+//             std::cin >> x1 >> y1 >> x2 >> y2;
+//             x1--;
+//             y1--;
+//             std::cout << p[x2][y2] - p[x2][y1] - p[x1][y2] + p[x1][y1] << std::endl;
+//         }
+//     }
+// }

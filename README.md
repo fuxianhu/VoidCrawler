@@ -1,8 +1,8 @@
 # VoidCrawler Client 虚空潜行者 客户端
 
-**当前版本： $v.0.0.1.2$**
+**当前版本： $v.0.0.1.4$**
 
-**更新日志与预告：见文档（`Docs/zh-cn/ChangeLog.md`）**
+**更新日志与预告：见文档（`Docs/zh-cn/ChangeLog.md`）或 Releases 页面**
 
 - This is a desktop hacking client running on the Microsoft Windows operating system.
 
@@ -29,5 +29,3 @@
 > When running for the first time, you may need to wait for a while before you can see the document.
 > 
 > 首次运行时，您可能需要等待一会儿才能看到文档。
-
-最近有个神奇的想法，在 Github 上写日记？
