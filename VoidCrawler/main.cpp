@@ -8,6 +8,26 @@ E:\Qt\6.5.3\msvc2019_64\bin\lrelease .\translations\en-US.ts -qm .\translations\
 链接器/系统/子系统 控制台或窗口
 */
 
+// 第一步：包含崩溃处理器（必须是第一个包含的头文件）
+#include "crash_handler.h"
+
+// 第二步：在main函数之前初始化的辅助类
+class EarlyInit {
+public:
+    EarlyInit() {
+        // 设置应用程序信息
+        SimpleCrashHandler::SetAppInfo(L"MyQtApp", L"1.0.0");
+
+        // 初始化崩溃处理器
+        SimpleCrashHandler::Initialize(L".\\crash_reports");
+    }
+};
+
+// 全局变量，会在main函数之前构造
+static EarlyInit g_earlyInit;
+
+// 第三步：现在可以包含Qt头文件
+
 #include "VoidCrawler.h"
 #include "LoggerManager.h"
 #include "configOperate.h"
@@ -59,7 +79,7 @@ static void parseArguments(const int& argc, char* argv[])
             std::cout << " VoidCrawler Client" << std::endl;
             std::cout << " Version Number: " << VCCore::VoidCrawlerVersion.toStdString() << std::endl;
             std::cout << " Description: " << VCCore::VoidCrawlerVersion.DESCRIPTION.toStdString() << std::endl;
-            std::cout << " Release Date: " << VCCore::VoidCrawlerVersion.BUILD_TIME.toString("yyyy/MM/dd").toStdString() << std::endl;
+            std::cout << " Release Date: " << VCCore::VoidCrawlerVersion.BUILD_TIME.toString("yyyy/MM/dd").toStdString() << " UTC" << std::endl;
             std::cout << "------------------------------" << std::endl;
             std::exit(0); // 输出版本后直接退出
         }
@@ -73,13 +93,11 @@ int main(int argc, char* argv[])
     QLocale::setDefault(QLocale::system());
     QApplication app(argc, argv);
 
-    // 记录开始时间
     QElapsedTimer timer;
     timer.start();
 
-    // 立即显示启动画面
-    QPixmap pixmap(VCCore::getPath("icon/startup.png"));
-    QSplashScreen* splash = new QSplashScreen(pixmap);
+    QPixmap* pixmap = new QPixmap(VCCore::getPath("icon/startup.png"));
+    QSplashScreen* splash = new QSplashScreen(*pixmap);
     splash->show();
     QApplication::processEvents();
 
@@ -91,16 +109,21 @@ int main(int argc, char* argv[])
     VCCore::logger->debug("init UI window...");
     window.initUI();
 
-    qint64 elapsed = timer.elapsed();
-    if (elapsed < STARTUP_SPLASH_DISPLAY_TIME)
     {
-        QThread::msleep(STARTUP_SPLASH_DISPLAY_TIME - elapsed);
+        qint64 elapsed = timer.elapsed();
+        if (elapsed < STARTUP_SPLASH_DISPLAY_TIME)
+        {
+            QThread::msleep(STARTUP_SPLASH_DISPLAY_TIME - elapsed);
+        }
     }
 
-    // 显示主窗口并关闭启动画面
+    window.show();
     splash->finish(&window);
+    splash->hide();
+    splash->close();
     delete splash;
-    window.show(); // 请勿修改这 3 行的执行顺序！！！
-    
+    delete pixmap;
+    VCCore::logger->debug(std::format("Initialization completed. Duration: {} milliseconds. ", timer.elapsed()));
+
     return QApplication::exec();
 }

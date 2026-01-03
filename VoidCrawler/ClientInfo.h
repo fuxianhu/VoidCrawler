@@ -1,0 +1,48 @@
+﻿/*
+只包含客户端关键内容的宏定义
+*/
+
+#pragma once
+
+// 使用 _CONCAT 宏拼接 L 和 字符串
+#ifndef _CONCAT // 这个宏在 xatomic.h 中定义了，且定义相同
+#define _CONCAT(x, y) x ## y
+#endif
+
+#define CONCAT(x, y) _CONCAT(x, y)
+#define WIDEN2(x) L ## x
+#define WIDEN(x) WIDEN2(x)
+
+// 字符串化宏
+#define STRINGIFY(x) #x
+#define TOSTRING(x) STRINGIFY(x)
+
+#define CLIENT_VERSION_NUMBER "v.0.0.1.4"
+#define L_CLIENT_VERSION_NUMBER WIDEN(CLIENT_VERSION_NUMBER)
+#define CLIENT_VERSION_TYPE "Alpha Version"
+#define CLIENT_BUILD_DATETIME_YEAR 2026
+#define CLIENT_BUILD_DATETIME_MONTH 1
+#define CLIENT_BUILD_DATETIME_DAY 3
+#define CLIENT_BUILD_DATETIME_HOUR 11
+#define CLIENT_BUILD_DATETIME_MINUTE 30
+#define CLIENT_BUILD_DATETIME_TIMEZONE "UTC+08:00"
+
+#define L_CRASH_REPORTS_PATH L".\\crash_reports"
+#define APP_NAME "VoidCrawlerClient"
+#define L_APP_NAME WIDEN(APP_NAME)
+
+#define LOADED_MODULES_REPORT_MAXIMUM 1000
+#define LOADED_MODULES_REPORT_MAXIMUM_LSTRING WIDEN(TOSTRING(LOADED_MODULES_REPORT_MAXIMUM))
+
+#define MAIN_JSON_FILE "main.json"
+#define ITEMS_JSON_FILE "items.json"
+
+#define STRING_IS_NULL "E01"
+#define STRING_IS_NOT_DIGIT "E02"
+#define STRING_OTHER_ERROR "E03"
+
+#ifdef QT_DEBUG
+#define STARTUP_SPLASH_DISPLAY_TIME 0 // 启动画面显示时间，单位毫秒
+#else
+#define STARTUP_SPLASH_DISPLAY_TIME 1000 // 启动画面显示时间，单位毫秒
+#endif

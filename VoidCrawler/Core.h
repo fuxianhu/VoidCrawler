@@ -3,6 +3,7 @@
 #include "LoggerManager.h"
 #include "configOperate.h"
 #include "CustomQtLogger.h"
+#include "ClientInfo.h"
 
 #include <string>
 #include <type_traits>
@@ -26,6 +27,8 @@
 #include <QTranslator>
 #include <QSplashScreen>
 #include <QObject>
+#include <QDateTime>
+#include <QTimeZone>
 
 #include <QJsonObject>
 #include <QJsonArray>
@@ -33,18 +36,6 @@
 #include <QJsonValue>
 #include <QJsonParseError>
 
-#define MAIN_JSON_FILE "main.json"
-#define ITEMS_JSON_FILE "items.json"
-
-#define STRING_IS_NULL "E01"
-#define STRING_IS_NOT_DIGIT "E02"
-#define STRING_OTHER_ERROR "E03"
-
-#ifdef QT_DEBUG
-#define STARTUP_SPLASH_DISPLAY_TIME 0 // 启动画面显示时间，单位毫秒
-#else
-#define STARTUP_SPLASH_DISPLAY_TIME 1000 // 启动画面显示时间，单位毫秒
-#endif
 
 namespace VCCore
 {
@@ -139,7 +130,7 @@ namespace VCCore
 
         // 解析版本字符串，格式为 "v.x.x.x.x" 或 "x.x.x.x"
         template <typename StringType>
-        static Version fromString(const StringType& versionStr)
+        static Version fromString(const StringType& versionStr, QString DESCRIPTION="", QDateTime BUILD_TIME= QDateTime())
         {
             QString str;
             if constexpr (std::is_same_v<StringType, std::string>)
@@ -212,8 +203,18 @@ namespace VCCore
         }
     };
 
-    // 当前客户端版本
-    inline Version VoidCrawlerVersion = Version(0, 0, 1, 3, "Beta Version", QDateTime(QDate(2026, 1, 2), QTime(22, 40)));
+    // 获取当前客户端发布 UTC 时间
+    inline QDateTime getClientBuildUTCTime()
+    {
+        // 创建带时区的日期时间
+        QDateTime localTime(QDate(CLIENT_BUILD_DATETIME_YEAR, CLIENT_BUILD_DATETIME_MONTH, CLIENT_BUILD_DATETIME_DAY), 
+            QTime(CLIENT_BUILD_DATETIME_HOUR, CLIENT_BUILD_DATETIME_MINUTE));
+        localTime.setTimeZone(QTimeZone(CLIENT_BUILD_DATETIME_TIMEZONE));
+        return localTime.toUTC();
+    }
+
+	// VoidCrawler 版本信息
+    inline Version VoidCrawlerVersion = Version::fromString(CLIENT_VERSION_NUMBER, CLIENT_VERSION_TYPE, getClientBuildUTCTime());
 
     // 隐藏所有顶级窗口（包括主窗口、独立对话框等）
     void hideAllTopLevelWindows();

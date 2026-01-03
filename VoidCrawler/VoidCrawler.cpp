@@ -373,7 +373,6 @@ void VoidCrawler::on_button_clicked(QString id, QPushButton* qpb, QString styles
             }
         }
     }
-
     if (id == "cmd")
     {
         VCCore::startShellDetached("cmd.exe");
@@ -437,30 +436,6 @@ void VoidCrawler::on_button_clicked(QString id, QPushButton* qpb, QString styles
     {
         VCCore::startShellDetached("https://mcbjd.net/");
     }
-    //else if (id == "test")
-    //{
-    //    GlassEffectWindow glassWindow;
-
-    //    if (!glassWindow.Create()) {
-    //        std::cerr << "Failed to create glass effect window!" << std::endl;
-    //        //return 1;
-    //    }
-
-    //    std::cout << "Glass effect window created successfully!" << std::endl;
-    //    std::cout << "Press ESC to exit." << std::endl;
-
-    //    glassWindow.Show();
-    //    glassWindow.RunMessageLoop();
-    //}
-    /*
-                {
-                "description": "test",
-                "help": "test",
-                "icons": null,
-                "id": "test",
-                "type": 0
-            },
-    */
     else
     {
         VCCore::logger->warn("In VoidCrawler::on_button_clicked function, id error!");
