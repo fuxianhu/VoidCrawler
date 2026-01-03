@@ -1,31 +1,26 @@
-# VoidCrawler Client 虚空潜行者 客户端
+# VoidCrawler Client
 
 **当前版本： $v.0.0.1.4$**
 
 **更新日志与预告：见文档（`Docs/zh-cn/ChangeLog.md`）或 Releases 页面**
 
-- This is a desktop hacking client running on the Microsoft Windows operating system.
+一个运行于 *Microsoft Windows 10/11* 操作系统的客户端（工具箱），中文名“虚空潜行者”。它将来会具有以下特点：
+- 允许用户获得极高权限、实施攻击（仅允许合法用途）
+- 美观炫酷的UI界面
+- 方便快捷地修改计算机系统设置、系统文件
+- 可以有高隐蔽性，窗口防截屏录屏+图标隐藏+进程隐藏+文件隐藏
+- DLL注入、钩子、宏录制、ARP欺骗与防护、DHCP攻击与防护、更好的开发体验
+- 各种实用功能，比如计算器和内置文件管理器，允许GPU并行计算
+- 低内存占用（一般小于 $50$ MB）、CPU占用（一般在 $0.1\%$ 到 $7\%$ 之间）、低磁盘空间占用（一般小于 $100$ MB）
 
-    这是一个 Microsoft Windows 操作系统下运行的桌面黑客客户端。
+项目有详细文档，请安装 Docsify，启动它，并在浏览器中查看。
 
-- The project has detailed documentation. Please install Docsify, start it, and view it in your browser.
-
-    项目有详细文档，请安装 Docsify，启动它，并在浏览器中查看。
-
-> Docsify Help ( Docsify 帮助 ): 
-> 
-> Docsify official website: `https://docsify.js.org/#/` (The "Translations" in the upper right corner can switch languages)
-> 
 > Docsify 官网：`https://docsify.js.org/#/` （右上角的 "Translations" 可以切换语言）
-> 
-> Run the following command in the terminal: 
 > 
 > 在终端中运行以下命令：
 > 
 > ```bash
 > docsify serve .\Docs
 > ```
-> 
-> When running for the first time, you may need to wait for a while before you can see the document.
 > 
 > 首次运行时，您可能需要等待一会儿才能看到文档。
