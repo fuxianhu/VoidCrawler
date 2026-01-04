@@ -36,7 +36,7 @@
                 "help": "Switch",
                 "icons": null,
                 "id": "SwitchIMECtrlSpace",
-                "switch": true,
+                "switch": false,
                 "type": 1
             },
             {

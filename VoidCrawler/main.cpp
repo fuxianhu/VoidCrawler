@@ -6,6 +6,10 @@ E:\Qt\6.5.3\msvc2019_64\bin\lupdate .\VoidCrawler.vcxproj -ts .\translations\zh-
 E:\Qt\6.5.3\msvc2019_64\bin\lrelease .\translations\en-US.ts -qm .\translations\en-US.qm
 
 链接器/系统/子系统 控制台或窗口
+
+His Theme
+https://www.bilibili.com/video/BV1Y4AGe9EVo/
+https://www.bilibili.com/video/BV1nkmQBaEVM/
 */
 
 // 第一步：包含崩溃处理器（必须是第一个包含的头文件）

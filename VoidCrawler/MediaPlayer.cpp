@@ -795,7 +795,7 @@ void AudioPlayer::paintEvent(QPaintEvent* event)
     path.addRoundedRect(rect(), 0, 0);
 
     // 使用半透明颜色
-    painter.fillPath(path, QColor(30, 30, 30, 100));
+    painter.fillPath(path, QColor(0, 0, 0, 10));
 
     // 可选：添加边框
     //painter.setPen(QPen(QColor(255, 255, 255, 30), 1));
