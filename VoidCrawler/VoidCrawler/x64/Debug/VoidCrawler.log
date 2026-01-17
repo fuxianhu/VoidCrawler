@@ -1,14 +1,4 @@
 ﻿   Qt/MSBuild: 3.4.1.0
    Qt: 6.5.3
-  Core.cpp
-  Encryption.cpp
-  FunctionSet.cpp
-  LoggerManger.cpp
-  MediaPlayer.cpp
   VoidCrawler.cpp
-  configOperate.cpp
-  crash_handler.cpp
-  main.cpp
-E:\YFY\VoidCrawler\VoidCrawler\crash_handler.cpp(286,30): warning C4244: “初始化”: 从“ULONG_PTR”转换到“DWORD”，可能丢失数据
-  LINK : 没有找到 E:\YFY\VoidCrawler\VoidCrawler\x64\Debug\VoidCrawler.exe 或上一个增量链接没有生成它；正在执行完全链接
   VoidCrawler.vcxproj -> E:\YFY\VoidCrawler\VoidCrawler\x64\Debug\VoidCrawler.exe

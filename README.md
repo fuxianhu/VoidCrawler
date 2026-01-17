@@ -1,6 +1,6 @@
 # VoidCrawler Client
 
-**当前版本： $v.0.0.1.4$**
+**当前版本： $v.0.0.1.5$**
 
 **更新日志与预告：见文档（`Docs/zh-cn/ChangeLog.md`）或 Releases 页面**
 

@@ -14,14 +14,56 @@
                 "description": "Run pwsh.exe. ",
                 "help": "Conveniently run pwsh.exe (New version) program. ",
                 "icons": null,
-                "id": "pwsh",
+                "id": "NewPowershell",
                 "type": 0
             },
             {
                 "description": "Run powershell.exe. ",
                 "help": "Conveniently run powershell.exe (Old version) program. ",
                 "icons": null,
-                "id": "PowerShell",
+                "id": "OldPowershell",
+                "type": 0
+            },
+            {
+                "description": "Open Visual Studio Code program. This is a open source AI code editor. Official Website: https://code.visualstudio.com/",
+                "help": "Open Visual Studio Code Program (A Code Editor).",
+                "icons": null,
+                "id": "VisualStudioCode",
+                "type": 0
+            },
+            {
+                "description": "Open Visual Studio program. This is a Windows OS code editor. Official Website: https://visualstudio.microsoft.com/",
+                "help": "Open Visual Studio Program (A Code Editor).",
+                "icons": null,
+                "id": "VisualStudio",
+                "type": 0
+            },
+            {
+                "description": "Open Taskmgr program. ",
+                "help": "Run Taskmgr.exe. ",
+                "icons": null,
+                "id": "WindowsTaskManger",
+                "type": 0
+            },
+            {
+                "description": "Open Microsoft Edge Browser Program (Run msedge.exe).",
+                "help": "Open Edge Browser Program (Run msedge.exe).",
+                "icons": null,
+                "id": "EdgeBrowser",
+                "type": 0
+            },
+            {
+                "description": "Open Calc Program (Run calc.exe).",
+                "help": "run calc.exe . ",
+                "icons": null,
+                "id": "WindowsCalc",
+                "type": 0
+            },
+            {
+                "description": "Open user folder in explorer.exe. (%USERPROFILE%)",
+                "help": "Open user folder in Explorer.",
+                "icons": null,
+                "id": "OpenUserFolder",
                 "type": 0
             },
             {
@@ -36,7 +78,7 @@
                 "help": "Switch",
                 "icons": null,
                 "id": "SwitchIMECtrlSpace",
-                "switch": false,
+                "switch": true,
                 "type": 1
             },
             {
@@ -87,7 +129,7 @@
                 "description": "Exit Client. ",
                 "help": "Exit VoidCrawler Client. ",
                 "icons": null,
-                "id": "exit",
+                "id": "Exit",
                 "type": 0
             }
         ]

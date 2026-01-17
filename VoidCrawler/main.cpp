@@ -10,6 +10,9 @@ E:\Qt\6.5.3\msvc2019_64\bin\lrelease .\translations\en-US.ts -qm .\translations\
 His Theme
 https://www.bilibili.com/video/BV1Y4AGe9EVo/
 https://www.bilibili.com/video/BV1nkmQBaEVM/
+
+窗口强制置顶：（第一步在程序初始化前从winlogon.exe偷UIAccess令牌）
+https://www.bilibili.com/video/BV1HCwwegEVp
 */
 
 // 第一步：包含崩溃处理器（必须是第一个包含的头文件）

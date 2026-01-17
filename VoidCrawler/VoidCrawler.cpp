@@ -8,7 +8,7 @@
 #include "FunctionSet.h"
 #include "keyhookthread.h"
 #include "MediaPlayer.h"
-//#include "GlassEffectWindow.h"
+#include "PropertyWindow.h"
 
 #include <format>
 #include <string>
@@ -46,6 +46,7 @@
 #include <QDialog>
 #include <QMessageBox>
 #include <QDebug>
+#include <QAudioOutput>
 
 // 小型的 QPushButton 子类，支持用于动画的 'rotation' 属性
 // 注意：此处没有使用 Q_OBJECT 宏以避免需要 moc 处理；旋转动画通过 QVariantAnimation 实现
@@ -327,6 +328,31 @@ void VoidCrawler::ProgramAfterStartup()
 
         m_hookThread->start();
     }
+    QMediaPlayer* player = new QMediaPlayer(this);
+    QAudioOutput* audioOutput = new QAudioOutput(this);
+    player->setAudioOutput(audioOutput);
+    player->setSource(VCCore::getPath("audio/startup.mp3"));
+    connect(player, &QMediaPlayer::playbackStateChanged,
+        [player, audioOutput](QMediaPlayer::PlaybackState state)
+        {
+            if (state == QMediaPlayer::StoppedState)
+            {
+                // 先断开连接，防止重复触发
+                player->disconnect();
+                // 删除音频输出
+                audioOutput->deleteLater();
+                // 删除播放器
+                player->deleteLater();
+            }
+        });
+    player->play();
+}
+
+void VoidCrawler::on_button_right_clicked(QString id, QPushButton* qpb)
+{
+    VCCore::logger->debug(std::format("Button right clicked, ID: {}", id.toStdString()));
+    PropertyWindow* p = new PropertyWindow(nullptr, id);
+    p->showAnimated(); 
 }
 
 void VoidCrawler::on_button_clicked(QString id, QPushButton* qpb, QString styles)
@@ -377,19 +403,44 @@ void VoidCrawler::on_button_clicked(QString id, QPushButton* qpb, QString styles
     {
         VCCore::startShellDetached("cmd.exe");
     }
-    else if (id == "pwsh")
+    else if (id == "NewPowershell")
     {
         VCCore::startShellDetached("pwsh.exe");
     }
-    else if (id == "PowerShell")
+    else if (id == "OldPowershell")
     {
         VCCore::startShellDetached("powershell.exe");
     }
+    else if (id == "VisualStudioCode")
+    {
+        VCCore::startShellDetached("code.exe");
+    }
+    else if (id == "VisualStudio")
+    {
+        VCCore::startShellDetached("D:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\devenv.exe");
+    }
+    else if (id == "WindowsTaskManger")
+    {
+        VCCore::startShellDetached("Taskmgr.exe");
+    }
+    else if (id == "EdgeBrowser")
+    {
+        VCCore::startShellDetached("msedge.exe");
+    }
+    else if (id == "WindowsCalc")
+    {
+		VCCore::startShellDetached("calc.exe");
+    }
+    else if (id == "OpenUserFolder")
+    {
+        VCCore::startShellDetached("explorer.exe", "%USERPROFILE%");
+    }
+    // "D:\Program Files\Microsoft Visual Studio\18\Community\Common7\IDE\devenv.exe"
     else if (id == "chcp")
     {
         system("chcp 65001");
     }
-    else if (id == "exit")
+    else if (id == "Exit")
     {
         QApplication::quit();
         std::exit(0);
@@ -552,6 +603,9 @@ void VoidCrawler::initUI()
             QString itemName = itemID;
             int valueType = itemObj.value("type").toInt();
             QPushButton* qpb = new QPushButton(itemName, m_contentWidget);
+            qpb->setProperty("itemID", itemID);  // 设置索引属性
+            qpb->setProperty("isItemButton", true);  // 标识这是自定义按钮
+
             QString styles = "background: rgba(0, 0, 0, 0.3); border-radius: 8px; ";
 
             std::bitset<3> switchKey = FunctionSet::getMicrosoftPinyinSwitchKey();
@@ -599,14 +653,18 @@ void VoidCrawler::initUI()
             QGraphicsDropShadowEffect* btnShadow = new QGraphicsDropShadowEffect(qpb);
             btnShadow->setBlurRadius(32);
             btnShadow->setOffset(0, 0);
-            btnShadow->setColor(QColor(0, 120, 255, 200)); // 蓝色阴影
+            btnShadow->setColor(QColor(138, 0, 255, 180));
             qpb->setGraphicsEffect(btnShadow);
+
             qpb->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
 
             // 使用C++14的广义lambda捕获
             connect(qpb, &QPushButton::clicked, this, [this, itemID = itemID, qpb = qpb, styles = styles]()
                 { VoidCrawler::on_button_clicked(itemID, qpb, styles); });
             contentLayout->addWidget(qpb);
+
+            // 为按钮安装事件过滤器，以处理右键点击等
+            qpb->installEventFilter(this);
 
             // ====== 彩色动态阴影效果：按钮 ======
             QGraphicsDropShadowEffect* btnShadowEffect = new QGraphicsDropShadowEffect(qpb);
@@ -815,6 +873,11 @@ void VoidCrawler::resizeEvent(QResizeEvent* event)
 
 bool VoidCrawler::eventFilter(QObject* watched, QEvent* event)
 {
+    if (event == nullptr)
+    {
+        return QMainWindow::eventFilter(watched, event);
+    }
+
     if ((watched == m_titleBar || watched == m_titleLabel) && event)
     {
         switch (event->type())
@@ -857,6 +920,19 @@ bool VoidCrawler::eventFilter(QObject* watched, QEvent* event)
             break;
         }
     }
-    // 不是我们关心的事件则交给基类处理
+    if (event->type() == QEvent::MouseButtonPress)
+    {
+        QMouseEvent* mouseEvent = static_cast<QMouseEvent*>(event);
+        if (watched->property("isItemButton").toBool())
+        {
+            if (mouseEvent->button() == Qt::RightButton)
+            {
+                on_button_right_clicked(
+                    watched->property("itemID").toString(),
+                    qobject_cast<QPushButton*>(watched));
+                return true;
+            }
+        }
+    }
     return QMainWindow::eventFilter(watched, event);
 }

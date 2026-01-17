@@ -76,6 +76,9 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PropertyWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LoggerManager.h">
@@ -126,6 +129,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="SmoothSwitch.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="PropertyWindow.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

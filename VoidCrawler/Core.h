@@ -265,7 +265,7 @@ namespace VCCore
     static QJsonDocument itemsConfig = readJSON(ITEMS_JSON_FILE);
 
     // 使用 ShellExecute 启动外部程序，非阻塞
-    void startShellDetached(const QString& program);
+    void startShellDetached(const QString& program, const QString& arguments = nullptr);
 
     template <typename StringType>
     inline QJsonValue cfgValue(const StringType& path, const QJsonDocument& cfg)

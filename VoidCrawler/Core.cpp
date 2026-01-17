@@ -29,16 +29,16 @@ void VCCore::showAllTopLevelWindows()
     }
 }
 
-void VCCore::startShellDetached(const QString& program)
+void VCCore::startShellDetached(const QString& program, const QString& arguments)
 {
     HINSTANCE result = ShellExecuteW
     (
-        nullptr,                        // 父窗口句柄
-        L"open",                        // 操作（打开）
-        program.toStdWString().c_str(), // 文件/程序
-        nullptr,                        // 参数
-        nullptr,                        // 工作目录
-        SW_SHOWNORMAL                   // 显示方式
+        nullptr,                          // 父窗口句柄
+        L"open",                          // 操作（打开）
+        program.toStdWString().c_str(),   // 文件/程序
+        arguments.toStdWString().c_str(), // 参数
+        nullptr,                          // 工作目录
+        SW_SHOWNORMAL                     // 显示方式
     );
 
     if ((size_t)result <= 32)

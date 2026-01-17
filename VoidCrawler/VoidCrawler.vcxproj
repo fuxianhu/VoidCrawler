@@ -127,6 +127,7 @@
     <ClCompile Include="LoggerManger.cpp" />
     <ClCompile Include="MediaPlayer.cpp" />
     <ClCompile Include="PrivilegeLevel.cpp" />
+    <ClCompile Include="PropertyWindow.cpp" />
     <ClCompile Include="SmoothSwitch.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="VoidCrawler.cpp">
@@ -149,6 +150,7 @@
     <ClInclude Include="crash_handler.h" />
     <ClInclude Include="CustomQtLogger.h" />
     <ClInclude Include="Encryption.h" />
+    <QtMoc Include="PropertyWindow.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="WindowCompositionAttribute.h" />
     <QtMoc Include="SmoothSwitch.h" />

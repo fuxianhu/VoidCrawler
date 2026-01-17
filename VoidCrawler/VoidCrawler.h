@@ -61,6 +61,7 @@ private:
     void ProgramAfterStartup();
 
 	// 按钮点击处理槽函数
+    void on_button_right_clicked(QString id, QPushButton* qpb);
 	void on_button_clicked(QString id, QPushButton* qpb, QString styles);
 
     // 全局热键槽函数
@@ -69,8 +70,8 @@ private:
 	// 钩子错误处理槽函数
     void onHookError(const QString& error);
 
-    KeyHookThread* m_hookThread; // 钩子线程指针
-    QLabel* m_statusLabel;       // 用于显示状态的标签
+    KeyHookThread* m_hookThread = nullptr; // 钩子线程指针
+    QLabel* m_statusLabel = nullptr;       // 用于显示状态的标签
 
     QLabel* privilegeIcon = nullptr;
 

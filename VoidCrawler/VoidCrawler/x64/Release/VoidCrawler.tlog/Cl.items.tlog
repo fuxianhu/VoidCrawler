@@ -8,11 +8,13 @@ E:\YFY\VoidCrawler\VoidCrawler\LicenseAgreementDialog.cpp;E:\YFY\VoidCrawler\Voi
 E:\YFY\VoidCrawler\VoidCrawler\LoggerManger.cpp;E:\YFY\VoidCrawler\VoidCrawler\VoidCrawler\x64\Release\LoggerManger.obj
 E:\YFY\VoidCrawler\VoidCrawler\MediaPlayer.cpp;E:\YFY\VoidCrawler\VoidCrawler\VoidCrawler\x64\Release\MediaPlayer.obj
 E:\YFY\VoidCrawler\VoidCrawler\PrivilegeLevel.cpp;E:\YFY\VoidCrawler\VoidCrawler\VoidCrawler\x64\Release\PrivilegeLevel.obj
+E:\YFY\VoidCrawler\VoidCrawler\PropertyWindow.cpp;E:\YFY\VoidCrawler\VoidCrawler\VoidCrawler\x64\Release\PropertyWindow.obj
 E:\YFY\VoidCrawler\VoidCrawler\SmoothSwitch.cpp;E:\YFY\VoidCrawler\VoidCrawler\VoidCrawler\x64\Release\SmoothSwitch.obj
 E:\YFY\VoidCrawler\VoidCrawler\test.cpp;E:\YFY\VoidCrawler\VoidCrawler\VoidCrawler\x64\Release\test.obj
 E:\YFY\VoidCrawler\VoidCrawler\VoidCrawler.cpp;E:\YFY\VoidCrawler\VoidCrawler\VoidCrawler\x64\Release\VoidCrawler.obj
 E:\YFY\VoidCrawler\VoidCrawler\main.cpp;E:\YFY\VoidCrawler\VoidCrawler\VoidCrawler\x64\Release\main.obj
 E:\YFY\VoidCrawler\VoidCrawler\VoidCrawler\x64\Release\qt\rcc\qrc_VoidCrawler.cpp;E:\YFY\VoidCrawler\VoidCrawler\VoidCrawler\x64\Release\qrc_VoidCrawler.obj
+E:\YFY\VoidCrawler\VoidCrawler\VoidCrawler\x64\Release\qt\moc\moc_PropertyWindow.cpp;E:\YFY\VoidCrawler\VoidCrawler\VoidCrawler\x64\Release\moc_PropertyWindow.obj
 E:\YFY\VoidCrawler\VoidCrawler\VoidCrawler\x64\Release\qt\moc\moc_SmoothSwitch.cpp;E:\YFY\VoidCrawler\VoidCrawler\VoidCrawler\x64\Release\moc_SmoothSwitch.obj
 E:\YFY\VoidCrawler\VoidCrawler\VoidCrawler\x64\Release\qt\moc\moc_LicenseAgreementDialog.cpp;E:\YFY\VoidCrawler\VoidCrawler\VoidCrawler\x64\Release\moc_LicenseAgreementDialog.obj
 E:\YFY\VoidCrawler\VoidCrawler\VoidCrawler\x64\Release\qt\moc\moc_keyhookthread.cpp;E:\YFY\VoidCrawler\VoidCrawler\VoidCrawler\x64\Release\moc_keyhookthread.obj
