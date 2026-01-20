@@ -5,7 +5,6 @@
 #include "SmoothSwitch.h"
 #include "WindowCompositionAttribute.h"
 #include <QWidget>
-#include <QPushButton>
 #include <QVBoxLayout>
 #include <QPropertyAnimation>
 #include <QTimer>
@@ -14,8 +13,8 @@
 class PropertyWindow : public QWidget
 {
     Q_OBJECT
-        Q_PROPERTY(QPoint windowPosition READ pos WRITE move) // 改为windowPosition
-
+    Q_PROPERTY(QPoint windowPosition READ pos WRITE move) // 改为windowPosition
+    
 public:
     PropertyWindow(QWidget* parent = nullptr, const QString& itemID = "");
     ~PropertyWindow();
@@ -40,5 +39,4 @@ private:
 
     void setupAnimations();
     void startShowAnimation();
-    void startCloseAnimation();
 };

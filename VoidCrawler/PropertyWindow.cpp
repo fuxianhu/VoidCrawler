@@ -3,6 +3,9 @@
 UpdateLayeredWindowIndirect failed for ptDst=(1620, 294), size=(600x1500), dirty=(660x1560 -30, -30) (参数错误。)
 这个错误在closeAnimated函数执行前就输出了
 由于不影响功能且有关Windows API，不予修复
+
+Basic Types:
+Intger, Float, Bool, String, List, Table, Task, File, Color, Font, Link, Dict(Map), DateTime, Regedit
 */
 
 #include "PropertyWindow.h"
