@@ -272,6 +272,8 @@
     <Image Include="icon\VoidCrawlerIcon.ico" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="config\items.json" />
+    <None Include="config\main.json" />
     <None Include="release.ps1" />
     <None Include="translations\en-US.qm" />
     <None Include="translations\zh-CN.qm" />

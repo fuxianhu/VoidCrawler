@@ -1,0 +1,54 @@
+{
+  "cmd": {
+    "command-line_arguments": null,
+    "permission": null,
+    "working_directory": null
+  },
+  "NewPowershell": {
+    "command-line_arguments": null,
+    "permission": null,
+    "working_directory": null
+  },
+  "OldPowershell": {
+    "command-line_arguments": null,
+    "permission": null,
+    "working_directory": null
+  },
+  "VisualStudioCode": {
+    "command-line_arguments": null,
+    "permission": null,
+    "working_directory": null
+  },
+  "VisualStudio": {
+    "command-line_arguments": null,
+    "permission": null,
+    "working_directory": null
+  },
+  "WindowsTaskManger": {
+    "command-line_arguments": null,
+    "permission": null
+  },
+  "EdgeBrowser": {
+    "command-line_arguments": null,
+    "permission": null
+  },
+  "Weixin": {
+    "command-line_arguments": null,
+    "permission": null
+  },
+  "WindowsCalc": {
+    "command-line_arguments": null
+  },
+  "OpenUserFolder": {
+    "permission": null
+  },
+  "chcp": {
+    "encoding": 65001
+  },
+  "AudioPlayer": {
+    "loop_play_mode": 1,
+    "audio": null, 
+    "position": 0, 
+    "auto_save": true
+  }
+}

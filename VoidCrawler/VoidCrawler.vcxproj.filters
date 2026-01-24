@@ -24,6 +24,9 @@
     <Filter Include="Log Files">
       <UniqueIdentifier>{a73ea851-0481-4770-a7f5-18de46b27aa0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Config Files">
+      <UniqueIdentifier>{4c9220be-9c64-44f0-afa9-8e6e406d33fa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="VoidCrawler.qrc">
@@ -170,6 +173,12 @@
     </None>
     <None Include="release.ps1">
       <Filter>Source Files</Filter>
+    </None>
+    <None Include="config\main.json">
+      <Filter>Config Files</Filter>
+    </None>
+    <None Include="config\items.json">
+      <Filter>Config Files</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

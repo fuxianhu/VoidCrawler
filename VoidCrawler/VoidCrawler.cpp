@@ -363,7 +363,7 @@ void VoidCrawler::on_button_clicked(QString id, QPushButton* qpb, QString styles
     VCCore::logger->debug(std::format("Button clicked, ID: {}", id.toStdString()));
 
     // 对于 开关类型，反转 switch （开关状态）
-    QJsonArray items = VCCore::itemsConfig.array()[0].toObject().value("items").toArray();
+    QJsonArray items = VCCore::categoryConfig.array()[0].toObject().value("items").toArray();
     std::bitset<3> IMESwitchState;
     for (int i = 0; i < items.size(); i++)
     {
@@ -389,12 +389,12 @@ void VoidCrawler::on_button_clicked(QString id, QPushButton* qpb, QString styles
                 }
                 qpb->setStyleSheet(styles);
 
-                QJsonArray arr = VCCore::itemsConfig.array();
+                QJsonArray arr = VCCore::categoryConfig.array();
                 QJsonObject a = arr[0].toObject();
                 a["items"] = items;
                 arr[0] = a;
-                VCCore::itemsConfig.setArray(arr);
-                writeJSON(VCCore::itemsConfig, ITEMS_JSON_FILE);
+                VCCore::categoryConfig.setArray(arr);
+                writeJSON(VCCore::categoryConfig, CATEGORY_JSON_FILE);
                 break;
             }
         }
@@ -427,6 +427,10 @@ void VoidCrawler::on_button_clicked(QString id, QPushButton* qpb, QString styles
     {
         VCCore::startShellDetached("msedge.exe");
     }
+    else if (id == "Weixin")
+    {
+        VCCore::startShellDetached(QString::fromStdString(FunctionSet::GetWeChatInstallPath()));
+    }
     else if (id == "WindowsCalc")
     {
 		VCCore::startShellDetached("calc.exe");
@@ -435,7 +439,6 @@ void VoidCrawler::on_button_clicked(QString id, QPushButton* qpb, QString styles
     {
         VCCore::startShellDetached("explorer.exe", "%USERPROFILE%");
     }
-    // "D:\Program Files\Microsoft Visual Studio\18\Community\Common7\IDE\devenv.exe"
     else if (id == "chcp")
     {
         system("chcp 65001");
@@ -591,7 +594,7 @@ void VoidCrawler::initUI()
     contentLayout->setContentsMargins(12, 12, 12, 12); // 边距
     contentLayout->setSpacing(8);                      // 子控件间距
 
-    QJsonObject classification = VCCore::itemsConfig.array()[0].toObject();
+    QJsonObject classification = VCCore::categoryConfig.array()[0].toObject();
     QJsonArray items = classification.value("items").toArray();
     if (!items.isEmpty())
     {
@@ -617,12 +620,12 @@ void VoidCrawler::initUI()
             {
                 itemObj["switch"] = !itemObj["switch"].toBool();
                 items[btnIdx] = itemObj;
-                QJsonArray arr = VCCore::itemsConfig.array();
+                QJsonArray arr = VCCore::categoryConfig.array();
                 QJsonObject a = arr[0].toObject();
                 a["items"] = items;
                 arr[0] = a;
-                VCCore::itemsConfig.setArray(arr);
-                writeJSON(VCCore::itemsConfig, ITEMS_JSON_FILE);
+                VCCore::categoryConfig.setArray(arr);
+                writeJSON(VCCore::categoryConfig, CATEGORY_JSON_FILE);
             }
             
             if (valueType == 1) // 开关类型

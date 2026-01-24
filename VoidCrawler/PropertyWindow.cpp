@@ -30,6 +30,7 @@ PropertyWindow::PropertyWindow(QWidget* parent, const QString& itemID)
     {
         VCCore::logger->error("PropertyWindow::PropertyWindow() Function Error: item ID arg is empty!");
     }
+    //if ()
 
     this->setWindowTitle("Property");
     this->setWindowFlags(Qt::Tool | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);

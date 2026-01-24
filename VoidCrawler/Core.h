@@ -261,8 +261,10 @@ namespace VCCore
     // main.json 配置文件的 Doc
     static QJsonDocument mainConfig = readJSON(MAIN_JSON_FILE);
 
-    // items.json 配置文件的 Doc
-    static QJsonDocument itemsConfig = readJSON(ITEMS_JSON_FILE);
+    // category.json 配置文件的 Doc
+    static QJsonDocument categoryConfig = readJSON(CATEGORY_JSON_FILE);
+
+    static QJsonDocument itemConfiguration = readJSON(ITEM_CONFIGURATION_JSON_FILE);
 
     // 使用 ShellExecute 启动外部程序，非阻塞
     void startShellDetached(const QString& program, const QString& arguments = nullptr);
@@ -317,6 +319,6 @@ namespace VCCore
     template <typename StringType>
     inline QJsonValue itemsCfgValue(const StringType& path)
     {
-        return cfgValue(path, VCCore::itemsConfig);
+        return cfgValue(path, VCCore::categoryConfig);
     }
 }

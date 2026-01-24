@@ -1,10 +1,10 @@
 # VoidCrawler Client
 
-**当前版本： $v.0.0.1.5$**
+**最新版本： $v.0.0.1.5$**
 
 **更新日志与预告：见文档（`Docs/zh-cn/ChangeLog.md`）或 Releases 页面**
 
-一个运行于 *Microsoft Windows 10/11* 操作系统的客户端（工具箱），中文名“虚空潜行者”。它将来会具有以下特点：
+一个运行于 *Microsoft Windows 10/11* x64 操作系统的客户端（工具箱），中文名“虚空潜行者”。它将来会具有以下特点：
 - 允许用户获得极高权限、实施攻击（仅允许合法用途）
 - 美观炫酷的UI界面
 - 方便快捷地修改计算机系统设置、系统文件
@@ -15,7 +15,7 @@
 
 项目有详细文档，请安装 Docsify，启动它，并在浏览器中查看。
 
-> Docsify 官网：`https://docsify.js.org/#/` （右上角的 "Translations" 可以切换语言）
+> Docsify 官网（有官方教程文档）：`https://docsify.js.org/#/` （右上角的 "Translations" 可以切换语言）
 > 
 > 在终端中运行以下命令：
 > 

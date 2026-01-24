@@ -37,7 +37,8 @@
 #define LOADED_MODULES_REPORT_MAXIMUM_LSTRING WIDEN(TOSTRING(LOADED_MODULES_REPORT_MAXIMUM))
 
 #define MAIN_JSON_FILE "main.json"
-#define ITEMS_JSON_FILE "items.json"
+#define CATEGORY_JSON_FILE "category.json"
+#define ITEM_CONFIGURATION_JSON_FILE "ItemConfiguration.json"
 
 #define STRING_IS_NULL "E01"
 #define STRING_IS_NOT_DIGIT "E02"

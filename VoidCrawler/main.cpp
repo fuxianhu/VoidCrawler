@@ -13,27 +13,23 @@ https://www.bilibili.com/video/BV1nkmQBaEVM/
 
 窗口强制置顶：（第一步在程序初始化前从winlogon.exe偷UIAccess令牌）
 https://www.bilibili.com/video/BV1HCwwegEVp
+
+tap hold flick drag
 */
 
-// 第一步：包含崩溃处理器（必须是第一个包含的头文件）
 #include "crash_handler.h"
 
-// 第二步：在main函数之前初始化的辅助类
-class EarlyInit {
+class EarlyInit
+{
 public:
-    EarlyInit() {
-        // 设置应用程序信息
+    EarlyInit()
+    {
         SimpleCrashHandler::SetAppInfo(L"MyQtApp", L"1.0.0");
-
-        // 初始化崩溃处理器
         SimpleCrashHandler::Initialize(L".\\crash_reports");
     }
 };
 
-// 全局变量，会在main函数之前构造
 static EarlyInit g_earlyInit;
-
-// 第三步：现在可以包含Qt头文件
 
 #include "VoidCrawler.h"
 #include "LoggerManager.h"

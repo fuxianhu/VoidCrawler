@@ -1,0 +1,144 @@
+[
+  {
+    "hide": false,
+    "id": "VoidCrawler",
+    "items": [
+      {
+        "description": "Run cmd.exe. ",
+        "help": "Conveniently run cmd.exe program. ",
+        "icons": null,
+        "id": "cmd",
+        "type": 0
+      },
+      {
+        "description": "Run pwsh.exe. ",
+        "help": "Conveniently run pwsh.exe (New version) program. ",
+        "icons": null,
+        "id": "NewPowershell",
+        "type": 0
+      },
+      {
+        "description": "Run powershell.exe. ",
+        "help": "Conveniently run powershell.exe (Old version) program. ",
+        "icons": null,
+        "id": "OldPowershell",
+        "type": 0
+      },
+      {
+        "description": "Open Visual Studio Code program. This is a open source AI code editor. Official Website: https://code.visualstudio.com/",
+        "help": "Open Visual Studio Code Program (A Code Editor).",
+        "icons": null,
+        "id": "VisualStudioCode",
+        "type": 0
+      },
+      {
+        "description": "Open Visual Studio program. This is a Windows OS code editor. Official Website: https://visualstudio.microsoft.com/",
+        "help": "Open Visual Studio Program (A Code Editor).",
+        "icons": null,
+        "id": "VisualStudio",
+        "type": 0
+      },
+      {
+        "description": "Open Taskmgr program. ",
+        "help": "Run Taskmgr.exe. ",
+        "icons": null,
+        "id": "WindowsTaskManger",
+        "type": 0
+      },
+      {
+        "description": "Open Microsoft Edge Browser Program (Run msedge.exe).",
+        "help": "Open Edge Browser Program (Run msedge.exe).",
+        "icons": null,
+        "id": "EdgeBrowser",
+        "type": 0
+      },
+      {
+        "description": "Open Weixin Software (Run Weixin.exe).",
+        "help": "Open Weixin Software",
+        "icons": null,
+        "id": "Weixin",
+        "type": 0
+      },
+      {
+        "description": "Open Calc Program (Run calc.exe).",
+        "help": "run calc.exe . ",
+        "icons": null,
+        "id": "WindowsCalc",
+        "type": 0
+      },
+      {
+        "description": "Open user folder in explorer.exe. (%USERPROFILE%)",
+        "help": "Open user folder in Explorer.",
+        "icons": null,
+        "id": "OpenUserFolder",
+        "type": 0
+      },
+      {
+        "description": "Change character set.",
+        "help": "Run chcp <a number>, change character set.",
+        "icons": null,
+        "id": "chcp",
+        "type": 0
+      },
+      {
+        "description": "Switch",
+        "help": "Switch",
+        "icons": null,
+        "id": "SwitchIMECtrlSpace",
+        "switch": true,
+        "type": 1
+      },
+      {
+        "description": "Switch",
+        "help": "Switch",
+        "icons": null,
+        "id": "SwitchIMEShift",
+        "switch": false,
+        "type": 1
+      },
+      {
+        "description": "Switch",
+        "help": "Switch",
+        "icons": null,
+        "id": "SwitchIMECtrl",
+        "switch": false,
+        "type": 1
+      },
+      {
+        "description": "Audio Player",
+        "help": "A Audio Player.",
+        "icons": null,
+        "id": "AudioPlayer",
+        "type": 0
+      },
+      {
+        "description": "Open Minecraft China Edition",
+        "help": "Open Minecraft China Edition (fevergames://mygame/?gameId=1).",
+        "icons": null,
+        "id": "OpenMinecraftChinaEdition",
+        "type": 0
+      },
+      {
+        "description": "Open Bjd in Minecraft",
+        "help": "Open Bjd in Minecraft China Edition.",
+        "icons": null,
+        "id": "OpenBjd",
+        "type": 0
+      },
+      {
+        "description": "Open Bjd Official Website",
+        "help": "Open Bjd official website in your browser.",
+        "icons": null,
+        "id": "OpenBjdOfficialWebsite",
+        "type": 0
+      },
+      {
+        "description": "Exit Client. ",
+        "help": "Exit VoidCrawler Client. ",
+        "icons": null,
+        "id": "Exit",
+        "type": 0
+      }
+    ]
+  }
+]

@@ -1,42 +1,42 @@
 {
-    "agreeTerms": true,
-    "clientLock": {
-        "disableClient": false,
-        "maximumAttempts": 3,
-        "password": "",
-        "salted": ""
+  "agreeTerms": true,
+  "clientLock": {
+    "disableClient": false,
+    "maximumAttempts": 3,
+    "password": "",
+    "salted": ""
+  },
+  "configVersion": "v.0.0.1.5",
+  "enableMultipleApplications": false,
+  "language": "zh-cn",
+  "log": {
+    "level": "debug",
+    "logFolder": "log",
+    "logName": "VoidCrawler",
+    "maxFileSize": 1048576,
+    "maxFiles": 5
+  },
+  "userName": "Hacker",
+  "font": {
+    "global": {
+      "family": "Microsoft YaHei",
+      "pointSize": -1,
+      "weight": -1
     },
-    "configVersion": "v.0.0.1.5",
-    "enableMultipleApplications": false,
-    "language": "zh-cn",
-    "log": {
-        "level": "debug",
-        "logFolder": "log",
-        "logName": "VoidCrawler",
-        "maxFileSize": 1048576,
-        "maxFiles": 5
+    "title": {
+      "family": "Holland",
+      "pointSize": 13,
+      "weight": 700
     },
-    "userName": "Hacker", 
-    "font": {
-        "global": {
-            "family": "Microsoft YaHei", 
-            "pointSize": -1, 
-            "weight": -1
-        }, 
-        "title": {
-            "family": "Holland", 
-            "pointSize": 13, 
-            "weight": 700
-        }, 
-        "item": {
-            "family": "Gabriola", 
-            "pointSize": 15, 
-            "weight": -1
-        }, 
-        "text": {
-            "family": "楷体", 
-            "pointSize": -1, 
-            "weight": -1
-        }
+    "item": {
+      "family": "Gabriola",
+      "pointSize": 15,
+      "weight": -1
+    },
+    "text": {
+      "family": "楷体",
+      "pointSize": -1,
+      "weight": -1
     }
+  }
 }

@@ -12,4 +12,13 @@ namespace FunctionSet
 	// 提醒：bitset 下标是从右到左依次为 第0位、第1位、第2位
 	// 1. Ctrl+Space 2. Shift 3. Ctrl
 	std::bitset<3> getMicrosoftPinyinSwitchKey();
+
+	// 检查文件是否存在
+	bool FileExists(const std::string& path);
+
+	// 构建完整路径
+	std::string BuildExePath(const std::string& installPath);
+
+	// 获取微信安装路径，返回可执行文件完整路径，失败返回空字符串
+	std::string GetWeChatInstallPath();
 }

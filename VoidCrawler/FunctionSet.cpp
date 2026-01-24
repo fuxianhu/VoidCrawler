@@ -3,6 +3,9 @@
 #include "Core.h"
 #include <map>
 #include <bitset>
+#include <iostream>
+#include <string>
+#include <vector>
 
 
 bool FunctionSet::modifyMicrosoftPinyinSwitchKey(const std::bitset<3>& bits)
@@ -131,4 +134,118 @@ std::bitset<3> FunctionSet::getMicrosoftPinyinSwitchKey()
         readValue, reverse_lookup_table[readValue].to_string()));
 
     return reverse_lookup_table[readValue];
+}
+
+bool FunctionSet::FileExists(const std::string& path)
+{
+    return GetFileAttributesA(path.c_str()) != INVALID_FILE_ATTRIBUTES;
+}
+
+std::string FunctionSet::BuildExePath(const std::string& installPath)
+{
+    std::vector<std::string> exeNames = { "WeChat.exe", "Weixin.exe", "微信.exe" };
+
+    for (const auto& exeName : exeNames)
+    {
+        std::string fullPath = installPath;
+        if (!fullPath.empty() && fullPath.back() != '\\')
+        {
+            fullPath += '\\';
+        }
+        fullPath += exeName;
+
+        if (FileExists(fullPath))
+        {
+            return fullPath;
+        }
+    }
+
+    return "";
+}
+
+std::string FunctionSet::GetWeChatInstallPath()
+{
+    std::string installPath;
+    HKEY hKey = nullptr;
+
+    // 尝试 HKEY_CURRENT_USER (当前用户安装，优先级最高)
+    if (RegOpenKeyExA(HKEY_CURRENT_USER, "Software\\Tencent\\Weixin", 0, KEY_READ, &hKey) == ERROR_SUCCESS)
+    {
+        char buffer[MAX_PATH] = { 0 };
+        DWORD bufferSize = sizeof(buffer);
+
+        if (RegQueryValueExA(hKey, "InstallPath", nullptr, nullptr,
+            reinterpret_cast<LPBYTE>(buffer), &bufferSize) == ERROR_SUCCESS)
+        {
+            installPath = buffer;
+        }
+        RegCloseKey(hKey);
+
+        if (!installPath.empty())
+        {
+            std::string exePath = BuildExePath(installPath);
+            if (!exePath.empty())
+            {
+                return exePath;
+            }
+        }
+    }
+
+    // 如果HKCU没有，尝试HKLM (所有用户安装)
+    const char* hklmPaths[] =
+    {
+        "SOFTWARE\\Tencent\\WeChat",
+        "SOFTWARE\\WOW6432Node\\Tencent\\WeChat",
+        "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\WeChat",
+        "SOFTWARE\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\WeChat"
+    };
+
+    const char* valueNames[] = { "InstallPath", "InstallLocation", "UninstallString" };
+
+    for (const auto& regPath : hklmPaths)
+    {
+        if (RegOpenKeyExA(HKEY_LOCAL_MACHINE, regPath, 0, KEY_READ, &hKey) == ERROR_SUCCESS)
+        {
+            for (const auto& valueName : valueNames)
+            {
+                char buffer[MAX_PATH] = { 0 };
+                DWORD bufferSize = sizeof(buffer);
+
+                if (RegQueryValueExA(hKey, valueName, nullptr, nullptr,
+                    reinterpret_cast<LPBYTE>(buffer), &bufferSize) == ERROR_SUCCESS)
+                {
+
+                    std::string path = buffer;
+
+                    // 如果是UninstallString，提取安装目录
+                    if (std::string(valueName) == "UninstallString")
+                    {
+                        size_t pos = path.find("\\uninstall");
+                        if (pos != std::string::npos)
+                        {
+                            installPath = path.substr(0, pos);
+                        }
+                    }
+                    else
+                    {
+                        installPath = path;
+                    }
+
+                    if (!installPath.empty())
+                    {
+                        std::string exePath = BuildExePath(installPath);
+                        if (!exePath.empty())
+                        {
+                            RegCloseKey(hKey);
+                            return exePath;
+                        }
+                    }
+                }
+            }
+            // if RegOpenKeyExA 内
+            RegCloseKey(hKey);
+        }
+    }
+
+    return "";
 }
