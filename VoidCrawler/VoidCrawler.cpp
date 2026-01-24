@@ -511,7 +511,7 @@ void VoidCrawler::initUI()
     this->resize(300, m_expandedHeight);
     this->setWindowTitle("VoidCrawler Client");
     this->setWindowIcon(QIcon(VCCore::getPath("icon/VoidCrawlerIcon.ico")));
-    this->setStyleSheet("QMainWindow { background-color: #000000; }");
+    this->setStyleSheet("QMainWindow { background-color: #121212; }");
     VCCore::logger->debug("Set Title Bar...");
     // 创建自定义标题栏（位于顶部）
     m_titleBar = new QWidget(w);
@@ -536,7 +536,7 @@ void VoidCrawler::initUI()
         VCCore::mainCfgValue("font/title/weight").toInt())
     );
     // 半透明背景，阴影更明显
-    m_titleLabel->setStyleSheet("color: white; background: rgba(0,0,0,0.3); border-radius: 8px;");
+    m_titleLabel->setStyleSheet("color: white; background: rgba(18,18,18,0.3); border-radius: 8px;");
 
     m_titleShadow = new QGraphicsDropShadowEffect(m_titleLabel);
     m_titleShadow->setBlurRadius(40);
@@ -552,7 +552,7 @@ void VoidCrawler::initUI()
     m_titleShadowAnim = new QVariantAnimation(this);
     m_titleShadowAnim->setStartValue(0.0);
     m_titleShadowAnim->setEndValue(360.0);
-    m_titleShadowAnim->setDuration(3000);
+    m_titleShadowAnim->setDuration(VCCore::mainConfig.object().value("animationSpeed").toInt());
     m_titleShadowAnim->setLoopCount(-1);
     
     connect(m_titleShadowAnim, &QVariantAnimation::valueChanged, this, [this](const QVariant& value) {
@@ -678,11 +678,11 @@ void VoidCrawler::initUI()
             QVariantAnimation* btnAnim = new QVariantAnimation(this);
             btnAnim->setStartValue(0.0);
             btnAnim->setEndValue(360.0);
-            btnAnim->setDuration(2500 + btnIdx * 200); // 每个按钮动画略有错位
+            btnAnim->setDuration(VCCore::mainConfig.object().value("animationSpeed").toInt()); // 速度
             btnAnim->setLoopCount(-1);
             connect(btnAnim, &QVariantAnimation::valueChanged, this, [btnShadowEffect, btnIdx](const QVariant& value) {
                 QColor color;
-                color.setHslF(static_cast<float>(fmod((value.toDouble() + btnIdx * 40) / 360.0, 1.0)), 0.7f, 0.55f);
+                color.setHslF(static_cast<float>(fmod((value.toDouble() + btnIdx * 10) / 360.0, 1.0)), 0.7f, 0.55f);
                 btnShadowEffect->setColor(color);
             });
             btnAnim->start();

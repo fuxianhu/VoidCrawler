@@ -46,7 +46,7 @@ PropertyWindow::PropertyWindow(QWidget* parent, const QString& itemID)
     closeBtn = new QPushButton("✗", this);
     closeBtn->setStyleSheet(
         "QPushButton{color:#fff;background:transparent;border:none;font-size:20px;border-radius:16px;}"
-        "QPushButton:hover{color:#000;background:#ff4c4c;}"
+        "QPushButton:hover{color:#121212;background:#ff4c4c;}"
     );
     closeBtn->setFixedSize(32, 32);
     closeBtn->move(width() - 32 - 8, 8);

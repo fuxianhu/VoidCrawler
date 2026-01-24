@@ -1,43 +1,43 @@
 {
   "cmd": {
-    "command-line_arguments": null,
+    "CommandLineArguments": null,
     "permission": null,
-    "working_directory": null
+    "workingDirectory": null
   },
   "NewPowershell": {
-    "command-line_arguments": null,
+    "CommandLineArguments": null,
     "permission": null,
-    "working_directory": null
+    "workingDirectory": null
   },
   "OldPowershell": {
-    "command-line_arguments": null,
+    "CommandLineArguments": null,
     "permission": null,
-    "working_directory": null
+    "workingDirectory": null
   },
   "VisualStudioCode": {
-    "command-line_arguments": null,
+    "CommandLineArguments": null,
     "permission": null,
-    "working_directory": null
+    "workingDirectory": null
   },
   "VisualStudio": {
-    "command-line_arguments": null,
+    "CommandLineArguments": null,
     "permission": null,
-    "working_directory": null
+    "workingDirectory": null
   },
   "WindowsTaskManger": {
-    "command-line_arguments": null,
+    "CommandLineArguments": null,
     "permission": null
   },
   "EdgeBrowser": {
-    "command-line_arguments": null,
+    "CommandLineArguments": null,
     "permission": null
   },
   "Weixin": {
-    "command-line_arguments": null,
+    "CommandLineArguments": null,
     "permission": null
   },
   "WindowsCalc": {
-    "command-line_arguments": null
+    "CommandLineArguments": null
   },
   "OpenUserFolder": {
     "permission": null
@@ -46,9 +46,9 @@
     "encoding": 65001
   },
   "AudioPlayer": {
-    "loop_play_mode": 1,
+    "LoopPlayMode": 1,
     "audio": null, 
     "position": 0, 
-    "auto_save": true
+    "AutoSave": true
   }
 }

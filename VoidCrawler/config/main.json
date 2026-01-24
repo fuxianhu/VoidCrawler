@@ -38,5 +38,6 @@
       "pointSize": -1,
       "weight": -1
     }
-  }
+  },
+  "animationSpeed": 4000
 }

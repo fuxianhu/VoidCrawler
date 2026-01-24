@@ -58,7 +58,8 @@ config
       "pointSize": -1,
       "weight": -1
     }
-  }
+  },
+  "animationSpeed": 4000 // 动画速度，数值越大越慢（相反）
 }
 ```
 
@@ -226,44 +227,44 @@ config
 ```json
 {
   "cmd": {
-    "command-line_arguments": null, // 命令行参数
+    "CommandLineArguments": null, // 命令行参数
     "permission": null, // 权限，null表示继承客户端权限
-    "working_directory": null // 工作目录
+    "workingDirectory": null // 工作目录
   },
   "NewPowershell": {
-    "command-line_arguments": null,
+    "CommandLineArguments": null,
     "permission": null,
-    "working_directory": null
+    "workingDirectory": null
   },
   "OldPowershell": {
-    "command-line_arguments": null,
+    "CommandLineArguments": null,
     "permission": null,
-    "working_directory": null
+    "workingDirectory": null
   },
   "VisualStudioCode": {
-    "command-line_arguments": null,
+    "CommandLineArguments": null,
     "permission": null,
-    "working_directory": null
+    "workingDirectory": null
   },
   "VisualStudio": {
-    "command-line_arguments": null,
+    "CommandLineArguments": null,
     "permission": null,
-    "working_directory": null
+    "workingDirectory": null
   },
   "WindowsTaskManger": {
-    "command-line_arguments": null,
+    "CommandLineArguments": null,
     "permission": null
   },
   "EdgeBrowser": {
-    "command-line_arguments": null,
+    "CommandLineArguments": null,
     "permission": null
   },
   "Weixin": {
-    "command-line_arguments": null,
+    "CommandLineArguments": null,
     "permission": null
   },
   "WindowsCalc": {
-    "command-line_arguments": null
+    "CommandLineArguments": null
   },
   "OpenUserFolder": {
     "permission": null
@@ -272,10 +273,10 @@ config
     "encoding": 65001 // 编码方式，如 65001 表示 UTF-8
   },
   "AudioPlayer": {
-    "loop_play_mode": 1, // 循环模式，0 表示不循环，1 表示单曲循环，2 表示歌单循环
+    "LoopPlayMode": 1, // 循环模式，0 表示不循环，1 表示单曲循环，2 表示歌单循环
     "audio": null, // 音频文件位置，可以是网址
     "position": 0, // 记录上次的播放位置
-    "auto_save": true // 是否自动保存配置
+    "AudoSave": true // 是否自动保存配置
   }
 }
 ```

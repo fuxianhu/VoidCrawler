@@ -2,7 +2,9 @@
 
 **最新版本： $v.0.0.1.5$**
 
-**更新日志与预告：见文档（`Docs/zh-cn/ChangeLog.md`）或 Releases 页面**
+**当前更新频率：1~3日一更（毕竟放假了**
+
+**更新日志与预告：见文档（`Docs/zh-cn/ChangeLog.md`）或 [Releases](https://github.com/fuxianhu/VoidCrawler/releases) 页面**
 
 一个运行于 *Microsoft Windows 10/11* x64 操作系统的客户端（工具箱），中文名“虚空潜行者”。它将来会具有以下特点：
 - 允许用户获得极高权限、实施攻击（仅允许合法用途）
