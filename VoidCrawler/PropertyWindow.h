@@ -8,6 +8,7 @@
 #include <QVBoxLayout>
 #include <QPropertyAnimation>
 #include <QTimer>
+#include <QLabel>
 
 
 class PropertyWindow : public QWidget
@@ -21,6 +22,8 @@ public:
 
     void showAnimated();
     void closeAnimated();
+    
+    bool initState = false; // 初始化是否成功标志
 
 protected:
     void paintEvent(QPaintEvent* event) override;
@@ -32,6 +35,7 @@ private slots:
 
 private:
     QPushButton* closeBtn;
+	QLabel* titleLabel;
     QPropertyAnimation* showAnimation;
     QPropertyAnimation* closeAnimation;
     QString itemID;

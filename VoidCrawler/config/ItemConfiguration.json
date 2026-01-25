@@ -1,54 +1,166 @@
 {
   "cmd": {
-    "CommandLineArguments": null,
-    "permission": null,
-    "workingDirectory": null
+    "CommandLineArguments": {
+      "type": ["String"],
+      "default": "",
+      "value": ""
+    },
+    "permission": {
+      "type": ["Permission"],
+      "default": null,
+      "value": null
+    },
+    "workingDirectory": {
+      "type": ["Folder", "Null"],
+      "default": null,
+      "value": null
+    }
   },
   "NewPowershell": {
-    "CommandLineArguments": null,
-    "permission": null,
-    "workingDirectory": null
+    "CommandLineArguments": {
+      "type": ["String"],
+      "default": "",
+      "value": ""
+    },
+    "permission": {
+      "type": ["Permission"],
+      "default": null,
+      "value": null
+    },
+    "workingDirectory": {
+      "type": ["Folder", "Null"],
+      "default": null,
+      "value": null
+    }
   },
   "OldPowershell": {
-    "CommandLineArguments": null,
-    "permission": null,
-    "workingDirectory": null
+    "CommandLineArguments": {
+      "type": ["String"],
+      "default": "",
+      "value": ""
+    },
+    "permission": {
+      "type": ["Permission"],
+      "default": null,
+      "value": null
+    },
+    "workingDirectory": {
+      "type": ["Folder", "Null"],
+      "default": null,
+      "value": null
+    }
   },
   "VisualStudioCode": {
-    "CommandLineArguments": null,
-    "permission": null,
-    "workingDirectory": null
+    "CommandLineArguments": {
+      "type": ["String"],
+      "default": "",
+      "value": ""
+    },
+    "permission": {
+      "type": ["Permission"],
+      "default": null,
+      "value": null
+    },
+    "workingDirectory": {
+      "type": ["Folder", "Null"],
+      "default": null,
+      "value": null
+    }
   },
   "VisualStudio": {
-    "CommandLineArguments": null,
-    "permission": null,
-    "workingDirectory": null
+    "CommandLineArguments": {
+      "type": ["String"],
+      "default": "",
+      "value": ""
+    },
+    "permission": {
+      "type": ["Permission"],
+      "default": null,
+      "value": null
+    },
+    "workingDirectory": {
+      "type": ["Folder", "Null"],
+      "default": null,
+      "value": null
+    }
   },
   "WindowsTaskManger": {
-    "CommandLineArguments": null,
-    "permission": null
+    "CommandLineArguments": {
+      "type": ["String"],
+      "default": "",
+      "value": ""
+    },
+    "permission": {
+      "type": ["Permission"],
+      "default": null,
+      "value": null
+    }
   },
   "EdgeBrowser": {
-    "CommandLineArguments": null,
-    "permission": null
+    "CommandLineArguments": {
+      "type": ["String"],
+      "default": "",
+      "value": ""
+    },
+    "permission": {
+      "type": ["Permission"],
+      "default": null,
+      "value": null
+    }
   },
   "Weixin": {
-    "CommandLineArguments": null,
-    "permission": null
+    "CommandLineArguments": {
+      "type": ["String"],
+      "default": "",
+      "value": ""
+    },
+    "permission": {
+      "type": ["Permission"],
+      "default": null,
+      "value": null
+    }
   },
   "WindowsCalc": {
-    "CommandLineArguments": null
+    "CommandLineArguments": {
+      "type": ["String"],
+      "default": "",
+      "value": ""
+    }
   },
   "OpenUserFolder": {
-    "permission": null
+    "permission": {
+      "type": ["Permission"],
+      "default": null,
+      "value": null
+    }
   },
   "chcp": {
-    "encoding": 65001
+    "encoding": {
+      "type": ["Int"],
+      "default": 65001,
+      "value": 65001
+    }
   },
   "AudioPlayer": {
-    "LoopPlayMode": 1,
-    "audio": null, 
-    "position": 0, 
-    "AutoSave": true
+    "LoopPlayMode": {
+      "type": ["Int"],
+      "default": 1,
+      "value": 1
+    },
+    "audio": {
+      "type": ["File", "String"],
+      "default": null,
+      "value": null
+    },
+    "position": {
+      "type": ["Int"],
+      "default": 0,
+      "value": 0
+    },
+    "AutoSave": {
+      "type": ["Bool"],
+      "default": true,
+      "value": true
+    }
   }
 }

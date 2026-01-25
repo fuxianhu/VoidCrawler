@@ -352,7 +352,15 @@ void VoidCrawler::on_button_right_clicked(QString id, QPushButton* qpb)
 {
     VCCore::logger->debug(std::format("Button right clicked, ID: {}", id.toStdString()));
     PropertyWindow* p = new PropertyWindow(nullptr, id);
-    p->showAnimated(); 
+    if (p->initState)
+    {
+        p->showAnimated();
+    }
+    else
+    {
+		VCCore::logger->warn(std::format("Failed to open property window for ID: {}", id.toStdString()));
+        delete p;
+    }
 }
 
 void VoidCrawler::on_button_clicked(QString id, QPushButton* qpb, QString styles)
