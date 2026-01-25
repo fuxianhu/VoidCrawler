@@ -48,3 +48,32 @@
 2. 清理解决方案，并使用 `Releses x64` 生成解决方案
 3. 在 `VoidCrawler` 目录下，运行 `pwsh release.ps1`
 4. 在 `VoidCrawler\x64\Releses\` 中，便是我们的软件了，其中有一个压缩包，你可以把它传给任何人。
+
+## 类型
+
+enum Types:
+```
+	TypeError = -1, // 类型错误，不用于表示哪种异常，而是表示类型无法识别
+    Null = 0, 
+    Bool = 1, 
+    Integer = 2, // 方便起见，囊括 NBaseNumber
+    Double = 3, // 方便起见，囊括 NBaseNumber
+    String = 4, 
+    Color = 5, 
+    File = 6, 
+    Folder = 7, 
+    Font = 8,
+    Link = 9,
+    Dict = 10,
+    Time = 11,
+    Date = 12,
+    DateTime = 13,
+    Regedit = 14,
+    Permission = 15,
+    Task = 16,
+    List = 17,
+    Table = 18,
+    Binary = 19, // 与2进制数不同，其可以用于存储更复杂的选项
+    SingleChoice = 20, // 单选
+    MultipleChoice = 21, // 多选
+    ```
