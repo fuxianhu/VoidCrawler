@@ -251,6 +251,7 @@
     <ClInclude Include="Encryption.h" />
     <QtMoc Include="PropertyWindow.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Types.h" />
     <ClInclude Include="WindowCompositionAttribute.h" />
     <QtMoc Include="SmoothSwitch.h" />
     <QtMoc Include="LicenseAgreementDialog.h" />
