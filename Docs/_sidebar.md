@@ -1,6 +1,7 @@
 <!-- docs/_sidebar.md -->
 
 * # [首页](zh-cn/)
+* # [安装](zh-cn/Install.md)
 * # [更新日志](zh-cn/ChangeLog)
 * # [临时草稿](zh-cn/temp)
 * # [新功能计划](zh-cn/NewFeaturesPlan.md)
