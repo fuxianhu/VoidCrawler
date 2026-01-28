@@ -7,8 +7,8 @@ Write-Host ""
 Write-Host "   选项 Options: " -ForegroundColor Cyan
 Write-Host "   [string]ProjectPath = E:\YFY\VoidCrawler" -ForegroundColor Cyan
 Write-Host "========================================" -ForegroundColor Cyan
-Write-Host "正在切换到项目目录... (" + $ProjectPath + "\VoidCrawler\)" -ForegroundColor Cyan
-Set-Location $ProjectPath + "\VoidCrawler\"
+Write-Host "正在切换到项目目录... ($ProjectPath\VoidCrawler\)" -ForegroundColor Cyan
+Set-Location "$ProjectPath\VoidCrawler\"
 
 Write-Host "========================================" -ForegroundColor Cyan
 Write-Host "正在检测环境..." -ForegroundColor Cyan
@@ -50,9 +50,9 @@ if (Test-Path ".\x64\Debug\") {
 
 Write-Host "========================================" -ForegroundColor Cyan
 Write-Host "正在发布应用程序... (E:\Qt\6.5.3\msvc2019_64\bin\windeployqt --release .\VoidCrawler.exe)" -ForegroundColor Cyan
-Set-Location $ProjectPath + "\VoidCrawler\x64\Release\"
+Set-Location "$ProjectPath\VoidCrawler\x64\Release\"
 & "E:\Qt\6.5.3\msvc2019_64\bin\windeployqt" --release .\VoidCrawler.exe
-Set-Location $ProjectPath + "\VoidCrawler\"
+Set-Location "$ProjectPath\VoidCrawler\"
 
 Write-Host "========================================" -ForegroundColor Cyan
 Write-Host "正在复制运行时必要文件..." -ForegroundColor Cyan

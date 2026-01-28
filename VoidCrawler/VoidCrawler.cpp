@@ -884,49 +884,84 @@ void VoidCrawler::resizeEvent(QResizeEvent* event)
 
 bool VoidCrawler::eventFilter(QObject* watched, QEvent* event)
 {
-    if (event == nullptr)
-    {
+    if (!event) {
         return QMainWindow::eventFilter(watched, event);
     }
 
-    if ((watched == m_titleBar || watched == m_titleLabel) && event)
-    {
-        switch (event->type())
-        {
+    if ((watched == m_titleBar || watched == m_titleLabel)) {
+        switch (event->type()) {
         case QEvent::MouseButtonPress:
         {
             QMouseEvent* me = static_cast<QMouseEvent*>(event);
-            if (me->button() == Qt::LeftButton)
-            {
-                // 开始拖动：记录鼠标相对于窗口左上角的偏移，用于后续移动
+            if (me->button() == Qt::LeftButton) {
                 m_dragging = true;
-                m_dragPosition = me->globalPosition().toPoint() - this->frameGeometry().topLeft();
-                return true; // 拦截事件
+                m_dragStartPosition = me->globalPosition().toPoint();
+                m_dragWindowPosition = this->pos();
+                if (watched->isWidgetType()) {
+                    QWidget* widget = static_cast<QWidget*>(watched);
+                    widget->setMouseTracking(true);
+                    widget->grabMouse();
+                }
+
+                // 开始拖动时，暂时禁用窗口更新以减少卡顿
+                this->setUpdatesEnabled(false);
+
+                return true;
             }
             break;
         }
         case QEvent::MouseMove:
         {
-            if (m_dragging)
-            {
+            if (m_dragging) {
                 QMouseEvent* me = static_cast<QMouseEvent*>(event);
-                // 根据鼠标当前位置减去偏移量移动窗口
-                this->move(me->globalPosition().toPoint() - m_dragPosition);
-                return true; // 拦截事件
+                QPoint globalPos = me->globalPosition().toPoint();
+                QPoint offset = globalPos - m_dragStartPosition;
+                QPoint newPos = m_dragWindowPosition + offset;
+                static QPoint lastPos = this->pos();
+                QPoint diff = newPos - lastPos;
+
+                if (abs(diff.x()) >= 2 || abs(diff.y()) >= 2) {
+                    this->move(newPos);
+                    lastPos = newPos;
+
+                    // 强制处理一次事件队列，让系统有时间更新
+                    QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
+                }
+
+                return true;
             }
             break;
         }
         case QEvent::MouseButtonRelease:
         {
             QMouseEvent* me = static_cast<QMouseEvent*>(event);
-            if (me->button() == Qt::LeftButton)
-            {
-                // 结束拖动
+            if (me->button() == Qt::LeftButton && m_dragging) {
                 m_dragging = false;
-                return true; // 拦截事件
+
+                // 最终确保窗口位置准确
+                QPoint globalPos = me->globalPosition().toPoint();
+                QPoint offset = globalPos - m_dragStartPosition;
+                QPoint finalPos = m_dragWindowPosition + offset;
+                this->move(finalPos);
+
+                // 重新启用窗口更新
+                this->setUpdatesEnabled(true);
+
+                // 释放鼠标捕获
+                if (watched->isWidgetType()) {
+                    QWidget* widget = static_cast<QWidget*>(watched);
+                    widget->releaseMouse();
+                    widget->setMouseTracking(false);
+                }
+
+                return true;
             }
             break;
         }
+        case QEvent::Leave:
+        case QEvent::HoverLeave:
+            // 防止鼠标离开控件时拖动中断
+            break;
         default:
             break;
         }
@@ -934,16 +969,14 @@ bool VoidCrawler::eventFilter(QObject* watched, QEvent* event)
     if (event->type() == QEvent::MouseButtonPress)
     {
         QMouseEvent* mouseEvent = static_cast<QMouseEvent*>(event);
-        if (watched->property("isItemButton").toBool())
+        if (watched->property("isItemButton").toBool() && mouseEvent->button() == Qt::RightButton)
         {
-            if (mouseEvent->button() == Qt::RightButton)
-            {
-                on_button_right_clicked(
-                    watched->property("itemID").toString(),
-                    qobject_cast<QPushButton*>(watched));
-                return true;
-            }
+            on_button_right_clicked(
+                watched->property("itemID").toString(),
+                qobject_cast<QPushButton*>(watched));
+            return true;
         }
     }
+
     return QMainWindow::eventFilter(watched, event);
 }

@@ -98,4 +98,7 @@ private:
     QGraphicsDropShadowEffect* m_titleShadow = nullptr;
     QList<QVariantAnimation*> m_buttonShadowAnims;
     QList<QGraphicsDropShadowEffect*> m_buttonShadows;
+
+    QPoint m_dragStartPosition;
+    QPoint m_dragWindowPosition;
 };
