@@ -249,18 +249,13 @@ void VoidCrawler::privilegeIconDisplay()
 {
     const std::map<PrivilegeLevel, std::string> iconMap =
     {
-        {PrivilegeLevel::Unknown,
-         "icon/User.png"},
-        {PrivilegeLevel::StandardUser,
-         "icon/User.png"},
-        {PrivilegeLevel::Administrator,
-         "icon/Administrator.png"},
-        {PrivilegeLevel::System,
-         "icon/System.png"},
-        {PrivilegeLevel::TrustedInstaller,
-         "icon/TrustedInstaller.png"},
-        {PrivilegeLevel::Other,
-         "icon/User.png"} };
+        {PrivilegeLevel::Unknown, "icon/User.png"},
+        {PrivilegeLevel::StandardUser, "icon/User.png"},
+        {PrivilegeLevel::Administrator, "icon/Administrator.png"},
+        {PrivilegeLevel::System, "icon/System.png"},
+        {PrivilegeLevel::TrustedInstaller,"icon/TrustedInstaller.png"},
+        {PrivilegeLevel::Other, "icon/User.png"}
+    };
     QPixmap pixmap(VCCore::getPath(
         iconMap.at(PrivilegeChecker::GetCurrentPrivilegeLevel())));
     VCCore::logger->info(PrivilegeChecker::GetPrivilegeLevelString(PrivilegeChecker::GetCurrentPrivilegeLevel()));
@@ -272,8 +267,7 @@ void VoidCrawler::privilegeIconDisplay()
     privilegeIcon->move(10, 10);
     privilegeIcon->show();
 }
-bool isDisplay = true;
-bool firstCall = true;
+
 void VoidCrawler::onHotkeyDetected(const QString& message)
 {
     // 在主线程中安全地更新
@@ -319,13 +313,9 @@ void VoidCrawler::ProgramAfterStartup()
     if (!m_hookThread)
     {
         m_hookThread = new KeyHookThread(this);
-        connect(m_hookThread, &KeyHookThread::hotkeyDetected,
-            this, &VoidCrawler::onHotkeyDetected);
-        connect(m_hookThread, &KeyHookThread::hookError,
-            this, &VoidCrawler::onHookError);
-        connect(m_hookThread, &QThread::finished,
-            m_hookThread, &QObject::deleteLater);
-
+        connect(m_hookThread, &KeyHookThread::hotkeyDetected, this, &VoidCrawler::onHotkeyDetected);
+        connect(m_hookThread, &KeyHookThread::hookError, this, &VoidCrawler::onHookError);
+        connect(m_hookThread, &QThread::finished, m_hookThread, &QObject::deleteLater);
         m_hookThread->start();
     }
     QMediaPlayer* player = new QMediaPlayer(this);
@@ -334,17 +324,14 @@ void VoidCrawler::ProgramAfterStartup()
     player->setSource(VCCore::getPath("audio/startup.mp3"));
     connect(player, &QMediaPlayer::playbackStateChanged,
         [player, audioOutput](QMediaPlayer::PlaybackState state)
-        {
+    {
             if (state == QMediaPlayer::StoppedState)
             {
-                // 先断开连接，防止重复触发
                 player->disconnect();
-                // 删除音频输出
                 audioOutput->deleteLater();
-                // 删除播放器
                 player->deleteLater();
             }
-        });
+    });
     player->play();
 }
 
@@ -516,24 +503,22 @@ void VoidCrawler::initUI()
 
     //         不在任务栏显示图标    无边框窗口，以便自定义标题栏样式    置顶窗口
     this->setWindowFlags(Qt::Tool | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
-    this->resize(300, m_expandedHeight);
+    this->resize(VCCore::mainConfig.object().value("mainWindowWidth").toInt(), m_expandedHeight);
     this->setWindowTitle("VoidCrawler Client");
     this->setWindowIcon(QIcon(VCCore::getPath("icon/VoidCrawlerIcon.ico")));
     this->setStyleSheet("QMainWindow { background-color: #121212; }");
     VCCore::logger->debug("Set Title Bar...");
-    // 创建自定义标题栏（位于顶部）
+
     m_titleBar = new QWidget(w);
     m_titleBar->setObjectName("titleBar");
-    int titleBarHeight = 48; // 标题栏高度
+    int titleBarHeight = VCCore::mainConfig.object().value("titleBarHeight").toInt();
     m_titleBar->setGeometry(0, 0, this->width(), titleBarHeight);
-    // 标题栏使用线性渐变背景并带有圆角样式
     m_titleBar->setStyleSheet(
         "QWidget#titleBar {"
         "background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #111111, stop:1 #0b0b0b);"
         "border-radius: 12px;"
         "}");
 
-    // 标题文本（居中显示）
     m_titleLabel = new QLabel(w);
     m_titleLabel->setText("VoidCrawler Client");
     m_titleLabel->setGeometry(0, 0, this->width(), titleBarHeight);
@@ -543,16 +528,14 @@ void VoidCrawler::initUI()
         VCCore::mainCfgValue("font/title/pointSize").toInt(),
         VCCore::mainCfgValue("font/title/weight").toInt())
     );
-    // 半透明背景，阴影更明显
     m_titleLabel->setStyleSheet("color: white; background: rgba(18,18,18,0.3); border-radius: 8px;");
 
     m_titleShadow = new QGraphicsDropShadowEffect(m_titleLabel);
     m_titleShadow->setBlurRadius(40);
     m_titleShadow->setOffset(0, 0);
-    m_titleShadow->setColor(QColor(255, 0, 0, 200)); // 红色阴影
+    m_titleShadow->setColor(QColor(255, 0, 0, 200));
     m_titleLabel->setGraphicsEffect(m_titleShadow);
 
-    // ====== 彩色动态阴影效果：标题 ======
     m_titleShadow = new QGraphicsDropShadowEffect(m_titleLabel);
     m_titleShadow->setBlurRadius(32);
     m_titleShadow->setOffset(0, 0);
@@ -562,7 +545,6 @@ void VoidCrawler::initUI()
     m_titleShadowAnim->setEndValue(360.0);
     m_titleShadowAnim->setDuration(VCCore::mainConfig.object().value("animationSpeed").toInt());
     m_titleShadowAnim->setLoopCount(-1);
-    
     connect(m_titleShadowAnim, &QVariantAnimation::valueChanged, this, [this](const QVariant& value) {
         // 彩虹色 HSL 动态
         QColor color;
@@ -570,10 +552,9 @@ void VoidCrawler::initUI()
         m_titleShadow->setColor(color);
     });
     m_titleShadowAnim->start();
-    // ====== 彩色动态阴影效果 END ======
 
     VCCore::logger->debug("Create Toggle Button...");
-    // 创建折叠/展开按钮（位于标题栏右侧），使用自定义可旋转按钮类
+
     m_toggleButton = new RotatableIconButton(w);
     QPixmap ico(VCCore::getPath("icon/favicon.ico"));
     if (!ico.isNull())
@@ -583,21 +564,19 @@ void VoidCrawler::initUI()
     }
     else
     {
-        // 如果图标加载失败，直接退出程序（可根据需要改为回退处理）
-        exit(1);
+		VCCore::logger->error("Failed to load icon for toggle button!");
+        QApplication::quit();
+        std::exit(1);
     }
     m_toggleButton->setFixedSize(36, 36);
     m_toggleButton->setStyleSheet("background: transparent; border: none; color: white;");
 
     VCCore::logger->debug("Create contentWidget...");
-    // 创建内容容器（这个容器支持折叠和展开）
     m_contentWidget = new QWidget(w);
     m_contentWidget->setStyleSheet("background: transparent;");
     m_contentWidget->setGeometry(0, titleBarHeight, this->width(), m_contentExpandedHeight);
-    // 将内容区设置为固定高度策略，以便通过修改 maximumHeight 来动画化高度变化
     m_contentWidget->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
 
-    // 使用垂直布局管理内容区内的控件
     QVBoxLayout* contentLayout = new QVBoxLayout(m_contentWidget);
     contentLayout->setContentsMargins(12, 12, 12, 12); // 边距
     contentLayout->setSpacing(8);                      // 子控件间距
@@ -614,7 +593,7 @@ void VoidCrawler::initUI()
             QString itemName = itemID;
             int valueType = itemObj.value("type").toInt();
             QPushButton* qpb = new QPushButton(itemName, m_contentWidget);
-            qpb->setProperty("itemID", itemID);  // 设置索引属性
+            qpb->setProperty("itemID", itemID);      // 设置索引属性
             qpb->setProperty("isItemButton", true);  // 标识这是自定义按钮
 
             QString styles = "background: rgba(0, 0, 0, 0.3); border-radius: 8px; ";
@@ -636,20 +615,18 @@ void VoidCrawler::initUI()
                 writeJSON(VCCore::categoryConfig, CATEGORY_JSON_FILE);
             }
             
-            if (valueType == 1) // 开关类型
+            if (valueType == 1)
             {
                 if (itemObj.value("switch").toBool())
                 {
-                    // 开
                     styles = styles.append("color: green; ");
                 }
                 else
                 {
-                    // 关
                     styles = styles.append("color: red; ");
                 }
             }
-            else if (valueType == 0) // 按钮类型
+            else if (valueType == 0)
             {
                 styles = styles.append("color: white; ");
             }
@@ -674,10 +651,8 @@ void VoidCrawler::initUI()
                 { VoidCrawler::on_button_clicked(itemID, qpb, styles); });
             contentLayout->addWidget(qpb);
 
-            // 为按钮安装事件过滤器，以处理右键点击等
             qpb->installEventFilter(this);
 
-            // ====== 彩色动态阴影效果：按钮 ======
             QGraphicsDropShadowEffect* btnShadowEffect = new QGraphicsDropShadowEffect(qpb);
             btnShadowEffect->setBlurRadius(24);
             btnShadowEffect->setOffset(0, 0);
@@ -686,7 +661,7 @@ void VoidCrawler::initUI()
             QVariantAnimation* btnAnim = new QVariantAnimation(this);
             btnAnim->setStartValue(0.0);
             btnAnim->setEndValue(360.0);
-            btnAnim->setDuration(VCCore::mainConfig.object().value("animationSpeed").toInt()); // 速度
+            btnAnim->setDuration(VCCore::mainConfig.object().value("animationSpeed").toInt());
             btnAnim->setLoopCount(-1);
             connect(btnAnim, &QVariantAnimation::valueChanged, this, [btnShadowEffect, btnIdx](const QVariant& value) {
                 QColor color;
@@ -696,12 +671,10 @@ void VoidCrawler::initUI()
             btnAnim->start();
             m_buttonShadowAnims.append(btnAnim);
             btnIdx++;
-            // ====== 彩色动态阴影效果 END ======
         }
     }
 
     VCCore::logger->debug("calc window size");
-    // 计算内容区展开时的高度：将所有子控件的 sizeHint 高度累加，再加上布局间距和边距
     int contentH = 0;
     int itemCount = contentLayout->count();
     for (int i = 0; i < itemCount; ++i)
@@ -712,21 +685,22 @@ void VoidCrawler::initUI()
             contentH += it->widget()->sizeHint().height();
         }
     }
-    // 累加子控件间距和边距
+
     contentH += contentLayout->spacing() * qMax(0, itemCount - 1);
     QMargins margins = contentLayout->contentsMargins();
     contentH += margins.top() + margins.bottom();
-    // 如果计算结果为 0，则使用默认值（防止计算异常导致高度为 0）
+
     if (contentH <= 0)
+    {
         contentH = (m_contentExpandedHeight > 0 ? m_contentExpandedHeight : 200);
+    }
     m_contentExpandedHeight = contentH;
-    // 折叠时的高度为 0（仅显示标题栏）
+
     m_contentCollapsedHeight = 0;
-    // 计算窗口展开与折叠时的整体高度
+
     m_collapsedHeight = titleBarHeight;
     m_expandedHeight = titleBarHeight + m_contentExpandedHeight;
 
-    // 根据当前 m_expanded 状态初始化内容区最大高度和窗口高度
     if (m_expanded)
     {
         m_contentWidget->setMaximumHeight(m_contentExpandedHeight);
@@ -738,7 +712,6 @@ void VoidCrawler::initUI()
         this->resize(this->width(), m_collapsedHeight);
     }
 
-    // 将内容区的几何高度设置为窗口可用高度与最大高度的较小值，确保子控件可见
     int initialContentH = qMin(m_contentWidget->maximumHeight(), this->height() - titleBarHeight);
     if (initialContentH < 0)
     {
@@ -748,58 +721,53 @@ void VoidCrawler::initUI()
     m_contentWidget->show();
 
     VCCore::logger->debug("toggleButton connect...");
-    // 点击折叠按钮时执行的动画：图标旋转 + 窗口高度动画 + 内容区高度动画
     QObject::connect(m_toggleButton, &QPushButton::clicked, [this]()
+    {
+        VCCore::logger->debug("toggleButton clicked.");
+        qreal start = m_expanded ? 180.0 : 0.0;
+        qreal end = m_expanded ? 0.0 : 180.0;
+        QVariantAnimation* rotAnim = new QVariantAnimation(this);
+        rotAnim->setDuration(300);
+        rotAnim->setStartValue(start);
+        rotAnim->setEndValue(end);
+        rotAnim->setEasingCurve(QEasingCurve::InOutCubic);
+        connect(rotAnim, &QVariantAnimation::valueChanged, [this](const QVariant& value)
         {
-            VCCore::logger->debug("toggleButton clicked.");
-            // 旋转动画使用 QVariantAnimation，角度在 0 到 180 度之间切换
-            qreal start = m_expanded ? 180.0 : 0.0;
-            qreal end = m_expanded ? 0.0 : 180.0;
-            QVariantAnimation* rotAnim = new QVariantAnimation(this);
-            rotAnim->setDuration(300);
-            rotAnim->setStartValue(start);
-            rotAnim->setEndValue(end);
-            rotAnim->setEasingCurve(QEasingCurve::InOutCubic);
-            connect(rotAnim, &QVariantAnimation::valueChanged, [this](const QVariant& value) {
-                if (auto r = dynamic_cast<RotatableIconButton*>(m_toggleButton)) {
-                    r->setRotation(value.toReal());
-                }
-                });
-            rotAnim->start(QAbstractAnimation::DeleteWhenStopped);
+            if (auto r = dynamic_cast<RotatableIconButton*>(m_toggleButton))
+            {
+                r->setRotation(value.toReal());
+            }
+        });
+        rotAnim->start(QAbstractAnimation::DeleteWhenStopped);
 
-            // 窗口高度动画：保持左上角位置不变，仅改变高度
-            QRect startGeom = this->geometry();
-            int targetHeight = m_expanded ? m_collapsedHeight : ((m_titleBar ? m_titleBar->height() : 48) + m_contentExpandedHeight);
-            QRect endGeom(startGeom.x(), startGeom.y(), startGeom.width(), targetHeight);
-            QPropertyAnimation* geomAnim = new QPropertyAnimation(this, "geometry");
-            geomAnim->setDuration(300);
-            geomAnim->setStartValue(startGeom);
-            geomAnim->setEndValue(endGeom);
-            geomAnim->setEasingCurve(QEasingCurve::InOutCubic);
-            geomAnim->start(QAbstractAnimation::DeleteWhenStopped);
+        QRect startGeom = this->geometry();
+        int targetHeight = m_expanded ? m_collapsedHeight : ((m_titleBar ? m_titleBar->height() : 48) + m_contentExpandedHeight);
+        QRect endGeom(startGeom.x(), startGeom.y(), startGeom.width(), targetHeight);
+        QPropertyAnimation* geomAnim = new QPropertyAnimation(this, "geometry");
+        geomAnim->setDuration(300);
+        geomAnim->setStartValue(startGeom);
+        geomAnim->setEndValue(endGeom);
+        geomAnim->setEasingCurve(QEasingCurve::InOutCubic);
+        geomAnim->start(QAbstractAnimation::DeleteWhenStopped);
 
-            // 内容区高度动画：改变 maximumHeight，从而触发行内布局重排
-            int startH = m_contentWidget->maximumHeight();
-            int titleBarH = (m_titleBar ? m_titleBar->height() : 48);
-            int endH = targetHeight - titleBarH;
-            if (endH < 0) endH = 0;
-            QPropertyAnimation* contentAnim = new QPropertyAnimation(m_contentWidget, "maximumHeight");
-            contentAnim->setDuration(300);
-            contentAnim->setStartValue(startH);
-            contentAnim->setEndValue(endH);
-            contentAnim->setEasingCurve(QEasingCurve::InOutCubic);
-            contentAnim->start(QAbstractAnimation::DeleteWhenStopped);
+        // 内容区高度动画：改变 maximumHeight，从而触发行内布局重排
+        int startH = m_contentWidget->maximumHeight();
+        int titleBarH = (m_titleBar ? m_titleBar->height() : 48);
+        int endH = targetHeight - titleBarH;
+        if (endH < 0) endH = 0;
+        QPropertyAnimation* contentAnim = new QPropertyAnimation(m_contentWidget, "maximumHeight");
+        contentAnim->setDuration(300);
+        contentAnim->setStartValue(startH);
+        contentAnim->setEndValue(endH);
+        contentAnim->setEasingCurve(QEasingCurve::InOutCubic);
+        contentAnim->start(QAbstractAnimation::DeleteWhenStopped);
 
-            // 切换展开状态（用于下一次点击判断）
-            m_expanded = !m_expanded; });
+        m_expanded = !m_expanded;
+    });
 
     VCCore::logger->debug("Other operate...");
-    // 支持通过拖动标题栏移动窗口：在标题栏相关控件上安装事件过滤器
     m_titleBar->installEventFilter(this);
     m_titleLabel->installEventFilter(this);
-    // 不在按钮上安装过滤器，以保证按钮能接收并处理点击事件
-
-    // 在初始化时执行一次 resizeEvent 以应用窗口圆角遮罩
     QResizeEvent ev(this->size(), this->size());
     this->resizeEvent(&ev);
     VCCore::logger->debug("initUI end.");
@@ -807,7 +775,7 @@ void VoidCrawler::initUI()
 
 VoidCrawler::~VoidCrawler()
 {
-    delete translator; // 这里手动 delete 是安全的，因为 translator 的父对象已设置为 this
+    delete translator;
     if (m_hookThread)
     {
         m_hookThread->stopHook();
@@ -818,10 +786,7 @@ VoidCrawler::~VoidCrawler()
 
 void VoidCrawler::changeLanguage(const QString& language)
 {
-    // 卸载当前翻译器
     QApplication::removeTranslator(translator);
-
-    // 尝试加载新的翻译文件并安装
     if (translator->load(QString(":/translations/%1.qm").arg(language)))
     {
         QApplication::installTranslator(translator);
@@ -830,10 +795,7 @@ void VoidCrawler::changeLanguage(const QString& language)
 
 void VoidCrawler::resizeEvent(QResizeEvent* event)
 {
-    // 先调用基类实现以保持默认行为
     QMainWindow::resizeEvent(event);
-
-    // 重新布局标题栏和标题文本的宽度，确保其宽度与窗口匹配
     if (m_titleBar)
     {
         int titleBarHeight = m_titleBar->height();
@@ -844,7 +806,6 @@ void VoidCrawler::resizeEvent(QResizeEvent* event)
         int titleBarHeight = m_titleLabel->height();
         m_titleLabel->setGeometry(0, 0, this->width(), titleBarHeight);
     }
-    // 重新定位折叠按钮，固定在右上角留白 8 像素
     if (m_toggleButton)
     {
         int titleBarHeight = (m_titleBar ? m_titleBar->height() : 48);
@@ -853,7 +814,6 @@ void VoidCrawler::resizeEvent(QResizeEvent* event)
         int y = (titleBarHeight - m_toggleButton->height()) / 2;
         m_toggleButton->setGeometry(x, y, btnW, m_toggleButton->height());
     }
-    // 更新内容区的位置与高度：使用窗口可用高度与最大高度的较小值，保证展开/折叠动画期间能正确显示子控件
     if (m_contentWidget)
     {
         int titleBarHeight = (m_titleBar ? m_titleBar->height() : 48);
@@ -864,7 +824,6 @@ void VoidCrawler::resizeEvent(QResizeEvent* event)
         m_contentWidget->setGeometry(0, titleBarHeight, this->width(), targetH);
     }
 
-    // 生成圆角遮罩：创建位图并绘制圆角矩形，用作窗口形状遮罩
     QSize s = this->size();
     QBitmap bitmap(s);
     bitmap.fill(Qt::color0);
@@ -878,56 +837,48 @@ void VoidCrawler::resizeEvent(QResizeEvent* event)
     painter.drawRoundedRect(r, radius, radius);
     painter.end();
 
-    // 将生成的位图设置为窗口遮罩，从而实现圆角窗口效果
     this->setMask(QRegion(bitmap));
 }
 
 bool VoidCrawler::eventFilter(QObject* watched, QEvent* event)
 {
-    if (!event) {
+    if (!event)
+    {
         return QMainWindow::eventFilter(watched, event);
     }
-
-    if ((watched == m_titleBar || watched == m_titleLabel)) {
-        switch (event->type()) {
+    if ((watched == m_titleBar || watched == m_titleLabel))
+    {
+        switch (event->type())
+        {
         case QEvent::MouseButtonPress:
         {
             QMouseEvent* me = static_cast<QMouseEvent*>(event);
-            if (me->button() == Qt::LeftButton) {
+            if (me->button() == Qt::LeftButton)
+            {
                 m_dragging = true;
                 m_dragStartPosition = me->globalPosition().toPoint();
                 m_dragWindowPosition = this->pos();
-                if (watched->isWidgetType()) {
+
+                if (watched->isWidgetType())
+                {
                     QWidget* widget = static_cast<QWidget*>(watched);
                     widget->setMouseTracking(true);
                     widget->grabMouse();
                 }
-
-                // 开始拖动时，暂时禁用窗口更新以减少卡顿
-                this->setUpdatesEnabled(false);
-
                 return true;
             }
             break;
         }
         case QEvent::MouseMove:
         {
-            if (m_dragging) {
+            if (m_dragging)
+            {
                 QMouseEvent* me = static_cast<QMouseEvent*>(event);
                 QPoint globalPos = me->globalPosition().toPoint();
                 QPoint offset = globalPos - m_dragStartPosition;
                 QPoint newPos = m_dragWindowPosition + offset;
-                static QPoint lastPos = this->pos();
-                QPoint diff = newPos - lastPos;
-
-                if (abs(diff.x()) >= 2 || abs(diff.y()) >= 2) {
-                    this->move(newPos);
-                    lastPos = newPos;
-
-                    // 强制处理一次事件队列，让系统有时间更新
-                    QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
-                }
-
+                this->move(newPos);
+                QCoreApplication::processEvents(QEventLoop::AllEvents);
                 return true;
             }
             break;
@@ -935,20 +886,15 @@ bool VoidCrawler::eventFilter(QObject* watched, QEvent* event)
         case QEvent::MouseButtonRelease:
         {
             QMouseEvent* me = static_cast<QMouseEvent*>(event);
-            if (me->button() == Qt::LeftButton && m_dragging) {
+            if (me->button() == Qt::LeftButton && m_dragging)
+            {
                 m_dragging = false;
-
-                // 最终确保窗口位置准确
                 QPoint globalPos = me->globalPosition().toPoint();
                 QPoint offset = globalPos - m_dragStartPosition;
                 QPoint finalPos = m_dragWindowPosition + offset;
                 this->move(finalPos);
-
-                // 重新启用窗口更新
-                this->setUpdatesEnabled(true);
-
-                // 释放鼠标捕获
-                if (watched->isWidgetType()) {
+                if (watched->isWidgetType())
+                {
                     QWidget* widget = static_cast<QWidget*>(watched);
                     widget->releaseMouse();
                     widget->setMouseTracking(false);

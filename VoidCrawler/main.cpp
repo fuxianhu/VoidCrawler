@@ -82,7 +82,7 @@ static void parseArguments(const int& argc, char* argv[])
             std::cout << " VoidCrawler Client" << std::endl;
             std::cout << " Version Number: " << VCCore::VoidCrawlerVersion.toStdString() << std::endl;
             std::cout << " Description: " << VCCore::VoidCrawlerVersion.DESCRIPTION.toStdString() << std::endl;
-            std::cout << " Release Date: " << VCCore::VoidCrawlerVersion.BUILD_TIME.toString("yyyy/MM/dd").toStdString() << " UTC" << std::endl;
+            std::cout << " Release Date: " << VCCore::VoidCrawlerVersion.BUILD_TIME.toString("yyyy/MM/dd").toStdString() << ' ' << CLIENT_BUILD_DATETIME_TIMEZONE << std::endl;
             std::cout << "------------------------------" << std::endl;
             std::exit(0); // 输出版本后直接退出
         }

@@ -101,4 +101,7 @@ private:
 
     QPoint m_dragStartPosition;
     QPoint m_dragWindowPosition;
+
+    bool isDisplay = true;
+    bool firstCall = true;
 };

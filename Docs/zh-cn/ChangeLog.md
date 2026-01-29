@@ -53,8 +53,14 @@
 - 修复：渐变效果一段时间后混乱的问题，并调整间隔
 - 修复：将部分（如窗口背景与加载图）纯黑色（`#000000`）转换为灰色（`#121212`）或深蓝色以提升视觉。
 - 项目开始使用issues功能并使用project管理它们。
-- 尝试修复issues [#1](https://github.com/fuxianhu/VoidCrawler/issues/1)
+- 尝试修复issues（未验证） [#1](https://github.com/fuxianhu/VoidCrawler/issues/1)
 - 其他细小更改
+
+# Alpha v.0.0.2.1 2026/1/29
+
+- 尝试修复issues: [#2 (未完全解决)](https://github.com/fuxianhu/VoidCrawler/issues/2), [#3 (Closed)](https://github.com/fuxianhu/VoidCrawler/issues/3)
+- 优化代码，删除冗余注释
+- 修复-version选项输出时区错误的问题
 
 ## Official v.0.1.0.0 预告
 

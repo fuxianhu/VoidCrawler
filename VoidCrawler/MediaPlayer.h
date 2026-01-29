@@ -21,35 +21,22 @@ public:
     ~AudioPlayer();
 
 protected:
-    // 重写鼠标事件实现最流畅拖拽
     void mousePressEvent(QMouseEvent* event) override;
     void mouseMoveEvent(QMouseEvent* event) override;
     void mouseReleaseEvent(QMouseEvent* event) override;
 
-    // 重写绘制事件实现高效圆角
     void paintEvent(QPaintEvent* event) override;
-
-    // 优化性能
     void showEvent(QShowEvent* event) override;
-    void hideEvent(QHideEvent* event) override;
 
-    void dragEnterEvent(QDragEnterEvent* event); // 拖动文件进入窗口时触发的事件处理
-	void dragLeaveEvent(QDragLeaveEvent* event); // 拖动文件离开窗口时触发的事件处理
-    void dropEvent(QDropEvent* event); // 拖动文件在窗口上放置时触发的事件处理
+    void dragEnterEvent(QDragEnterEvent* event); // 进入窗口
+	void dragLeaveEvent(QDragLeaveEvent* event); // 离开窗口
+    void dropEvent(QDropEvent* event); // 放置
 
 private:
-    // 高性能拖拽相关
     bool isDragging = false;
     QPoint dragStartPosition;
     QPoint windowStartPosition;
 
-    // 平滑移动相关
-    QTimer* smoothMoveTimer;
-    QPoint targetPosition;
-    QPoint moveStartPosition;
-    qint64 moveStartTime;
-
-    // UI组件
     QMediaPlayer* player = nullptr;
     QLabel* titleLabel = nullptr;
     QPushButton* closeBtn = nullptr;
@@ -66,12 +53,6 @@ private:
     bool loopPlay = true;
     QString originalTitle;
 
-    // 性能优化标志
-    bool highPerformanceMode = false;
-
-private slots:
-    void onSmoothMoveTimeout();
-
 private:
     void initUI();
 
@@ -81,16 +62,12 @@ private:
     void on_stopButton_clicked();
     void onLoopPlaySwitchToggled(bool checked);
 
-    void initSmoothMove();
     void applyHighPerformanceSettings();
-    void updatePositionSmoothly(const QPoint& targetPos);
 
-    //Inside class
-private:
     HWND hwnd;
     HMODULE huser;
     pfnSetWindowCompositionAttribute setWindowCompositionAttribute;
 
-    QColor acryBackground;	//用来控制背景颜色
-    int acryOpacity;	//用来控制透明度
+    QColor acryBackground;
+    int acryOpacity;
 };

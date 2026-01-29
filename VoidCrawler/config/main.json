@@ -6,7 +6,7 @@
     "password": "",
     "salted": ""
   },
-  "configVersion": "v.0.0.2.0",
+  "configVersion": "v.0.0.2.1",
   "enableMultipleApplications": false,
   "language": "zh-cn",
   "log": {
@@ -39,5 +39,7 @@
       "weight": -1
     }
   },
-  "animationSpeed": 4000
+  "animationSpeed": 4000,
+  "titleBarHeight": 48, 
+  "mainWindowWidth": 300
 }
