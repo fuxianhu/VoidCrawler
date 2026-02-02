@@ -46,7 +46,7 @@
 
 ## Alpha v.0.0.2.0 2026/1/28
 
-> [!TIP]
+> [!NOTE]
 > 也是终于放假了喵，Coding... 2026/1/24
 - 大幅更改配置文件格式
 - 进一步完善属性窗口
@@ -56,11 +56,22 @@
 - 尝试修复issues（未验证） [#1](https://github.com/fuxianhu/VoidCrawler/issues/1)
 - 其他细小更改
 
-# Alpha v.0.0.2.1 2026/1/29
+## Alpha v.0.0.2.1 2026/1/29
 
 - 尝试修复issues: [#2 (未完全解决)](https://github.com/fuxianhu/VoidCrawler/issues/2), [#3 (Closed)](https://github.com/fuxianhu/VoidCrawler/issues/3)
 - 优化代码，删除冗余注释
-- 修复-version选项输出时区错误的问题
+- 修复 `-version` 选项输出时区错误的问题（当前压缩包中没有这个更改，将会在下个版本中修复）
+
+## Alpha v.0.0.2.2 2026/2/2
+
+> [!NOTE]
+> 配置功能似乎烂尾了。。。
+
+- 修复 `v.0.0.2.1` 中实际无 `-version` 选项错误修复的问题
+- 修复以往更新日志部分错误
+- 修复项目根目录下 `README.md` 文档中的客户端版本错误，不再描述版本，并更新一些内容
+- 新增 **Arealme Cheat** 类功能，并提供 $2$ 个作弊，但在没有充分阅读并理解源码的情况下，不能随意在任意 PC 上使用！
+- 从大量的类人样本中找到了 YFY 这个 ~~Bug~~ $0 day$ 漏洞，于是，正在阅读这段逆天更新日志的你决定修复 YFY233_awa（bushi
 
 ## Official v.0.1.0.0 预告
 
