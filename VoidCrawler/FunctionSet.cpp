@@ -6,7 +6,29 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <ctime>
 
+void FunctionSet::scrollMouse(int delta)
+{
+    INPUT input = { 0 };
+    input.type = INPUT_MOUSE;
+    input.mi.dwFlags = MOUSEEVENTF_WHEEL;
+    input.mi.mouseData = delta;
+    SendInput(1, &input, sizeof(INPUT));
+}
+
+void FunctionSet::clickMouse(int x, int y)
+{
+    SetCursorPos(x, y);
+    INPUT down = { 0 };
+    down.type = INPUT_MOUSE;
+    down.mi.dwFlags = MOUSEEVENTF_LEFTDOWN;
+    SendInput(1, &down, sizeof(INPUT));
+    INPUT up = { 0 };
+    up.type = INPUT_MOUSE;
+    up.mi.dwFlags = MOUSEEVENTF_LEFTUP;
+    SendInput(1, &up, sizeof(INPUT));
+}
 
 bool FunctionSet::modifyMicrosoftPinyinSwitchKey(const std::bitset<3>& bits)
 {

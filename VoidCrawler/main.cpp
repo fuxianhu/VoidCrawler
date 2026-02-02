@@ -108,6 +108,7 @@ int main(int argc, char* argv[])
     VCCore::logger->debug(VCCore::mainConfig.object().value("language").toString().toStdString());
 
     VoidCrawler window;
+    VCCore::mainWindow = &window;
     window.changeLanguage(VCCore::mainConfig.object().value("language").toString());
     VCCore::logger->debug("init UI window...");
     window.initUI();

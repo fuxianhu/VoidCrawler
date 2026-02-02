@@ -199,6 +199,7 @@
     <QtRcc Include="VoidCrawler.qrc" />
     <QtUic Include="AudioPlayer.ui" />
     <QtUic Include="VoidCrawler.ui" />
+    <ClCompile Include="ArealmeCheat.cpp" />
     <ClCompile Include="configOperate.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="crash_handler.cpp" />
@@ -243,6 +244,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ArealmeCheat.h" />
     <ClInclude Include="ClientInfo.h" />
     <ClInclude Include="configOperate.h" />
     <ClInclude Include="Core.h" />

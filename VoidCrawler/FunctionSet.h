@@ -3,6 +3,12 @@
 
 namespace FunctionSet
 {
+	// 滚动鼠标，delta 为滚动量
+	void scrollMouse(int delta);
+
+	// 点击鼠标左键，x 和 y 为屏幕坐标
+	void clickMouse(int x, int y);
+
 	// 修改微软拼音输入法的英文切换快捷键，成功返回 true
 	// // 提醒：bitset 下标是从右到左依次为 第0位、第1位、第2位
 	// 1. Ctrl+Space 2. Shift 3. Ctrl

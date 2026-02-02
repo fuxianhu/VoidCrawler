@@ -91,11 +91,12 @@ PropertyWindow::PropertyWindow(QWidget* parent, const QString& itemID)
             initState = false;
             return;
         }
-        QJsonArray types = it.value().toObject().value("type").toArray();
-        for (auto i : types)
-        {
-            //if (i.toString() == "String")
-        }
+        QString nowType = it.value().toObject().value("nowType").toString();
+        //QJsonArray types = it.value().toObject().value("type").toArray();
+        //for (auto i : types)
+        //{
+        //    //if (i.toString() == "String")
+        //}
         //{
       //  if (value.isNull())
       //  {

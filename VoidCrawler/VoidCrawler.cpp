@@ -9,6 +9,7 @@
 #include "keyhookthread.h"
 #include "MediaPlayer.h"
 #include "PropertyWindow.h"
+#include "ArealmeCheat.h"
 
 #include <format>
 #include <string>
@@ -484,6 +485,14 @@ void VoidCrawler::on_button_clicked(QString id, QPushButton* qpb, QString styles
     else if (id == "OpenBjdOfficialWebsite")
     {
         VCCore::startShellDetached("https://mcbjd.net/");
+    }
+    else if (id == "ArealmeTestColorCheat")
+    {
+        ArealmeCheat::testColorCheat();
+    }
+    else if (id == "ArealmeTest1To50Cheat")
+    {
+        ArealmeCheat::test1to50Cheat();
     }
     else
     {

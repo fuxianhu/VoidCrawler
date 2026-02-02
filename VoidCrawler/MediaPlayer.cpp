@@ -382,7 +382,7 @@ void AudioPlayer::initUI()
             totalSeconds = maxSeconds;
         }
 
-        player->setPosition(totalSeconds * 1000);
+        player->setPosition(static_cast<qint64>(totalSeconds) * 1000);
     });
 
     connect(pSpinBoxSecond, QOverload<int>::of(&QSpinBox::valueChanged), this, [=](int secondValue)
@@ -428,7 +428,7 @@ void AudioPlayer::initUI()
             totalSeconds = maxSeconds;
         }
 
-        player->setPosition(totalSeconds * 1000);
+        player->setPosition(static_cast<qint64>(totalSeconds) * 1000);
     });
 
     connect(positionSlider, &QSlider::valueChanged, this, [=](int totalSeconds)
@@ -464,7 +464,7 @@ void AudioPlayer::initUI()
     connect(positionSlider, &QSlider::valueChanged, this, [=]()
     {
         int totalSeconds = positionSlider->value();
-        player->setPosition(totalSeconds * 1000);
+        player->setPosition(static_cast<qint64>(totalSeconds) * 1000);
         updateMinuteSecondDisplay(totalSeconds);
     });
 

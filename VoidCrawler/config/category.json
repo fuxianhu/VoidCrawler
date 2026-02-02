@@ -133,6 +133,20 @@
                 "type": 0
             },
             {
+                "description": "Arealme website cheat: Color test cheat",
+                "help": "Arealme website cheat: Color test cheat.",
+                "icons": null,
+                "id": "ArealmeTestColorCheat",
+                "type": 0
+            },
+            {
+                "description": "Arealme website cheat: 1 to 50 test cheat",
+                "help": "Arealme website cheat: 1 to 50 test cheat.",
+                "icons": null,
+                "id": "ArealmeTest1To50Cheat",
+                "type": 0
+            },
+            {
                 "description": "Exit Client. ",
                 "help": "Exit VoidCrawler Client. ",
                 "icons": null,

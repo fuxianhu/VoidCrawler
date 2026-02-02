@@ -2,16 +2,19 @@
   "cmd": {
     "CommandLineArguments": {
       "type": ["String"],
+      "nowType": "String",
       "default": "",
       "value": ""
     },
     "permission": {
       "type": ["Permission"],
+      "nowType": "Permission",
       "default": null,
       "value": null
     },
     "workingDirectory": {
       "type": ["Folder", "Null"],
+      "nowType": "Null",
       "default": null,
       "value": null
     }
@@ -19,16 +22,19 @@
   "NewPowershell": {
     "CommandLineArguments": {
       "type": ["String"],
+      "nowType": "String",
       "default": "",
       "value": ""
     },
     "permission": {
       "type": ["Permission"],
+      "nowType": "Permission",
       "default": null,
       "value": null
     },
     "workingDirectory": {
       "type": ["Folder", "Null"],
+      "nowType": "Null",
       "default": null,
       "value": null
     }
@@ -36,16 +42,19 @@
   "OldPowershell": {
     "CommandLineArguments": {
       "type": ["String"],
+      "nowType": "String",
       "default": "",
       "value": ""
     },
     "permission": {
       "type": ["Permission"],
+      "nowType": "Permission",
       "default": null,
       "value": null
     },
     "workingDirectory": {
       "type": ["Folder", "Null"],
+      "nowType": "Null",
       "default": null,
       "value": null
     }
@@ -53,16 +62,19 @@
   "VisualStudioCode": {
     "CommandLineArguments": {
       "type": ["String"],
+      "nowType": "String",
       "default": "",
       "value": ""
     },
     "permission": {
       "type": ["Permission"],
+      "nowType": "Permission",
       "default": null,
       "value": null
     },
     "workingDirectory": {
       "type": ["Folder", "Null"],
+      "nowType": "Null",
       "default": null,
       "value": null
     }
@@ -70,16 +82,19 @@
   "VisualStudio": {
     "CommandLineArguments": {
       "type": ["String"],
+      "nowType": "String",
       "default": "",
       "value": ""
     },
     "permission": {
       "type": ["Permission"],
+      "nowType": "Permission",
       "default": null,
       "value": null
     },
     "workingDirectory": {
       "type": ["Folder", "Null"],
+      "nowType": "Null",
       "default": null,
       "value": null
     }
@@ -87,11 +102,13 @@
   "WindowsTaskManger": {
     "CommandLineArguments": {
       "type": ["String"],
+      "nowType": "String",
       "default": "",
       "value": ""
     },
     "permission": {
       "type": ["Permission"],
+      "nowType": "Permission",
       "default": null,
       "value": null
     }
@@ -99,11 +116,13 @@
   "EdgeBrowser": {
     "CommandLineArguments": {
       "type": ["String"],
+      "nowType": "String",
       "default": "",
       "value": ""
     },
     "permission": {
       "type": ["Permission"],
+      "nowType": "Permission",
       "default": null,
       "value": null
     }
@@ -111,11 +130,13 @@
   "Weixin": {
     "CommandLineArguments": {
       "type": ["String"],
+      "nowType": "String",
       "default": "",
       "value": ""
     },
     "permission": {
       "type": ["Permission"],
+      "nowType": "Permission",
       "default": null,
       "value": null
     }
@@ -123,6 +144,7 @@
   "WindowsCalc": {
     "CommandLineArguments": {
       "type": ["String"],
+      "nowType": "String",
       "default": "",
       "value": ""
     }
@@ -130,6 +152,7 @@
   "OpenUserFolder": {
     "permission": {
       "type": ["Permission"],
+      "nowType": "Permission",
       "default": null,
       "value": null
     }
@@ -137,6 +160,7 @@
   "chcp": {
     "encoding": {
       "type": ["Int"],
+      "nowType": "Int",
       "default": 65001,
       "value": 65001
     }
@@ -144,21 +168,25 @@
   "AudioPlayer": {
     "LoopPlayMode": {
       "type": ["Int"],
+      "nowType": "Int",
       "default": 1,
       "value": 1
     },
     "audio": {
-      "type": ["File", "String"],
+      "type": ["File", "String", "Null"],
+      "nowType": "Null",
       "default": null,
       "value": null
     },
     "position": {
       "type": ["Int"],
+      "nowType": "Int",
       "default": 0,
       "value": 0
     },
     "AutoSave": {
       "type": ["Bool"],
+      "nowType": "Bool",
       "default": true,
       "value": true
     }

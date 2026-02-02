@@ -29,6 +29,7 @@
 #include <QObject>
 #include <QDateTime>
 #include <QTimeZone>
+#include <QMainWindow>
 
 #include <QJsonObject>
 #include <QJsonArray>
@@ -39,6 +40,9 @@
 
 namespace VCCore
 {
+    // 主窗口指针
+    inline QMainWindow* mainWindow = nullptr;
+
     // 获取路径字符串
     template <typename StringType>
     inline QString getPath(const StringType& path)
