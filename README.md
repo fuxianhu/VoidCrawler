@@ -6,7 +6,7 @@
 
 **更新日志与预告：见文档（`Docs/zh-cn/ChangeLog.md`）或 [Releases](https://github.com/fuxianhu/VoidCrawler/releases) 页面**
 
-一个运行于 *Microsoft Windows 10/11* x64 操作系统的客户端（工具箱），中文名“虚空潜行者”。它将来会具有以下特点：
+一个运行于 Microsoft Windows 10/11 x64 操作系统的客户端（工具箱），中文名“虚空潜行者”。它将来会具有以下特点：
 - 允许用户获得极高权限等
 - 美观炫酷的 UI 界面
 - 方便快捷地修改计算机系统设置、系统文件
@@ -15,7 +15,7 @@
 - 各种实用功能，比如计算器和内置文件管理器，允许 GPU 并行计算
 - 较少内存占用（一般小于 $50$ MB）、CPU 占用（在 YFY 的 PC 上占全部处理器的 $0.1\%$ 到 $7\%$ 之间）、较少磁盘空间占用（一般小于 $100$ MB），如遇到某方面的性能瓶颈，你首先应该交一个详细的 issue 告诉我们优化，其次可以降低外观配置或提高配置
 
-**项目文档**基于 Docsify
+项目文档基于 Docsify
 
 > 官网及文档： [Docsify 官网](https://docsify.js.org/#/) （右上角的 "Translations" 可以切换语言）
 > 
