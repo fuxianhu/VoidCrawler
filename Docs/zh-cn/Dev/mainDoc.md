@@ -33,11 +33,16 @@
 ## 自行构建项目
 
 - 克隆仓库，注意项目用了 Github LFS，使用 `git lfs pull` 等命令将大文件一并克隆下来，仓库地址等信息见文档开头
-- 配置 Qt 环境（版本见文档开头），官网：`https://www.qt.io/zh-cn/`
-- 安装 `Microsoft Visual Studio`，官网：`https://visualstudio.microsoft.com/zh-hans/`
-- 打开 `Microsoft Visual Studio`
-- 安装 `Qt VS Tools` 扩展。（在上方的标题栏中的 `扩展>管理扩展`，搜索 `Qt` 安装它并重新启动 `Microsoft Visual Studio` 以生效）
+- 配置 Qt 环境（版本见文档开头），[官网链接](https://www.qt.io/zh-cn/)
+- 安装 Microsoft Visual Studio，[官网链接](https://visualstudio.microsoft.com/zh-hans/)
+- 打开 Microsoft Visual Studio
+- 安装 Qt VS Tools 扩展。（在上方的标题栏中的 扩展>管理扩展，安装它并重新启动 Microsoft Visual Studio 以生效）
 - 尝试生成解决方案
+
+如果尝试导入第三方库时报错，那么你需要安装和配置 vcpkg:
+- 在终端中打开 `\VoidCrawler` 目录（使用 `cd` 命令）
+- 安装 vcpkg，确保能正常编译
+- 运行 `vcpkg install` 命令安装依赖库
 
 > [!NOTE]
 > 除特殊情况，所有文件都要用 Unicode 带签名（万国码，统一码） UTF-8 with BOM 编码！优先用 CRLF，减少因编码导致的乱码问题和因换行方式导致的换行问题。
@@ -51,31 +56,6 @@
 3. 在 `VoidCrawler` 目录下，使用 PowerShell 运行 `release.ps1`
 4. 在 `VoidCrawler\x64\Releses\` 中，便是我们的软件了，其中有一个压缩包，你可以把它传给任何人
 
-## 类型
+## 提交 PR
 
-enum Types:
-```
-	TypeError = -1, // 类型错误，不用于表示哪种异常，而是表示类型无法识别
-    Null = 0, 
-    Bool = 1, 
-    Integer = 2, // 方便起见，囊括 NBaseNumber
-    Double = 3, // 方便起见，囊括 NBaseNumber
-    String = 4, 
-    Color = 5, 
-    File = 6, 
-    Folder = 7, 
-    Font = 8,
-    Link = 9,
-    Dict = 10,
-    Time = 11,
-    Date = 12,
-    DateTime = 13,
-    Regedit = 14,
-    Permission = 15,
-    Task = 16,
-    List = 17,
-    Table = 18,
-    Binary = 19, // 与2进制数不同，其可以用于存储更复杂的选项
-    SingleChoice = 20, // 单选
-    MultipleChoice = 21, // 多选
-    ```
+欢迎你为项目做出任何贡献！
