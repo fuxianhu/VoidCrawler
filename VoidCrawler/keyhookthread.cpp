@@ -65,7 +65,7 @@ void KeyHookThread::processKeyEvent(DWORD vkCode, bool isKeyDown)
         m_comboTriggered = true; // 设置触发标志，防止重复响应
 
         // 使用Qt信号将结果发送出去（线程安全）
-        emit hotkeyDetected(tr("检测到组合键：左Shift + 右Shift"));
+        emit hotkeyDetected(tr("Hotkey detected"));
         qDebug() << "Hotkey detected in thread:" << QThread::currentThreadId();
     }
 }

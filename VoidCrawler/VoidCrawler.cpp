@@ -496,7 +496,7 @@ void VoidCrawler::on_button_clicked(QString id, QPushButton* qpb, QString styles
     }
     else
     {
-        VCCore::logger->warn("In VoidCrawler::on_button_clicked function, id error!");
+        VCCore::logger->warn("In VoidCrawler::on_button_clicked function, ID error!");
     }
 }
 

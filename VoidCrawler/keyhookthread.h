@@ -1,4 +1,46 @@
-﻿#pragma once
+﻿/*
+使用C++语言与Windows API实现一个Auto Click函数，全局热键使用Qt 6.5实现。
+全局热键参考代码：(KeyHookThread是我自己写的实现)
+    if (!m_hookThread)
+    {
+        m_hookThread = new KeyHookThread(this);
+        connect(m_hookThread, &KeyHookThread::hotkeyDetected, this, &VoidCrawler::onHotkeyDetected);
+        connect(m_hookThread, &KeyHookThread::hookError, this, &VoidCrawler::onHookError);
+        connect(m_hookThread, &QThread::finished, m_hookThread, &QObject::deleteLater);
+        m_hookThread->start();
+    }
+void VoidCrawler::onHotkeyDetected(const QString& message)
+{
+    // 在主线程中安全地更新
+    if (firstCall)
+    {
+        firstCall = false;
+    }
+    else
+    {
+        if (isDisplay)
+        {
+            isDisplay = false;
+            VCCore::hideAllTopLevelWindows();
+        }
+        else
+        {
+            isDisplay = true;
+            VCCore::showAllTopLevelWindows();
+        }
+    }
+    VCCore::logger->info(std::format("Main threrad: {} Message: {}",
+        QString("0x%1").arg(reinterpret_cast<quintptr>(QThread::currentThreadId()), 16, 16, QLatin1Char('0')).toStdString(),
+        message.toStdString()));
+}
+
+void VoidCrawler::onHookError(const QString& error)
+{
+    m_statusLabel->setText("错误: " + error);
+    VCCore::logger->error(std::format("Hook error: {}", error.toStdString()));
+}
+*/
+#pragma once
 
 #include <QThread>
 #include <windows.h>

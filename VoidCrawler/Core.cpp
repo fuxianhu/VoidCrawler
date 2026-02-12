@@ -41,7 +41,7 @@ void VCCore::startShellDetached(const QString& program, const QString& arguments
         SW_SHOWNORMAL                     // 显示方式
     );
 
-    if ((size_t)result <= 32)
+    if ((INT_PTR)result <= 32)
     {
         DWORD error = GetLastError();
         logger->error(std::format("ShellExecute failed for {}, Error: {}",
