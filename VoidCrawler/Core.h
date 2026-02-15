@@ -273,6 +273,9 @@ namespace VCCore
     // 使用 ShellExecute 启动外部程序，非阻塞
     void startShellDetached(const QString& program, const QString& arguments = nullptr);
 
+    // 运行程序
+    void runProgram(const QString& program, const QString& itemName, const QString& arguments = nullptr);
+
     template <typename StringType>
     inline QJsonValue cfgValue(const StringType& path, const QJsonDocument& cfg)
     {
