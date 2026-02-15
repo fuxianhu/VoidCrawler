@@ -397,43 +397,43 @@ void VoidCrawler::on_button_clicked(QString id, QPushButton* qpb, QString styles
     }
     if (id == "cmd")
     {
-        VCCore::startShellDetached("cmd.exe");
+        VCCore::runProgram("cmd.exe", id);
     }
     else if (id == "NewPowershell")
     {
-        VCCore::startShellDetached("pwsh.exe");
+        VCCore::runProgram("pwsh.exe", id);
     }
     else if (id == "OldPowershell")
     {
-        VCCore::startShellDetached("powershell.exe");
+        VCCore::runProgram("powershell.exe", id);
     }
     else if (id == "VisualStudioCode")
     {
-        VCCore::startShellDetached("code.exe");
+        VCCore::runProgram("code.exe", id);
     }
     else if (id == "VisualStudio")
     {
-        VCCore::startShellDetached("D:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\devenv.exe");
+        VCCore::runProgram("D:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\devenv.exe", id);
     }
     else if (id == "WindowsTaskManger")
     {
-        VCCore::startShellDetached("Taskmgr.exe");
+        VCCore::runProgram("Taskmgr.exe", id);
     }
     else if (id == "EdgeBrowser")
     {
-        VCCore::startShellDetached("msedge.exe");
+        VCCore::runProgram("msedge.exe", id);
     }
     else if (id == "Weixin")
     {
-        VCCore::startShellDetached(QString::fromStdString(FunctionSet::GetWeChatInstallPath()));
+        VCCore::runProgram(QString::fromStdString(FunctionSet::GetWeChatInstallPath()), id);
     }
     else if (id == "WindowsCalc")
     {
-		VCCore::startShellDetached("calc.exe");
+		VCCore::runProgram("calc.exe", id);
     }
     else if (id == "OpenUserFolder")
     {
-        VCCore::startShellDetached("explorer.exe", "%USERPROFILE%");
+        VCCore::runProgram("explorer.exe", "%USERPROFILE%");
     }
     else if (id == "chcp")
     {
@@ -496,7 +496,7 @@ void VoidCrawler::on_button_clicked(QString id, QPushButton* qpb, QString styles
     }
     else
     {
-        VCCore::logger->warn("In VoidCrawler::on_button_clicked function, ID error!");
+        VCCore::logger->info("In VoidCrawler::on_button_clicked function, ID error!");
     }
 }
 
