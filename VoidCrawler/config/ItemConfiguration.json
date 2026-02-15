@@ -17,6 +17,12 @@
       "nowType": "Null",
       "default": null,
       "value": null
+    },
+    "mode": {
+      "type": ["Int"],
+      "nowType": "Int",
+      "default": 1,
+      "value": 1
     }
   },
   "NewPowershell": {
@@ -37,6 +43,12 @@
       "nowType": "Null",
       "default": null,
       "value": null
+    },
+    "mode": {
+      "type": ["Int"],
+      "nowType": "Int",
+      "default": 1,
+      "value": 1
     }
   },
   "OldPowershell": {
@@ -57,6 +69,12 @@
       "nowType": "Null",
       "default": null,
       "value": null
+    },
+    "mode": {
+      "type": ["Int"],
+      "nowType": "Int",
+      "default": 1,
+      "value": 1
     }
   },
   "VisualStudioCode": {
@@ -77,6 +95,12 @@
       "nowType": "Null",
       "default": null,
       "value": null
+    },
+    "mode": {
+      "type": ["Int"],
+      "nowType": "Int",
+      "default": 0,
+      "value": 0
     }
   },
   "VisualStudio": {
@@ -97,6 +121,12 @@
       "nowType": "Null",
       "default": null,
       "value": null
+    },
+    "mode": {
+      "type": ["Int"],
+      "nowType": "Int",
+      "default": 1,
+      "value": 1
     }
   },
   "WindowsTaskManger": {
@@ -111,6 +141,12 @@
       "nowType": "Permission",
       "default": null,
       "value": null
+    },
+    "mode": {
+      "type": ["Int"],
+      "nowType": "Int",
+      "default": 1,
+      "value": 1
     }
   },
   "EdgeBrowser": {
@@ -125,6 +161,12 @@
       "nowType": "Permission",
       "default": null,
       "value": null
+    },
+    "mode": {
+      "type": ["Int"],
+      "nowType": "Int",
+      "default": 1,
+      "value": 1
     }
   },
   "Weixin": {
@@ -139,6 +181,12 @@
       "nowType": "Permission",
       "default": null,
       "value": null
+    },
+    "mode": {
+      "type": ["Int"],
+      "nowType": "Int",
+      "default": 1,
+      "value": 1
     }
   },
   "WindowsCalc": {
@@ -147,6 +195,12 @@
       "nowType": "String",
       "default": "",
       "value": ""
+    },
+    "mode": {
+      "type": ["Int"],
+      "nowType": "Int",
+      "default": 1,
+      "value": 1
     }
   },
   "OpenUserFolder": {
@@ -155,6 +209,12 @@
       "nowType": "Permission",
       "default": null,
       "value": null
+    },
+    "mode": {
+      "type": ["Int"],
+      "nowType": "Int",
+      "default": 1,
+      "value": 1
     }
   },
   "chcp": {
