@@ -53,9 +53,9 @@ void VCCore::startShellDetached(const QString& program, const QString& arguments
     }
 }
 
-void VCCore::runProgram(const QString& program, const QString& itemName, const QString& arguments = nullptr)
+void VCCore::runProgram(const QString& program, const QString& itemName, const QString& arguments)
 {
-    int mode = itemConfiguration.object().value(itemName).toObject().value("mode").toInt();
+    int mode = itemConfiguration.object().value(itemName).toObject().value("mode").toObject().value("value").toInt();
     switch (mode)
     {
     case 0:
@@ -65,7 +65,6 @@ void VCCore::runProgram(const QString& program, const QString& itemName, const Q
         startShellDetached(program, arguments);
         break;
     default:
-        logger->error(std::format("VCCore::runProgram Error: Read mode value error, options: {}, {}, {}  Value: {}", program, itemName, arguments, mode));
+        logger->error(std::format("VCCore::runProgram Error: Read mode value error, options: {}, {}, {}  Value: {}", program.toStdString(), itemName.toStdString(), arguments.toStdString(), mode));
     }
-    
 }
