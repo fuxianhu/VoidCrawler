@@ -29,7 +29,7 @@ void VCCore::showAllTopLevelWindows()
     }
 }
 
-void VCCore::startShellDetached(const QString& program, const QString& arguments)
+int VCCore::startShellDetached(const QString& program, const QString& arguments)
 {
     HINSTANCE result = ShellExecuteW
     (
@@ -41,30 +41,46 @@ void VCCore::startShellDetached(const QString& program, const QString& arguments
         SW_SHOWNORMAL                     // 显示方式
     );
 
-    if ((INT_PTR)result <= 32)
+    // ShellExecute 返回值大于32表示成功
+    if ((INT_PTR)result > 32)
     {
-        DWORD error = GetLastError();
-        logger->error(std::format("ShellExecute failed for {}, Error: {}",
-            program.toStdString(), error));
+        logger->debug(std::format("ShellExecute successful: {}", program.toStdString()));
+        return 0;  // 成功返回0
     }
     else
     {
-        logger->debug(std::format("ShellExecute successful: {}", program.toStdString()));
+        // 获取错误码
+        DWORD error = GetLastError();
+
+        // 如果GetLastError返回0，则使用result作为错误码
+        int errorCode = error;
+        if (errorCode == 0)
+        {
+            errorCode = (INT_PTR)result;  // 使用ShellExecute返回的错误值
+        }
+        logger->error(std::format("ShellExecute failed for {}, Error code: {}", program.toStdString(), errorCode));
+
+        return errorCode;  // 返回错误码
     }
 }
 
-void VCCore::runProgram(const QString& program, const QString& itemName, const QString& arguments)
+int VCCore::runProgram(const QString& program, const QString& itemName, const QString& arguments)
 {
     int mode = itemConfiguration.object().value(itemName).toObject().value("mode").toObject().value("value").toInt();
+    int value;
     switch (mode)
     {
     case 0:
-        system((program + arguments).toStdString().c_str());
+        value = system((program + arguments).toStdString().c_str());
         break;
     case 1:
-        startShellDetached(program, arguments);
+        value = startShellDetached(program, arguments);
         break;
     default:
-        logger->error(std::format("VCCore::runProgram Error: Read mode value error, options: {}, {}, {}  Value: {}", program.toStdString(), itemName.toStdString(), arguments.toStdString(), mode));
+        value = -1;
+        logger->error(std::format("VCCore::runProgram error: Read mode value error, options: {}, {}, {} Mode: {} Value: {}", program.toStdString(), itemName.toStdString(), arguments.toStdString(), mode, value));
+        return value;
     }
+    logger->info(std::format("VCCore::runProgram info: options: {}, {}, {} Mode: {} Value: {}", program.toStdString(), itemName.toStdString(), arguments.toStdString(), mode, value));
+    return value;
 }

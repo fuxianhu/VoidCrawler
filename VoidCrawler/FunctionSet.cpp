@@ -7,6 +7,8 @@
 #include <string>
 #include <vector>
 #include <ctime>
+#include <tlhelp32.h>
+#include <cwctype>
 
 void FunctionSet::scrollMouse(int delta)
 {
@@ -152,7 +154,7 @@ std::bitset<3> FunctionSet::getMicrosoftPinyinSwitchKey()
     }
 
     // 6. 使用逆向查找表将注册表值转换回二进制
-    VCCore::logger->info(std::format("Successfully read Microsoft Pinyin switch key: {} -> {}",
+    VCCore::logger->debug(std::format("Successfully read Microsoft Pinyin switch key: {} -> {}",
         readValue, reverse_lookup_table[readValue].to_string()));
 
     return reverse_lookup_table[readValue];
@@ -270,4 +272,34 @@ std::string FunctionSet::GetWeChatInstallPath()
     }
 
     return "";
+}
+
+bool FunctionSet::IsProcessRunning(const std::wstring& processName) {
+    HANDLE hProcessSnap = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+    if (hProcessSnap == INVALID_HANDLE_VALUE)
+    {
+		VCCore::logger->error(std::format("Failed to create process snapshot, error code: {}", GetLastError()));
+        return false;
+    }
+
+    PROCESSENTRY32W pe32;
+    pe32.dwSize = sizeof(PROCESSENTRY32W);
+
+    if (!Process32FirstW(hProcessSnap, &pe32))
+    {
+        CloseHandle(hProcessSnap);
+        return false;
+    }
+
+    do
+    {
+        if (_wcsicmp(pe32.szExeFile, processName.c_str()) == 0)
+        {
+            CloseHandle(hProcessSnap);
+            return true;
+        }
+    } while (Process32NextW(hProcessSnap, &pe32));
+
+    CloseHandle(hProcessSnap);
+    return false;
 }

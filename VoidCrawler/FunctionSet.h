@@ -27,4 +27,7 @@ namespace FunctionSet
 
 	// 获取微信安装路径，返回可执行文件完整路径，失败返回空字符串
 	std::string GetWeChatInstallPath();
+
+	// 检查指定名称的进程是否存在
+	bool IsProcessRunning(const std::wstring& processName);
 }

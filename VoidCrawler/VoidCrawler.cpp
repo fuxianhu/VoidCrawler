@@ -361,6 +361,7 @@ void VoidCrawler::on_button_clicked(QString id, QPushButton* qpb, QString styles
     // 对于 开关类型，反转 switch （开关状态）
     QJsonArray items = VCCore::categoryConfig.array()[0].toObject().value("items").toArray();
     std::bitset<3> IMESwitchState;
+    bool FastGithubState = false;
     for (int i = 0; i < items.size(); i++)
     {
         QJsonObject obj = items[i].toObject();
@@ -374,6 +375,17 @@ void VoidCrawler::on_button_clicked(QString id, QPushButton* qpb, QString styles
                 if (id == "SwitchIMECtrlSpace") { IMESwitchState[2] = newValue; }
                 if (id == "SwitchIMEShift") { IMESwitchState[1] = newValue; }
                 if (id == "SwitchIMECtrl") { IMESwitchState[0] = newValue; }
+                if (id == "FastGithub") {
+                    if (FunctionSet::IsProcessRunning(QString::fromUtf8("FastGithub.UI.exe").toStdWString()) == FastGithubState)
+                    {
+                        VCCore::logger->info("FastGithub state normal.");
+                        FastGithubState = newValue;
+                    }
+                    else
+                    {
+                        VCCore::logger->info("FastGithub state abnormal.");
+                    }
+                }
                 styles = "background: rgba(0, 0, 0, 0.3); border-radius: 8px; ";
                 if (newValue)
                 {
@@ -395,6 +407,9 @@ void VoidCrawler::on_button_clicked(QString id, QPushButton* qpb, QString styles
             }
         }
     }
+
+
+
     if (id == "cmd")
     {
         VCCore::runProgram("cmd.exe", id);
@@ -430,6 +445,71 @@ void VoidCrawler::on_button_clicked(QString id, QPushButton* qpb, QString styles
     else if (id == "WindowsCalc")
     {
 		VCCore::runProgram("calc.exe", id);
+    }
+    else if (id == "FastGithub")
+    {
+        // https://github.com/creazyboyone/FastGithub
+        if (FastGithubState)
+        {
+            int value = VCCore::runProgram("FastGithub.UI.exe", id);
+            if (value == 2)
+            {
+                QMessageBox::critical(
+                    this,
+                    tr("FastGithub Error"),
+					tr("Failed to start FastGithub. Please check if FastGithub.UI.exe is in the PATH and try again."));
+            }
+        }
+        else
+        {
+            // 警告框
+            auto button = QMessageBox::warning(
+                this,
+                tr("FastGithub"),
+                tr("VCC will run command: TASKKILL /IM FastGithub.UI.exe"),
+                QMessageBox::Yes | QMessageBox::No,
+				QMessageBox::No);
+            if (button == QMessageBox::Yes)
+            {
+                VCCore::logger->info("Run command: TASKKILL /IM FastGithub.UI.exe");
+                system("TASKKILL /IM FastGithub.UI.exe");
+            }
+            else
+            {
+                for (int i = 0; i < items.size(); i++)
+                {
+                    QJsonObject obj = items[i].toObject();
+                    if (obj.contains("id") && obj["id"].toString() == id)
+                    {
+                        if (obj.contains("type") && obj["type"].toInt() == 1)
+                        {
+                            bool newValue = !obj["switch"].toBool(); // 反转布尔值
+                            obj["switch"] = newValue;
+                            items[i] = obj; // 更新回数组
+                            FastGithubState = newValue;
+                            styles = "background: rgba(0, 0, 0, 0.3); border-radius: 8px; ";
+                            if (newValue)
+                            {
+                                styles = styles.append("color: green; ");
+                            }
+                            else
+                            {
+                                styles = styles.append("color: red; ");
+                            }
+                            qpb->setStyleSheet(styles);
+
+                            QJsonArray arr = VCCore::categoryConfig.array();
+                            QJsonObject a = arr[0].toObject();
+                            a["items"] = items;
+                            arr[0] = a;
+                            VCCore::categoryConfig.setArray(arr);
+                            writeJSON(VCCore::categoryConfig, CATEGORY_JSON_FILE);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
     }
     else if (id == "OpenUserFolder")
     {
