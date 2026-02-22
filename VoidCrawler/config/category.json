@@ -40,7 +40,7 @@
             },
             {
                 "description": "Open Taskmgr program. ",
-                "help": "Run Taskmgr.exe. ",
+                "help": "Run Taskmgr.exe.",
                 "icons": null,
                 "id": "WindowsTaskManger",
                 "type": 0
@@ -54,17 +54,27 @@
             },
             {
                 "description": "Open Weixin Software (Run Weixin.exe).",
-                "help": "Open Weixin Software",
+                "help": "Open Weixin Software.",
                 "icons": null,
                 "id": "Weixin",
                 "type": 0
             },
             {
                 "description": "Open Calc Program (Run calc.exe).",
-                "help": "run calc.exe . ",
+                "help": "run calc.exe.",
                 "icons": null,
                 "id": "WindowsCalc",
                 "type": 0
+            },
+            {
+                "description": "Open/taskkill Fast Github",
+                "help": "Open/taskkill Fast Github software.",
+                "icons": [
+                    "Administrator"
+                ],
+                "id": "FastGithub",
+                "switch": true,
+                "type": 1
             },
             {
                 "description": "Open user folder in explorer.exe. (%USERPROFILE%)",

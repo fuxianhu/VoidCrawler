@@ -203,6 +203,32 @@
       "value": 1
     }
   },
+  "FastGithub": {
+    "CommandLineArguments": {
+      "type": ["String"],
+      "nowType": "String",
+      "default": "",
+      "value": ""
+    },
+    "permission": {
+      "type": ["Permission"],
+      "nowType": "Permission",
+      "default": null,
+      "value": null
+    },
+    "workingDirectory": {
+      "type": ["Folder", "Null"],
+      "nowType": "Null",
+      "default": null,
+      "value": null
+    },
+    "mode": {
+      "type": ["Int"],
+      "nowType": "Int",
+      "default": 1,
+      "value": 1
+    }
+  },
   "OpenUserFolder": {
     "permission": {
       "type": ["Permission"],
