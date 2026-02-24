@@ -73,6 +73,13 @@
 - 新增 **Arealme Cheat** 类功能，并提供 $2$ 个作弊，但在没有充分阅读并理解源码的情况下，不能随意在任意 PC 上使用！
 - 从大量的类人样本中找到了 YFY 这个 ~~Bug~~ $0 day$ 漏洞，于是，正在阅读这段逆天更新日志的你决定修复 YFY233_awa（bushi
 
+## Alpha v.0.0.3.0 2026/2/24
+
+- 新增快速打开/关闭 Fast Github 功能
+- 修改 JSON 文件，现在采用 `category, ItemConfiguration, main` 三个文件
+- 修复 issues: [#5 (Closed)](https://github.com/fuxianhu/VoidCrawler/issues/5)
+- 包含一些咕了很久的更改，时间太长忘记写了qwq
+
 ## Official v.0.1.0.0 预告
 
 - 有基础的功能（如属性、配置窗口），满足日常使用所需的客户端。
