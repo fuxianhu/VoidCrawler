@@ -9,6 +9,10 @@
 #include <ctime>
 #include <tlhelp32.h>
 #include <cwctype>
+#include <thread>
+#include <chrono>
+#include <fcntl.h>
+#include <io.h>
 
 void FunctionSet::scrollMouse(int delta)
 {
@@ -274,7 +278,8 @@ std::string FunctionSet::GetWeChatInstallPath()
     return "";
 }
 
-bool FunctionSet::IsProcessRunning(const std::wstring& processName) {
+bool FunctionSet::IsProcessRunning(const std::wstring& processName)
+{
     HANDLE hProcessSnap = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
     if (hProcessSnap == INVALID_HANDLE_VALUE)
     {
@@ -302,4 +307,51 @@ bool FunctionSet::IsProcessRunning(const std::wstring& processName) {
 
     CloseHandle(hProcessSnap);
     return false;
+}
+
+bool FunctionSet::SetWindowTransparency(HWND hwnd, BYTE alpha)
+{
+    // 获取当前窗口样式
+    LONG_PTR exStyle = GetWindowLongPtr(hwnd, GWL_EXSTYLE);
+
+    // 如果窗口没有 WS_EX_LAYERED 样式，则添加上去
+    if (!(exStyle & WS_EX_LAYERED))
+    {
+        SetWindowLongPtr(hwnd, GWL_EXSTYLE, exStyle | WS_EX_LAYERED);
+    }
+
+    // 调用 API 设置透明度 (LWA_ALPHA 标志表示使用 alpha 值)
+    return SetLayeredWindowAttributes(hwnd, 0, alpha, LWA_ALPHA) != 0;
+}
+
+HWND FunctionSet::FindWindowByTitle(const std::wstring& titleKeyword)
+{
+    struct FindData
+    {
+        std::wstring keyword;
+        HWND result;
+    } findData = { titleKeyword, NULL };
+
+    // 枚举所有顶级窗口
+    EnumWindows([](HWND hwnd, LPARAM lParam) -> BOOL
+        {
+            FindData* data = reinterpret_cast<FindData*>(lParam);
+            wchar_t windowTitle[256];
+
+            // 获取窗口标题
+            if (GetWindowTextW(hwnd, windowTitle, sizeof(windowTitle) / sizeof(wchar_t)))
+            {
+                std::wstring title(windowTitle);
+                // 如果标题包含关键词，则找到目标窗口
+                if (title.find(data->keyword) != std::wstring::npos)
+                {
+                    data->result = hwnd;
+                    return FALSE; // 找到后停止枚举
+                }
+            }
+            return TRUE; // 继续枚举
+        },
+        reinterpret_cast<LPARAM>(&findData));
+
+    return findData.result;
 }

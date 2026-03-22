@@ -16,6 +16,10 @@
 
 #include <windows.h>
 #include <shellapi.h>
+#include <thread>
+#include <chrono>
+#include <fcntl.h>
+#include <io.h>
 
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -48,6 +52,7 @@
 #include <QMessageBox>
 #include <QDebug>
 #include <QAudioOutput>
+#include <QProgressDialog>
 
 // 小型的 QPushButton 子类，支持用于动画的 'rotation' 属性
 // 注意：此处没有使用 Q_OBJECT 宏以避免需要 moc 处理；旋转动画通过 QVariantAnimation 实现
@@ -351,6 +356,38 @@ void VoidCrawler::on_button_right_clicked(QString id, QPushButton* qpb)
     }
 }
 
+void VoidCrawler::askAndSetTransparent(HWND windowHwnd)
+{
+    bool ok;
+    int inputValue = QInputDialog::getInt(
+        this, "VoidCrawler", "Enter transparency value (0-255):",
+        240, 0, 255, 1, &ok
+    );
+    if (!ok)
+    {
+        return;
+    }
+    BYTE alphaValue = inputValue;
+    if (FunctionSet::SetWindowTransparency(windowHwnd, alphaValue))
+    {
+        VCCore::logger->info(std::format("成功设置透明度为 {} ( {} % )", static_cast<int>(alphaValue), (alphaValue * 100 / 255)));
+        QMessageBox::information(
+            this, "VoidCrawler",
+            QString::fromStdString(std::format("Successfully set transparency to {} ( {} % )",
+                static_cast<int>(alphaValue), (alphaValue * 100 / 255))),
+            QMessageBox::Ok, QMessageBox::NoButton
+        );
+    }
+    else
+    {
+        VCCore::logger->error(std::format("设置透明度失败，错误码: {}", GetLastError()));
+        QMessageBox::critical(
+            this, "VoidCrawler",
+            QString::fromStdString(std::format("Failed to set window transparency, error code: {}", GetLastError()))
+        );
+    }
+}
+
 void VoidCrawler::on_button_clicked(QString id, QPushButton* qpb, QString styles)
 {
 	// 由于 styles 参数是值传递，因此在函数内修改 styles 不会影响外部变量，不会出现超长字符串累积的问题
@@ -573,6 +610,66 @@ void VoidCrawler::on_button_clicked(QString id, QPushButton* qpb, QString styles
     else if (id == "ArealmeTest1To50Cheat")
     {
         ArealmeCheat::test1to50Cheat();
+    }
+    else if (id == "WindowTransparent(Title)")
+    {
+        bool ok = false;
+        QString input = QInputDialog::getText(this, "VoidCrawler", 
+            "Enter window title(supports fuzzy search) :", QLineEdit::Normal, "", &ok);
+        if (!ok || input.isEmpty())
+        {
+            return;
+        }
+        wchar_t* inputTitle = new wchar_t[input.length() + 1];
+        input.toWCharArray(inputTitle);
+        inputTitle[input.length()] = L'\0';
+        VCCore::logger->info(std::format("正在查找窗口： {}", QString::fromWCharArray(inputTitle).toStdString()));
+        HWND windowHwnd = FunctionSet::FindWindowByTitle(inputTitle);
+        if (windowHwnd == NULL)
+        {
+            QMessageBox::critical(
+                this, "VoidCrawler",
+                QString::fromStdString(std::format("错误: 未找到 {} 窗口！", QString::fromWCharArray(inputTitle).toStdString()))
+            );
+            return;
+        }
+        wchar_t title[256];
+        GetWindowTextW(windowHwnd, title, 256);
+        QMessageBox::information(
+            this, "VoidCrawler",
+            QString::fromStdString(std::format("找到窗口: {} (句柄: {})", QString::fromWCharArray(title).toStdString(), reinterpret_cast<int>(windowHwnd))),
+            QMessageBox::Ok, QMessageBox::NoButton
+        );
+        askAndSetTransparent(windowHwnd);
+    }
+    else if (id == "WindowTransparent(Mouse)")
+    {
+        HWND initialHwnd = GetForegroundWindow();
+
+        if (initialHwnd == NULL)
+        {
+            VCCore::logger->error("无法获取当前活动窗口句柄");
+            QMessageBox::critical(
+                this, "VoidCrawler", "Error: Unable to obtain the handle of the current active window!"
+            );
+            return;
+        }
+        connect(this, &VoidCrawler::requestSetTransparent, this, &VoidCrawler::askAndSetTransparent);
+        std::thread([this, initialHwnd]()
+            {
+            HWND lastHwnd = initialHwnd;
+            while (true)
+            {
+                HWND currentHwnd = GetForegroundWindow();
+                if (currentHwnd != lastHwnd)
+                {
+                    lastHwnd = currentHwnd;
+                    emit requestSetTransparent(currentHwnd); // 线程安全
+                    return;
+                }
+                std::this_thread::sleep_for(std::chrono::milliseconds(50));
+            }
+        }).detach();
     }
     else
     {

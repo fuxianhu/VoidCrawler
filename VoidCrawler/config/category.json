@@ -157,6 +157,20 @@
         "type": 0
       },
       {
+        "description": "Change the window transparency of any window. (Choose according to the title)",
+        "help": "Change the window transparency of any window. (Choose according to the title)",
+        "icons": null,
+        "id": "WindowTransparent(Title)",
+        "type": 0
+      },
+      {
+        "description": "Change the window transparency of any window. (Mouse selection)",
+        "help": "Change the window transparency of any window. (Mouse selection)",
+        "icons": null,
+        "id": "WindowTransparent(Mouse)",
+        "type": 0
+      },
+      {
         "description": "Exit Client. ",
         "help": "Exit VoidCrawler Client. ",
         "icons": null,

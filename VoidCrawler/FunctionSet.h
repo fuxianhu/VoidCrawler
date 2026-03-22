@@ -1,5 +1,8 @@
 ﻿#pragma once
 #include <bitset>
+#include <string>
+#include <iostream>
+#include <windows.h>
 
 namespace FunctionSet
 {
@@ -30,4 +33,12 @@ namespace FunctionSet
 
 	// 检查指定名称的进程是否存在
 	bool IsProcessRunning(const std::wstring& processName);
+
+	// 设置窗口透明度
+	// hwnd: 目标窗口句柄
+	// alpha: 透明度 (0 = 完全透明, 255 = 完全不透明)
+	bool SetWindowTransparency(HWND hwnd, BYTE alpha);
+
+	// 通过窗口标题查找窗口句柄 (支持模糊匹配)
+	HWND FindWindowByTitle(const std::wstring& titleKeyword);
 }

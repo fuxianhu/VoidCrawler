@@ -11,6 +11,7 @@
 #include <QEvent>
 #include <QSplashScreen>
 #include "ui_VoidCrawler.h"
+#include <windows.h>
 #include <QGraphicsDropShadowEffect>
 #include <QVariantAnimation>
 #include <QColor>
@@ -70,6 +71,9 @@ private:
 	// 钩子错误处理槽函数
     void onHookError(const QString& error);
 
+    // 询问用户透明度，并设置透明
+    void askAndSetTransparent(HWND windowHwnd);
+
     KeyHookThread* m_hookThread = nullptr; // 钩子线程指针
     QLabel* m_statusLabel = nullptr;       // 用于显示状态的标签
 
@@ -104,4 +108,7 @@ private:
 
     bool isDisplay = true;
     bool firstCall = true;
+
+signals:
+    void requestSetTransparent(HWND hwnd);
 };
