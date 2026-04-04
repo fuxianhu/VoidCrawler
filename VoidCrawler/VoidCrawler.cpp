@@ -358,6 +358,9 @@ void VoidCrawler::on_button_right_clicked(QString id, QPushButton* qpb)
 
 void VoidCrawler::askAndSetTransparent(HWND windowHwnd)
 {
+    this->activateWindow();
+    this->raise();
+
     bool ok;
     int inputValue = QInputDialog::getInt(
         this, "VoidCrawler", "Enter transparency value (0-255):",
@@ -654,7 +657,7 @@ void VoidCrawler::on_button_clicked(QString id, QPushButton* qpb, QString styles
             );
             return;
         }
-        connect(this, &VoidCrawler::requestSetTransparent, this, &VoidCrawler::askAndSetTransparent);
+        connect(this, &VoidCrawler::requestSetTransparent, this, &VoidCrawler::askAndSetTransparent, Qt::UniqueConnection);
         std::thread([this, initialHwnd]()
             {
             HWND lastHwnd = initialHwnd;
