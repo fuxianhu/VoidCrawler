@@ -2,6 +2,7 @@
 #include "Core.h"
 #include "SmoothSwitch.h"
 
+#include <QMediaFormat>
 #include <QPainter>
 #include <QPainterPath>
 #include <QMouseEvent>
@@ -60,7 +61,7 @@ AudioPlayer::AudioPlayer(QWidget* parent)
 void AudioPlayer::on_selectButton_clicked()
 {
     QString filePath = QFileDialog::getOpenFileName(this, "Select Audio File", QString(),
-        "Audio Files (*.mp3 *.wav *.wma);;All Files (*)");
+        "Media Files (*.mp3 *.wav *.wma *.ogg *.mp4);;All Files (*)");
     VCCore::logger->info("Selected audio file: {}", filePath.toStdString());
     if (filePath != "")
     {
@@ -81,7 +82,27 @@ void AudioPlayer::dragEnterEvent(QDragEnterEvent* event)
             QString filePath = urls.first().toLocalFile();
             QFileInfo fileInfo(filePath);
             QString ext = fileInfo.suffix().toLower();
-            if (ext == "mp3" || ext == "wav" || ext == "wma")
+            // 支持的文件类型：
+            //enum FileFormat {
+            //    UnspecifiedFormat = -1,
+            //    // Video Formats
+            //    WMV,
+            //    AVI,
+            //    Matroska,
+            //    MPEG4,
+            //    Ogg,
+            //    QuickTime,
+            //    WebM,
+            //    // Audio Only Formats
+            //    Mpeg4Audio,
+            //    AAC,
+            //    WMA,
+            //    MP3,
+            //    FLAC,
+            //    Wave,
+            //    LastFileFormat = Wave
+            //};
+            if (ext == "mp3" || ext == "wav" || ext == "wma" || ext == "ogg" || ext == "mp4")
             {
                 originalTitle = titleLabel->text();
                 titleLabel->setText(fileInfo.baseName());
@@ -116,7 +137,7 @@ void AudioPlayer::dropEvent(QDropEvent* event)
             QString filePath = urls.first().toLocalFile();
             QFileInfo fileInfo(filePath);
             QString ext = fileInfo.suffix().toLower();
-            if (ext == "mp3" || ext == "wav" || ext == "wma")
+            if (ext == "mp3" || ext == "wav" || ext == "wma" || ext == "ogg" || ext == "mp4")
             {
                 VCCore::logger->info("Dropped audio file: {}", filePath.toStdString());
                 titleLabel->setText(fileInfo.baseName());

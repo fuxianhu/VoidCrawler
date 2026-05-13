@@ -1,12 +1,12 @@
 {
-  "agreeTerms": true,
+  "agreeTerms": false,
   "clientLock": {
     "disableClient": false,
     "maximumAttempts": 3,
     "password": "",
     "salted": ""
   },
-  "configVersion": "v.0.0.3.1",
+  "configVersion": "v.0.0.4.0",
   "enableMultipleApplications": false,
   "language": "zh-cn",
   "log": {
